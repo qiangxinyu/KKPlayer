@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G920" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AudioModel" representedClassName="AudioModel" syncable="YES">
+        <attribute name="album" optional="YES" attributeType="String"/>
+        <attribute name="albumLetters" optional="YES" attributeType="String"/>
+        <attribute name="artist" optional="YES" attributeType="String"/>
+        <attribute name="artistLetters" optional="YES" attributeType="String"/>
+        <attribute name="artistSort" optional="YES" attributeType="String"/>
+        <attribute name="artwork" optional="YES" attributeType="Binary"/>
+        <attribute name="createTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="length" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="letters" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nameSort" optional="YES" attributeType="String"/>
+        <attribute name="playCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="relativePath" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="PlayerStatus" representedClassName="PlayerStatus" syncable="YES">
+        <attribute name="ascending" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="audioID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="loop" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="playTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="sort" optional="YES" attributeType="String"/>
+    </entity>
+</model>
