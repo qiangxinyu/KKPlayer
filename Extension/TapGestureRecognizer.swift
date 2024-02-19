@@ -10,10 +10,8 @@ import UIKit
 private var touchKey = "touchKey"
 
 
-extension UITapGestureRecognizer {
-
-    
-    typealias Touch = (UITapGestureRecognizer) -> Void
+extension UIGestureRecognizer {
+    typealias Touch = (UIGestureRecognizer) -> Void
 
     var touch: Touch? {
         set {
@@ -27,12 +25,11 @@ extension UITapGestureRecognizer {
     convenience init(_ touch: @escaping Touch) {
 
         self.init()
-        addTarget(self, action: #selector(clickTap))
+        addTarget(self, action: #selector(handleEvent))
         self.touch = touch
     }
 
-    @objc func clickTap(gesture: UITapGestureRecognizer) {
+    @objc func handleEvent(gesture: UITapGestureRecognizer) {
         touch?(gesture)
     }
-
 }

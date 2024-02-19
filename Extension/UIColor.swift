@@ -14,6 +14,7 @@ extension UIColor {
     
     static let B01 = UIColor(named: "B01")!
     static let B02 = UIColor(named: "B02")!
+    static let B03 = UIColor(named: "B03")!
     static let B04 = UIColor(named: "B04")!
 
     static let P01 = UIColor(named: "P01")!

@@ -8,10 +8,10 @@
 import UIKit
 
 
-class AudioItemView: View {
+class AudioItemView: UIView {
     var model = AudioModel() {
         didSet {
-            artwork.image = model.artworkImage ?? UIImage(named: "default_audio_artwork")
+            artwork.image = model.artworkImage ?? UIImage(named: "icon_default_artwork")
             name.text = model.name
             artist.text = model.artist
             if model.playCount > 1000 {
@@ -26,14 +26,25 @@ class AudioItemView: View {
     private let artwork = MainThemeImageView()
     private let name = UILabel()
     private let artist = UILabel()
-    private let playCount = Button(style: .imageLeft, imageName: "play_count")
-    private let more = TouchButton(imageName: "icon_more")
+    private let playCount = ImageTextComponent(style: .imageLeft, imageName: "play_count")
+    private let more = Button(imageName: "icon_more")
     private let line = UIView()
 
+    private var hasLine = true
     
-    override func initSelf() {
-//        backgroundColor = .white
+    init(hasLine: Bool = true) {
+        super.init(frame: .zero)
+        self.hasLine = hasLine
+        initSelf()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    func initSelf() {
         
+        backgroundColor = .white
         addSubview(artwork)
         addSubview(playCount)
         addSubview(more)
@@ -44,12 +55,9 @@ class AudioItemView: View {
         contentView.addSubview(artist)
 
         
-        
-        artwork.contentMode = .scaleAspectFit
-        artwork.backgroundColor = .P01
         artwork.layer.cornerRadius = 4
         artwork.layer.masksToBounds = true
-        
+        artwork.backgroundColor = .P01
         artwork.snp.makeConstraints { make in
             make.left.equalTo(Theme.marginOffset)
             make.top.equalTo(2)
@@ -97,21 +105,22 @@ class AudioItemView: View {
 
         
         more.backgroundColor = .clear
-        more.imageEdgeInserts = .init(top: 10, left: 10, bottom: 10, right: 12)
+        more.imageEdgeInserts = .init(edges: 10)
         more.snp.makeConstraints { make in
             make.right.equalToSuperview()
             make.width.height.equalTo(44)
             make.centerY.equalToSuperview()
         }
         
-        
-        addSubview(line)
-        line.backgroundColor = .T02
-        line.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.right.equalToSuperview()
-            make.left.equalTo(artwork.snp.right).offset(4)
-            make.height.equalTo(0.5)
+        if hasLine {
+            addSubview(line)
+            line.backgroundColor = .T02
+            line.snp.makeConstraints { make in
+                make.bottom.equalToSuperview()
+                make.right.equalToSuperview()
+                make.left.equalTo(artwork.snp.right).offset(4)
+                make.height.equalTo(0.5)
+            }
         }
     }
     

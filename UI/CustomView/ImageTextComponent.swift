@@ -8,7 +8,7 @@
 import UIKit
 
 
-class Button: UIView {
+class ImageTextComponent: UIView {
     enum Style {
         case text
         case image
@@ -24,7 +24,7 @@ class Button: UIView {
     private override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    private init() {
+    init() {
         super.init(frame: .zero)
     }
     required init?(coder: NSCoder) {
@@ -81,7 +81,7 @@ class Button: UIView {
     }
 
     
-    fileprivate func initSelf() {
+    func initSelf() {
         backgroundColor = .white
         settingStyle()
     }
@@ -214,18 +214,3 @@ class Button: UIView {
 }
 
 
-class TouchButton: Button, TapProtocol {
-    
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        alpha = Theme.touchAlpha
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        alpha = 1
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        alpha = 1
-    }
-}

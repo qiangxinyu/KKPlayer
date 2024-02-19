@@ -15,13 +15,6 @@ class UserDefaultsUtils {
     }
     
     
-    private static let idKey = "idKey"
-    static var id: Int64 {
-        set {
-            userDefault.set(newValue, forKey: idKey)
-        }
-        get {Int64(userDefault.integer(forKey: idKey))}
-    }
     
     
     

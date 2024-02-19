@@ -35,7 +35,7 @@ extension PlayerManager {
         lazy private var timer: Timer = {
             let t = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {[weak self] _ in
                 if let player = self?.player {
-//                    PlayerInfo.main.currentPlayerTime = player.currentTime
+                    PlayerManager.currentPlayerTime = player.currentTime
                 }
             }
             
@@ -43,9 +43,7 @@ extension PlayerManager {
             
             return t
         }()
-        
-        var model: AudioModel? = nil
-        
+                
             
         override init() {
             super.init()
@@ -90,7 +88,7 @@ extension PlayerManager {
         
         func seek(to: TimeInterval) {
             player?.currentTime = to
-//            PlayerInfo.main.currentPlayerTime = to
+            PlayerManager.currentPlayerTime = to
             updateNowPlaying()
         }
         
@@ -98,8 +96,6 @@ extension PlayerManager {
         func play(model: AudioModel) {
             player?.stop()
             do {
-                self.model = model
-                PlayerManager.currentModel = model
                 
                 player = try AVAudioPlayer(contentsOf: model.path.url)
                 player?.numberOfLoops = 0
@@ -109,8 +105,9 @@ extension PlayerManager {
 
                 playTime = 0
                 
-//                PlayerInfo.main.currentPlayerTime = 0
-//                PlayerInfo.main.duration = player?.duration ?? 0
+                PlayerManager.currentPlayerTime = 0
+                PlayerManager.duration = player?.duration ?? 0
+                PlayerManager.currentModel = model
 
                 play()
 
@@ -134,7 +131,7 @@ extension PlayerManager {
         func play() {
             if let player = player, player.play() {
                 
-//                IsPlayingStatus.value = true
+                PlayerManager.isPlaying = true
                 startTime = Date().timeIntervalSince1970
                 
                 updateNowPlaying()
@@ -146,7 +143,7 @@ extension PlayerManager {
         
         
         func pause() {
-//            IsPlayingStatus.value = false
+            PlayerManager.isPlaying = false
             player?.pause()
             updateNowPlaying()
             calculateTime()
@@ -160,21 +157,20 @@ extension PlayerManager {
                     return
             }
 
-//            switch type {
-//            case .began: IsPlayingStatus.value = false
-//            case .ended: IsPlayingStatus.value = true
-//            default: break
-//            }
+            switch type {
+            case .began: pause()
+            case .ended: play()
+            default: break
+            }
         }
         
         @objc func audioRouteChange(noti: Notification) {
             if let state = noti.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt {
-                
-//                switch state {
-//                case AVAudioSession.RouteChangeReason.newDeviceAvailable.rawValue: break
-//                case AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue: IsPlayingStatus.value = false
-//                default: break
-//                }
+                switch state {
+                case AVAudioSession.RouteChangeReason.newDeviceAvailable.rawValue: break
+                case AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue: pause()
+                default: break
+                }
             }
         }
         
@@ -214,13 +210,6 @@ extension PlayerManager {
             MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
         }
         
-        func updateCurrentTime() {
-            guard let player = player,
-                  var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo else {return}
-            nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentTime
-            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-        }
-        
         
         func calculateTime() {
             playTime += Date().timeIntervalSince1970 - startTime
@@ -229,11 +218,10 @@ extension PlayerManager {
         func checkPlayCount() {
             calculateTime()
             
-            
-//            if PlayerInfo.main.duration > 0, playTime >= PlayerInfo.main.duration * 0.9 {
-//                PlayerManager.currentModel?.playCount += 1
-//                try? PersistenceController.shared.container.viewContext.save()
-//            }
+            if PlayerManager.duration > 0, playTime >= PlayerManager.duration * 0.9 {
+                PlayerManager.currentModel?.playCountAddOne()
+                try? CoreDataContext.save()
+            }
             
         }
     }

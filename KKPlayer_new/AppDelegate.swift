@@ -15,6 +15,7 @@ var CoreDataContext: NSManagedObjectContext = {
     lazy var persistentContainer: NSPersistentContainer = {
        
         let container = NSPersistentContainer(name: "KKPlayer_new")
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 
@@ -23,6 +24,7 @@ var CoreDataContext: NSManagedObjectContext = {
         })
         return container
     }()
+    
     
     return persistentContainer.viewContext
 }()
@@ -34,16 +36,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        PlayerManager.regist()
+
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(didRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
-        
-        
+ 
         IQKeyboardManager.shared.enable = true
         
         kMainWindow.rootViewController = HomeViewController.shared
         kMainWindow.backgroundColor = .B01
         kMainWindow.makeKeyAndVisible()
         
+        restorePlayerStatus()
+        
+        
+        if !UserDefaults.standard.bool(forKey: "11") {
+            
+            HomeDataSource.items.forEach {
+                CoreDataContext.delete($0)
+            }
+            
+            try? CoreDataContext.save()
+            
+            DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+                
+               let l = KKFileManager.main.allURL(path: .audio())
+
+               var list = [URL]()
+               l.forEach { url in
+                   let toPath = KKFileManager.Path.tmp(component: url.relativePath)
+                   KKFileManager.moveFile(path: url, toPath: toPath)
+                   list.append(toPath.url)
+               }
+                
+                list.forEach { url in
+                    AudioFileQueue.push(audio: url)
+                }
+
+            }
+            UserDefaults.standard.set(true, forKey: "11")
+        }
+
+        
+        
+
         
         return true
     }
@@ -66,15 +102,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-//        UserDefaultsUtils.playAudioTime = KKPlayer.currentTime
-        UserDefaultsUtils.synchronize()
+        PlayerStatus.save()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        UserDefaultsUtils.synchronize()
+        PlayerStatus.save()
     }
 
     
+    func restorePlayerStatus() {
+        if let string = PlayerStatus.main.sort, let sort = HomeDataSource.Sort(rawValue: string) {
+            HomeDataSource.sort = .sort(sort: sort, ascending: PlayerStatus.main.ascending)
+        }
+        
+        if let loop = PlayerList.Loop.init(rawValue: PlayerStatus.main.loop) {
+            PlayerManager.loop = loop
+        }
+        
+        guard
+            let url = PlayerStatus.main.audioObjectID,
+            let objectID = CoreDataContext.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: url)
+        else {return}
 
+        
+        guard let item = try? CoreDataContext.existingObject(with: objectID) as? AudioModel else {return}
+        
+        PlayerManager.play(model: item, list: HomeDataSource.items)
+        PlayerManager.pause()
+        PlayerManager.seek(to: PlayerStatus.main.playTime)
+    }
 }
 

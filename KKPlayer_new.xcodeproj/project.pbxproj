@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2979BA042B807DCE0038C104 /* PopViewAnimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA032B807DCE0038C104 /* PopViewAnimate.swift */; };
+		2979BA062B80A88E0038C104 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA052B80A88E0038C104 /* HomeDataSource.swift */; };
+		2979BA082B80B5CF0038C104 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA072B80B5CF0038C104 /* Button.swift */; };
+		2979BA0A2B80B7700038C104 /* UIEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA092B80B7700038C104 /* UIEdgeInsets.swift */; };
 		29DB12002B7DA8470069C827 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB11FF2B7DA8470069C827 /* AppDelegate.swift */; };
 		29DB120A2B7DA8470069C827 /* KKPlayer_new.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12082B7DA8470069C827 /* KKPlayer_new.xcdatamodeld */; };
 		29DB120C2B7DA8490069C827 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29DB120B2B7DA8490069C827 /* Assets.xcassets */; };
@@ -24,7 +28,7 @@
 		29DB12382B7DF6390069C827 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12372B7DF6390069C827 /* NavigationBar.swift */; };
 		29DB123E2B7DF6D20069C827 /* SelectLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB123D2B7DF6D20069C827 /* SelectLabel.swift */; };
 		29DB12402B7DF6E30069C827 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB123F2B7DF6E30069C827 /* ImageView.swift */; };
-		29DB12422B7DF6F30069C827 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12412B7DF6F30069C827 /* Button.swift */; };
+		29DB12422B7DF6F30069C827 /* ImageTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12412B7DF6F30069C827 /* ImageTextComponent.swift */; };
 		29DB12442B7DF75D0069C827 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12432B7DF75D0069C827 /* HomeViewController.swift */; };
 		29DB12462B7DF80E0069C827 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12452B7DF80E0069C827 /* Theme.swift */; };
 		29DB124A2B7E019B0069C827 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12492B7E019B0069C827 /* SettingView.swift */; };
@@ -46,13 +50,18 @@
 		29DB129E2B7F5C940069C827 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB129D2B7F5C940069C827 /* View.swift */; };
 		29DB12A02B7F5CD20069C827 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB129F2B7F5CD20069C827 /* Label.swift */; };
 		29DB12A22B7F5FE80069C827 /* AudioItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12A12B7F5FE80069C827 /* AudioItemView.swift */; };
-		29DB12A62B7F65370069C827 /* TapProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12A52B7F65370069C827 /* TapProtocol.swift */; };
+		29DB12A62B7F65370069C827 /* GestureRecognizerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12A52B7F65370069C827 /* GestureRecognizerProtocol.swift */; };
 		29DB12A82B7F670B0069C827 /* TapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12A72B7F670B0069C827 /* TapGestureRecognizer.swift */; };
 		29DB12AA2B7F89F20069C827 /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12A92B7F89F20069C827 /* SnapKit.swift */; };
+		29E4F1E82B8300EE00F0C539 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4F1E72B8300EE00F0C539 /* UITableView.swift */; };
 		6AE006D751054BC5E454B77A /* Pods_KKPlayer_new.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73399B736E76759BBBF02142 /* Pods_KKPlayer_new.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2979BA032B807DCE0038C104 /* PopViewAnimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopViewAnimate.swift; sourceTree = "<group>"; };
+		2979BA052B80A88E0038C104 /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
+		2979BA072B80B5CF0038C104 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		2979BA092B80B7700038C104 /* UIEdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEdgeInsets.swift; sourceTree = "<group>"; };
 		29DB11FC2B7DA8470069C827 /* KKPlayer_new.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKPlayer_new.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29DB11FF2B7DA8470069C827 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29DB12092B7DA8470069C827 /* KKPlayer_new.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KKPlayer_new.xcdatamodel; sourceTree = "<group>"; };
@@ -73,7 +82,7 @@
 		29DB12372B7DF6390069C827 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		29DB123D2B7DF6D20069C827 /* SelectLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLabel.swift; sourceTree = "<group>"; };
 		29DB123F2B7DF6E30069C827 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
-		29DB12412B7DF6F30069C827 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		29DB12412B7DF6F30069C827 /* ImageTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTextComponent.swift; sourceTree = "<group>"; };
 		29DB12432B7DF75D0069C827 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		29DB12452B7DF80E0069C827 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		29DB12492B7E019B0069C827 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -95,9 +104,10 @@
 		29DB129D2B7F5C940069C827 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		29DB129F2B7F5CD20069C827 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		29DB12A12B7F5FE80069C827 /* AudioItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioItemView.swift; sourceTree = "<group>"; };
-		29DB12A52B7F65370069C827 /* TapProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapProtocol.swift; sourceTree = "<group>"; };
+		29DB12A52B7F65370069C827 /* GestureRecognizerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecognizerProtocol.swift; sourceTree = "<group>"; };
 		29DB12A72B7F670B0069C827 /* TapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizer.swift; sourceTree = "<group>"; };
 		29DB12A92B7F89F20069C827 /* SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
+		29E4F1E72B8300EE00F0C539 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		447FE7FA4569C623575EEB5D /* Pods-KKPlayer_new.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KKPlayer_new.release.xcconfig"; path = "Target Support Files/Pods-KKPlayer_new/Pods-KKPlayer_new.release.xcconfig"; sourceTree = "<group>"; };
 		73399B736E76759BBBF02142 /* Pods_KKPlayer_new.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KKPlayer_new.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4DE2287B6936861B0A9C965 /* Pods-KKPlayer_new.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KKPlayer_new.debug.xcconfig"; path = "Target Support Files/Pods-KKPlayer_new/Pods-KKPlayer_new.debug.xcconfig"; sourceTree = "<group>"; };
@@ -123,7 +133,6 @@
 				29DB12872B7E2E7C0069C827 /* Utils */,
 				29DB12822B7E2D560069C827 /* File */,
 				29DB12772B7E2CD10069C827 /* Model */,
-				29DB12352B7DF6220069C827 /* CustomView */,
 				29DB121A2B7DBAC10069C827 /* Extension */,
 				29DB12172B7DB8140069C827 /* Global */,
 				29DB11FE2B7DA8470069C827 /* KKPlayer_new */,
@@ -177,6 +186,8 @@
 				29DB124D2B7E08310069C827 /* CGRect.swift */,
 				29DB12A72B7F670B0069C827 /* TapGestureRecognizer.swift */,
 				29DB12A92B7F89F20069C827 /* SnapKit.swift */,
+				2979BA092B80B7700038C104 /* UIEdgeInsets.swift */,
+				29E4F1E72B8300EE00F0C539 /* UITableView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -189,6 +200,7 @@
 				29DB12392B7DF6580069C827 /* Home */,
 				29DB12362B7DF62D0069C827 /* Component */,
 				29DB122C2B7DBBC00069C827 /* Base */,
+				29DB12352B7DF6220069C827 /* CustomView */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -209,8 +221,9 @@
 				29DB129F2B7F5CD20069C827 /* Label.swift */,
 				29DB123D2B7DF6D20069C827 /* SelectLabel.swift */,
 				29DB123F2B7DF6E30069C827 /* ImageView.swift */,
-				29DB12412B7DF6F30069C827 /* Button.swift */,
-				29DB12A52B7F65370069C827 /* TapProtocol.swift */,
+				29DB12412B7DF6F30069C827 /* ImageTextComponent.swift */,
+				2979BA072B80B5CF0038C104 /* Button.swift */,
+				29DB12A52B7F65370069C827 /* GestureRecognizerProtocol.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -218,6 +231,7 @@
 		29DB12362B7DF62D0069C827 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				2979BA032B807DCE0038C104 /* PopViewAnimate.swift */,
 				29DB12372B7DF6390069C827 /* NavigationBar.swift */,
 				29DB12A12B7F5FE80069C827 /* AudioItemView.swift */,
 			);
@@ -228,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				29DB12432B7DF75D0069C827 /* HomeViewController.swift */,
+				2979BA052B80A88E0038C104 /* HomeDataSource.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -423,6 +438,7 @@
 				29DB12512B7E1A290069C827 /* PlayerMiniControl.swift in Sources */,
 				29DB12AA2B7F89F20069C827 /* SnapKit.swift in Sources */,
 				29DB12332B7DBBC00069C827 /* BaseNavigationController.swift in Sources */,
+				2979BA042B807DCE0038C104 /* PopViewAnimate.swift in Sources */,
 				29DB124E2B7E08310069C827 /* CGRect.swift in Sources */,
 				29DB12892B7E2E7C0069C827 /* UserDefaults.swift in Sources */,
 				29DB12282B7DBAC10069C827 /* UIAlertController.swift in Sources */,
@@ -450,15 +466,19 @@
 				29DB129C2B7F123F0069C827 /* Player.swift in Sources */,
 				29DB12A02B7F5CD20069C827 /* Label.swift in Sources */,
 				29DB127F2B7E2CD10069C827 /* AudioModel+CoreDataClass.swift in Sources */,
+				29E4F1E82B8300EE00F0C539 /* UITableView.swift in Sources */,
 				29DB12462B7DF80E0069C827 /* Theme.swift in Sources */,
 				29DB12382B7DF6390069C827 /* NavigationBar.swift in Sources */,
 				29DB129E2B7F5C940069C827 /* View.swift in Sources */,
+				2979BA082B80B5CF0038C104 /* Button.swift in Sources */,
 				29DB124A2B7E019B0069C827 /* SettingView.swift in Sources */,
-				29DB12A62B7F65370069C827 /* TapProtocol.swift in Sources */,
+				29DB12A62B7F65370069C827 /* GestureRecognizerProtocol.swift in Sources */,
+				2979BA062B80A88E0038C104 /* HomeDataSource.swift in Sources */,
 				29DB12002B7DA8470069C827 /* AppDelegate.swift in Sources */,
 				29DB127D2B7E2CD10069C827 /* AudioModel+CalculationProperty.swift in Sources */,
 				29DB122A2B7DBAC10069C827 /* TimeInterval.swift in Sources */,
-				29DB12422B7DF6F30069C827 /* Button.swift in Sources */,
+				2979BA0A2B80B7700038C104 /* UIEdgeInsets.swift in Sources */,
+				29DB12422B7DF6F30069C827 /* ImageTextComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

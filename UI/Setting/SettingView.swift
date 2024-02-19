@@ -8,64 +8,81 @@
 import UIKit
 
 
-class SettingView: View, TapProtocol {
+class SettingView: View, HomePopViewAnimate {
     static let shared = SettingView()
     
-    private let contentView = View()
+    private let contentView = ContentView()
     
-    private let contentWidth = kScreenWidth - 100
+    private let contentWidth = kScreenWidth - 80
+    private var begainX: CGFloat = 0
     
     override func initSelf() {
         kMainWindow.addSubview(self)
-        kMainWindow.addSubview(contentView)
-        touchUpInside { _ in
-            self.hidden()
-        }
       
-        
-        backgroundColor = .black.withAlphaComponent(0.12)
         frame = .init(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight)
         alpha = 0
         
-        contentView.backgroundColor = .blue
-        contentView.frame = .init(x: -contentWidth, y: 0, width: contentWidth, height: kScreenHeight)
+        
+        initContentView()
     }
     
-    
-    func show() {
-        moveAnimate()
-    }
-    
-    func hidden() {
-        moveAnimate(isShow: false)
-    }
-    
-    
-    private func moveAnimate(isShow: Bool = true) {
-        let parentView = HomeViewController.shared.view!
-        
-        
-        if isShow {
-            parentView.clipsToBounds = true
-            parentView.layer.cornerRadius = 12
-        }
-        
-        UIView.animate(withDuration: 0.45, delay: 0, options: .curveEaseInOut) {
-            self.alpha = isShow ? 1 : 0
-            self.contentView.x = isShow ? 0 : -self.contentWidth
-            
-            let scale = isShow ? 0.9 : 1
-            parentView.transform = CGAffineTransformMakeScale(scale, scale)
-        }
-        completion: { _ in
-            if !isShow {
-                parentView.clipsToBounds = false
-                parentView.layer.cornerRadius = 0
-            }
+    static func show() {
+        shared.moveAnimate(isShow: true) { _ in
+            shared.contentView.x = 0
         }
     }
     
+    static func hidden() {
+        shared.moveAnimate(isShow: false) { _ in
+            shared.contentView.x = -shared.contentWidth
+        }
+    }
 }
 
 
 
+
+
+// MARK: Content View
+
+extension SettingView {
+    private func initContentView() {
+        contentView.layer.cornerRadius = 12
+        contentView.backgroundColor = .orange
+        kMainWindow.addSubview(contentView)
+
+        contentView.pan { p in
+            if let pan = p as? UIPanGestureRecognizer {
+                self.handlePan(pan: pan)
+            }
+        }
+        contentView.frame = .init(x: -contentWidth, y: 0, width: contentWidth, height: kScreenHeight)
+
+    }
+    
+    private func handlePan(pan: UIPanGestureRecognizer) {
+        
+        let point = pan.translation(in: kMainWindow)
+        let moveX = point.x - begainX
+
+        switch pan.state {
+        case .began:
+            begainX = point.x
+        case .changed:
+            
+            if moveX < 0 {
+                contentView.x = moveX
+                handMovePopView(scale: abs(moveX) / contentView.width)
+            }
+
+        default:
+            if abs(moveX) > contentView.width / 2 {
+                SettingView.hidden()
+            } else {
+                SettingView.show()
+            }
+        }
+    }
+    
+    private class ContentView: UIView, PanProtocol {}
+}

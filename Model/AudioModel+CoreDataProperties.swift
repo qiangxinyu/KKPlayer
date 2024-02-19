@@ -15,14 +15,13 @@ extension AudioModel {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<AudioModel> {
         return NSFetchRequest<AudioModel>(entityName: "AudioModel")
     }
-    @NSManaged public var id: Int64
     @NSManaged public var length: Int64
     @NSManaged public var createTime: Int64
-    @NSManaged public var playCount: Int64
     @NSManaged public var relativePath: String?
-    @NSManaged public var artwork: Data?
+    
 
     
+    @NSManaged private(set) public var playCount: Int64
     @NSManaged private(set) var album: String?
     @NSManaged private(set) var albumLetters: String?
     @NSManaged private(set) var artist: String?
@@ -61,29 +60,18 @@ extension AudioModel {
         artistSort = artistLetters?.sortKey
     }
 
-
-    private var smallArtworkName: String {
-        get {"\(String(describing: createTime))_s"}
+    /// 只有在初始导入的时候会用这个方法，所以不需要进行 save core data
+    func setPlayCount(count: Int64) {
+        playCount = count
+        renameFile()
     }
     
-    
-    
-    func changeValues(newModel: AudioModel) {
-        id = newModel.id
-        createTime = newModel.createTime
-        relativePath = newModel.relativePath
-        playCount = newModel.playCount
-        
-        name = newModel.name
-        album = newModel.album
-        artist = newModel.artist
-        albumLetters = newModel.albumLetters
-        length = newModel.length
-        nameSort = newModel.nameSort
-        letters = newModel.letters
-        artistSort = newModel.artistSort
-        artistLetters = newModel.artistLetters
+    func playCountAddOne() {
+        playCount += 1
+        renameFile()
+        try? CoreDataContext.save()
     }
+    
 }
 
 

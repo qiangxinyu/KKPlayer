@@ -12,6 +12,8 @@ import ID3TagEditor
 import CoreData
 
 
+/// 导入歌曲 文件管理
+/// 文件命名格式：   歌名_歌手
 
 class AudioFileQueue {
     private init() {}
@@ -178,10 +180,7 @@ class AudioFileQueue {
                 model.setArtist(nameArtist.last)
             }
             
-            
-            model.id = UserDefaultsUtils.id + 1
-            UserDefaultsUtils.id += 1
-            
+                        
             next()
         } fail: {
             next()
@@ -200,7 +199,7 @@ class AudioFileQueue {
         DispatchQueue.main.async {
             do {
                 try CoreDataContext.save()
-                PlayerManager.main.getItems()
+                HomeDataSource.refreshItems()
             } catch {
                 UIAlertController.show(title: "数据库写入失败 \(error.localizedDescription)")
             }

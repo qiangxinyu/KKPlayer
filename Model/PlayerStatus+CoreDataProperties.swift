@@ -16,7 +16,7 @@ extension PlayerStatus {
         return NSFetchRequest<PlayerStatus>(entityName: "PlayerStatus")
     }
 
-    @NSManaged public var audioID: Int64
+    @NSManaged public var audioObjectID: URL?
     @NSManaged public var sort: String?
     @NSManaged public var ascending: Bool
     @NSManaged public var playTime: Double
@@ -26,20 +26,22 @@ extension PlayerStatus {
 
 
 extension PlayerStatus {
+    
+    
     static func save() {
-//        if let model = PlayerManager.currentModel {
-//            main.audioID = model.id
-//        }
-//        
-//        switch PlayerManager.main.sort {
-//        case .sort(let sort, let ascending):
-//            main.ascending = ascending
-//            main.sort = sort.rawValue
-//        default: break
-//        }
-//        main.loop = PlayerManager.main.loop.rawValue
-//        main.playTime = PlayerInfo.main.currentPlayerTime
+        if let model = PlayerManager.currentModel {
+            
+            model.objectID.uriRepresentation()
+        }
         
+        switch HomeDataSource.sort {
+        case .sort(let sort, let ascending):
+            main.ascending = ascending
+            main.sort = sort.rawValue
+        default: break
+        }
+        main.loop = PlayerManager.loop.rawValue
+        main.playTime = PlayerManager.currentPlayerTime
         
         try? CoreDataContext.save()
     }
