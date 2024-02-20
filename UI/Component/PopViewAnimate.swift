@@ -68,7 +68,7 @@ extension HomePopViewAnimate {
                 parentView.clipsToBounds = false
                 parentView.layer.cornerRadius = 0
                 maskView.removeFromSuperview()
-            }
+            }            
         }
     }
 }

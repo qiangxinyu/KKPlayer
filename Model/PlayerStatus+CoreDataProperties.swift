@@ -30,16 +30,11 @@ extension PlayerStatus {
     
     static func save() {
         if let model = PlayerManager.currentModel {
-            
             model.objectID.uriRepresentation()
         }
         
-        switch HomeDataSource.sort {
-        case .sort(let sort, let ascending):
-            main.ascending = ascending
-            main.sort = sort.rawValue
-        default: break
-        }
+        main.ascending = HomeDataSource.sort.ascending
+        main.sort = HomeDataSource.sort.key
         main.loop = PlayerManager.loop.rawValue
         main.playTime = PlayerManager.currentPlayerTime
         

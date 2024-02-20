@@ -17,13 +17,9 @@ class PlayerMiniControl: Button {
     override init() {
         super.init()
         
-
-        
         PlayerManager.currentModelChange {
-            if let model = PlayerManager.currentModel {
-                self.artwork.image = model.artworkImage ?? UIImage(named: "icon_default_artwork")
-                self.name.text = model.name
-            }
+            self.artwork.image = PlayerManager.currentModel?.artworkImage ?? UIImage(named: "icon_default_artwork")
+            self.name.text = PlayerManager.currentModel?.name
         }
         
         PlayerManager.isPlayingChange {

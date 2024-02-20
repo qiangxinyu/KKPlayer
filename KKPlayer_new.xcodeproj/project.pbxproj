@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2943F37B2B8454BA008F9DDE /* AudioMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */; };
+		2943F37F2B84B94E008F9DDE /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F37E2B84B94E008F9DDE /* Share.swift */; };
+		2943F3822B84B98C008F9DDE /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F3812B84B98C008F9DDE /* TipView.swift */; };
+		2943F3842B84F508008F9DDE /* EditAudioInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F3832B84F508008F9DDE /* EditAudioInfo.swift */; };
 		2979BA042B807DCE0038C104 /* PopViewAnimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA032B807DCE0038C104 /* PopViewAnimate.swift */; };
 		2979BA062B80A88E0038C104 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA052B80A88E0038C104 /* HomeDataSource.swift */; };
 		2979BA082B80B5CF0038C104 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA072B80B5CF0038C104 /* Button.swift */; };
@@ -54,10 +58,15 @@
 		29DB12A82B7F670B0069C827 /* TapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12A72B7F670B0069C827 /* TapGestureRecognizer.swift */; };
 		29DB12AA2B7F89F20069C827 /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12A92B7F89F20069C827 /* SnapKit.swift */; };
 		29E4F1E82B8300EE00F0C539 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4F1E72B8300EE00F0C539 /* UITableView.swift */; };
+		29E4F1EA2B83896300F0C539 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4F1E92B83896300F0C539 /* MenuView.swift */; };
 		6AE006D751054BC5E454B77A /* Pods_KKPlayer_new.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73399B736E76759BBBF02142 /* Pods_KKPlayer_new.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMenuView.swift; sourceTree = "<group>"; };
+		2943F37E2B84B94E008F9DDE /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
+		2943F3812B84B98C008F9DDE /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
+		2943F3832B84F508008F9DDE /* EditAudioInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAudioInfo.swift; sourceTree = "<group>"; };
 		2979BA032B807DCE0038C104 /* PopViewAnimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopViewAnimate.swift; sourceTree = "<group>"; };
 		2979BA052B80A88E0038C104 /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
 		2979BA072B80B5CF0038C104 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -108,6 +117,7 @@
 		29DB12A72B7F670B0069C827 /* TapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizer.swift; sourceTree = "<group>"; };
 		29DB12A92B7F89F20069C827 /* SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
 		29E4F1E72B8300EE00F0C539 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		29E4F1E92B83896300F0C539 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		447FE7FA4569C623575EEB5D /* Pods-KKPlayer_new.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KKPlayer_new.release.xcconfig"; path = "Target Support Files/Pods-KKPlayer_new/Pods-KKPlayer_new.release.xcconfig"; sourceTree = "<group>"; };
 		73399B736E76759BBBF02142 /* Pods_KKPlayer_new.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KKPlayer_new.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4DE2287B6936861B0A9C965 /* Pods-KKPlayer_new.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KKPlayer_new.debug.xcconfig"; path = "Target Support Files/Pods-KKPlayer_new/Pods-KKPlayer_new.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +135,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2943F3802B84B985008F9DDE /* TipView */ = {
+			isa = PBXGroup;
+			children = (
+				2943F3812B84B98C008F9DDE /* TipView.swift */,
+			);
+			path = TipView;
+			sourceTree = "<group>";
+		};
 		29DB11F32B7DA8470069C827 = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +213,7 @@
 		29DB122B2B7DBBA40069C827 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2943F3802B84B985008F9DDE /* TipView */,
 				29DB124F2B7E1A1A0069C827 /* PlayerControl */,
 				29DB123A2B7DF65C0069C827 /* Setting */,
 				29DB12392B7DF6580069C827 /* Home */,
@@ -234,6 +253,8 @@
 				2979BA032B807DCE0038C104 /* PopViewAnimate.swift */,
 				29DB12372B7DF6390069C827 /* NavigationBar.swift */,
 				29DB12A12B7F5FE80069C827 /* AudioItemView.swift */,
+				29E4F1E92B83896300F0C539 /* MenuView.swift */,
+				2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -243,6 +264,7 @@
 			children = (
 				29DB12432B7DF75D0069C827 /* HomeViewController.swift */,
 				2979BA052B80A88E0038C104 /* HomeDataSource.swift */,
+				2943F3832B84F508008F9DDE /* EditAudioInfo.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -289,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				29DB12882B7E2E7C0069C827 /* UserDefaults.swift */,
+				2943F37E2B84B94E008F9DDE /* Share.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -446,6 +469,7 @@
 				29DB12232B7DBAC10069C827 /* Notification.Name.swift in Sources */,
 				29DB129B2B7F123F0069C827 /* PlayerManager.swift in Sources */,
 				29DB129A2B7F123F0069C827 /* PlayerList.swift in Sources */,
+				2943F3842B84F508008F9DDE /* EditAudioInfo.swift in Sources */,
 				29DB12442B7DF75D0069C827 /* HomeViewController.swift in Sources */,
 				29DB12292B7DBAC10069C827 /* UIColor.swift in Sources */,
 				29DB12192B7DB8240069C827 /* Porperty.swift in Sources */,
@@ -457,7 +481,9 @@
 				29DB12262B7DBAC10069C827 /* UIFont.swift in Sources */,
 				29DB12242B7DBAC10069C827 /* UIString.swift in Sources */,
 				29DB12402B7DF6E30069C827 /* ImageView.swift in Sources */,
+				29E4F1EA2B83896300F0C539 /* MenuView.swift in Sources */,
 				29DB124C2B7E07350069C827 /* UIView.swift in Sources */,
+				2943F37F2B84B94E008F9DDE /* Share.swift in Sources */,
 				29DB123E2B7DF6D20069C827 /* SelectLabel.swift in Sources */,
 				29DB12852B7E2D560069C827 /* AudioFileQueue.swift in Sources */,
 				29DB120A2B7DA8470069C827 /* KKPlayer_new.xcdatamodeld in Sources */,
@@ -467,6 +493,7 @@
 				29DB12A02B7F5CD20069C827 /* Label.swift in Sources */,
 				29DB127F2B7E2CD10069C827 /* AudioModel+CoreDataClass.swift in Sources */,
 				29E4F1E82B8300EE00F0C539 /* UITableView.swift in Sources */,
+				2943F3822B84B98C008F9DDE /* TipView.swift in Sources */,
 				29DB12462B7DF80E0069C827 /* Theme.swift in Sources */,
 				29DB12382B7DF6390069C827 /* NavigationBar.swift in Sources */,
 				29DB129E2B7F5C940069C827 /* View.swift in Sources */,
@@ -476,6 +503,7 @@
 				2979BA062B80A88E0038C104 /* HomeDataSource.swift in Sources */,
 				29DB12002B7DA8470069C827 /* AppDelegate.swift in Sources */,
 				29DB127D2B7E2CD10069C827 /* AudioModel+CalculationProperty.swift in Sources */,
+				2943F37B2B8454BA008F9DDE /* AudioMenuView.swift in Sources */,
 				29DB122A2B7DBAC10069C827 /* TimeInterval.swift in Sources */,
 				2979BA0A2B80B7700038C104 /* UIEdgeInsets.swift in Sources */,
 				29DB12422B7DF6F30069C827 /* ImageTextComponent.swift in Sources */,

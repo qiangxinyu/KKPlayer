@@ -8,9 +8,9 @@
 import UIKit
 
 
-protocol TapProtocol: UIView {}
+public protocol TapProtocol: UIView {}
 extension TapProtocol {
-    func touchUpInside(touch: @escaping () -> Void) {
+    public func touchUpInside(touch: @escaping () -> Void) {
         addGestureRecognizer(UITapGestureRecognizer {_ in
             touch()
         })

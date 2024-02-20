@@ -27,6 +27,10 @@ class PlayerList {
         }
     }
     
+    func settingPlayList(list: [AudioModel]) {
+        originItems = list
+        loop = PlayerManager.loop
+    }
     
     func play(model: AudioModel, list: [AudioModel]) {
         originItems = list
@@ -46,18 +50,22 @@ class PlayerList {
             return
         }
         guard let index = items.firstIndex(of: model!) else {
-            UIAlertController.show(title: "播放\(String(describing: model!.name))出错，播放列表中没找到")
             return
         }
         
         self.index = index
     }
     
-    func insertNext(model: AudioModel) {
-        items.insert(model, at: index + 1)
+    func insertNext(models: [AudioModel]) {
+        if items.count <= index {
+            items.append(contentsOf: models)
+        } else {
+            items.insert(contentsOf: models, at: index + 1)
+        }
+        
         PlayerManager.playListChanges.forEach {$0()}
 
-//            NoticeManager.text = "已加入下一首播放"
+        TipView.show("已加入下一首播放")
     }
     
     

@@ -7,7 +7,8 @@
 
 import UIKit
 
-class TouchAudioItemView: AudioItemView, TapProtocol {}
+fileprivate let CellKey = "CellKey"
+
 
 class PlayerControl: View, HomePopViewAnimate {
     
@@ -387,7 +388,8 @@ extension PlayerControl: UITableViewDelegate, UITableViewDataSource {
         tableView.alpha = 0
         
         tableView.layoutIfNeeded()
-        
+        tableView.register(Cell.self, forCellReuseIdentifier: CellKey)
+
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
@@ -408,7 +410,7 @@ extension PlayerControl: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Cell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellKey) as? Cell ?? Cell()
         cell.model = list[indexPath.row]
 
         return cell
@@ -430,8 +432,8 @@ fileprivate class Cell: UITableViewCell {
         didSet { itemView.model = model }
     }
     
-    init() {
-        super.init(style: .default, reuseIdentifier: nil)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(itemView)
         backgroundColor = .clear
         itemView.backgroundColor = .clear
@@ -440,8 +442,9 @@ fileprivate class Cell: UITableViewCell {
         }
     }
     
+  
     required init?(coder: NSCoder) {
-        super.init(style: .default, reuseIdentifier: nil)
+        super.init(style: .default, reuseIdentifier: CellKey)
     }
 }
 
@@ -618,3 +621,7 @@ extension PlayerControl {
         tableView.scrollTo(item: PlayerManager.currentModel, list: list)
     }
 }
+
+
+
+class TouchAudioItemView: AudioItemView, TapProtocol {}

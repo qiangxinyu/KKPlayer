@@ -82,14 +82,19 @@ class PlayerManager {
         playerList.play(model: model, list: list)
     }
     
+    static func settingPlayList(list: [AudioModel]) {
+        playerList.settingPlayList(list: list)
+
+    }
+    
     /// 单纯播放某首歌
     static func play(model: AudioModel) {
         playerList.play(model: model)
     }
     
     /// 插入下一首播放
-    static func insertNext(model: AudioModel) {
-        playerList.insertNext(model: model)
+    static func insertNext(models: [AudioModel]) {
+        playerList.insertNext(models: models)
     }
     
     static func play() {
@@ -98,6 +103,14 @@ class PlayerManager {
     
     static func replay() {
         player.replay()
+    }
+    
+    static func pause() {
+        player.pause()
+    }
+    
+    static func stop() {
+        player.stop()
     }
     
     static func seek(to: TimeInterval) {
@@ -116,11 +129,6 @@ class PlayerManager {
             player.seek(to: targetSecond)
         }
     }
-    
-    static func pause() {
-        player.pause()
-    }
-    
     static func next() {
         playerList.next()
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ImageTextComponent: UIView {
+open class ImageTextComponent: UIView {
     enum Style {
         case text
         case image
@@ -27,7 +27,7 @@ class ImageTextComponent: UIView {
     init() {
         super.init(frame: .zero)
     }
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
@@ -118,6 +118,8 @@ class ImageTextComponent: UIView {
                 make.top.equalToSuperview().offset(imageEdgeInserts.top)
                 make.left.equalToSuperview().offset(imageEdgeInserts.left)
                 make.right.equalToSuperview().offset(-imageEdgeInserts.right)
+                make.aspectRatio(1, view: imageView!)
+
             })
             label?.snp.makeConstraints({ make in
                 make.top.equalTo(imageView!.snp.bottom).offset(titleEdgeInserts.top + imageEdgeInserts.bottom)
@@ -139,7 +141,9 @@ class ImageTextComponent: UIView {
                 make.top.equalToSuperview().offset(imageEdgeInserts.top)
                 make.left.equalToSuperview().offset(imageEdgeInserts.left)
                 make.bottom.equalToSuperview().offset(-imageEdgeInserts.bottom)
+                make.aspectRatio(1, view: imageView!)
             })
+            
             
             
             label?.snp.makeConstraints({ make in
@@ -149,7 +153,6 @@ class ImageTextComponent: UIView {
                 make.bottom.equalToSuperview().offset(-titleEdgeInserts.bottom)
                 make.height.greaterThanOrEqualTo(1)
                 make.width.greaterThanOrEqualTo(1)
-
             })
         case .imageBottom:
             imageView?.image = image
@@ -161,6 +164,8 @@ class ImageTextComponent: UIView {
                 make.left.equalToSuperview().offset(imageEdgeInserts.left)
                 make.right.equalToSuperview().offset(-imageEdgeInserts.right)
                 make.bottom.equalToSuperview().offset(-imageEdgeInserts.bottom)
+                make.aspectRatio(1, view: imageView!)
+
             })
             
             
@@ -182,6 +187,7 @@ class ImageTextComponent: UIView {
                 make.top.equalToSuperview().offset(imageEdgeInserts.top)
                 make.right.equalToSuperview().offset(-imageEdgeInserts.right)
                 make.bottom.equalToSuperview().offset(-imageEdgeInserts.bottom)
+                make.aspectRatio(1, view: imageView!)
             })
             
             

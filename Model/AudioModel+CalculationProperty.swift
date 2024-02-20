@@ -85,6 +85,7 @@ extension AudioModel {
     
     func clearDisk() {
         KKFileManager.removeFile(path: path)
+        KKFileManager.removeFile(path: artworkPath)
         KKFileManager.removeFile(path: originArtworkPath)
         KKFileManager.removeFile(path: lyricsPath)
     }

@@ -137,7 +137,7 @@ extension PlayerManager {
                 updateNowPlaying()
      
             } else {
-                UIAlertController.show(title: "\(PlayerManager.currentModel?.name ?? "") 无法播放 未知原因")
+//                UIAlertController.show(title: "\(PlayerManager.currentModel?.name ?? "") 无法播放 未知原因")
             }
         }
         
@@ -147,6 +147,15 @@ extension PlayerManager {
             player?.pause()
             updateNowPlaying()
             calculateTime()
+        }
+        
+        func stop() {
+            PlayerManager.isPlaying = false
+            player?.stop()
+            updateNowPlaying()
+            calculateTime()
+            player = nil
+            PlayerManager.currentModel = nil
         }
         
         

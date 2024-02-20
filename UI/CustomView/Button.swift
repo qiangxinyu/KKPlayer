@@ -7,21 +7,45 @@
 
 import UIKit
 
-class Button: ImageTextComponent, TapProtocol {
+open class Button: ImageTextComponent, TapProtocol {
+    var oldTitleColor: UIColor?
+    
+    var isEnable = true {
+        didSet {
+            if !isEnable {
+                imageView?.tintColor = .gray
+                oldTitleColor = label?.textColor
+                label?.textColor = .gray
+            } else {
+                imageView?.tintColor = .Main
+                label?.textColor = oldTitleColor
+            }
+        }
+    }
     var isShowTouchState = true
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if isShowTouchState {
+    
+    public func touchUpInside(touch: @escaping () -> Void) {
+        addGestureRecognizer(UITapGestureRecognizer {[weak self] _ in
+            if self?.isEnable == true {
+                touch()
+            }
+        })
+    }
+    
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if isShowTouchState, isEnable {
             alpha = Theme.touchAlpha
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        alpha = 1
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if isEnable {
+            alpha = 1
+        }
     }
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if isShowTouchState {
+    open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if isShowTouchState, isEnable {
             alpha = 1
         }
     }
@@ -29,13 +53,21 @@ class Button: ImageTextComponent, TapProtocol {
 
 
 
-class SelectButton: Button {
+open class SelectButton: Button {
     init(imageName: String, selectImageName: String) {
         super.init(imageName: imageName)
         selectedImage = .init(named: selectImageName)
     }
+    init(title: String, selectTitle: String) {
+        super.init(title: title)
+        selectedTitle = selectTitle
+    }
     
-    required init?(coder: NSCoder) {
+    override init() {
+        super.init()
+    }
+    
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     override var title: String? {
@@ -52,12 +84,12 @@ class SelectButton: Button {
         didSet { refresh() }
     }
     
-    var isSelected = false {
+    open var isSelected = false {
         didSet { refresh() }
     }
     
     
-    private func refresh() {
+    func refresh() {
         label?.text = isSelected ? selectedTitle : title
         imageView?.image = isSelected ? selectedImage : image
     }
@@ -65,11 +97,11 @@ class SelectButton: Button {
 
 
 
-class MainThemeButton: Button {
+open class MainThemeButton: Button {
     
 }
 
 
-class MainThemeSelectButton: SelectButton {
+open class MainThemeSelectButton: SelectButton {
     
 }

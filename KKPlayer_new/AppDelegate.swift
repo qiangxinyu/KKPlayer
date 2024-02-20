@@ -111,8 +111,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func restorePlayerStatus() {
-        if let string = PlayerStatus.main.sort, let sort = HomeDataSource.Sort(rawValue: string) {
-            HomeDataSource.sort = .sort(sort: sort, ascending: PlayerStatus.main.ascending)
+        if let key = PlayerStatus.main.sort {
+            HomeDataSource.sort = .init(key: key, ascending: PlayerStatus.main.ascending)
         }
         
         if let loop = PlayerList.Loop.init(rawValue: PlayerStatus.main.loop) {
@@ -132,4 +132,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PlayerManager.seek(to: PlayerStatus.main.playTime)
     }
 }
+
 
