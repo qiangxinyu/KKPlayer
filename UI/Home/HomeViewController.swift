@@ -79,7 +79,7 @@ extension HomeViewController {
     private func statusChange() {
         navigationBar.status = status
         tableView.reloadData()
-        selectList.removeAll()
+        selectList = []
         title = ""
     }
 }
@@ -373,7 +373,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellKey) as? Cell ?? Cell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellKey) as! Cell
 
         cell.status = status
         cell.model = HomeDataSource.items[indexPath.row]
@@ -479,7 +479,7 @@ fileprivate class Cell: UITableViewCell {
         }
     }
     
-    let itemView = AudioItemView()
+    var itemView = AudioItemView()
     
     var model = AudioModel() {
         didSet { itemView.model = model }
@@ -496,7 +496,7 @@ fileprivate class Cell: UITableViewCell {
     
     
     required init?(coder: NSCoder) {
-        super.init(style: .default, reuseIdentifier: CellKey)
+        fatalError("")
     }
 }
 
@@ -533,7 +533,6 @@ extension HomeViewController {
         }
     }
 }
-
 
 
 // MARK: Sort Menu View

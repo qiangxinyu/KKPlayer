@@ -10,12 +10,16 @@ import UIKit
 class MenuView: View, TapProtocol {
     let contentView = UIView()
     
+    override func addSubview(_ view: UIView) {
+        fatalError("应该给 contentView 添加")
+    }
+    
     override func initSelf() {
         backgroundColor = .black.withAlphaComponent(0.15)
         alpha = 0
         frame = kScreenBounds
 
-        addSubview(contentView)
+        super.addSubview(contentView)
         
         touchUpInside {[weak self] in
             self?.hidden()

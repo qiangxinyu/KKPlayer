@@ -36,6 +36,15 @@ extension UIView {
         }
         get { frame.origin.y }
     }
+    
+    
+    static var presentLine: UIView {
+        let v = UIView()
+        v.layer.cornerRadius = 3
+        v.backgroundColor = .B04
+        v.frame = .init(x: 0, y: 0, width: 60, height: 6)
+        return v
+    }
 }
 
 

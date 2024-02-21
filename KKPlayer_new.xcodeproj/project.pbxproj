@@ -10,7 +10,7 @@
 		2943F37B2B8454BA008F9DDE /* AudioMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */; };
 		2943F37F2B84B94E008F9DDE /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F37E2B84B94E008F9DDE /* Share.swift */; };
 		2943F3822B84B98C008F9DDE /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F3812B84B98C008F9DDE /* TipView.swift */; };
-		2943F3842B84F508008F9DDE /* EditAudioInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F3832B84F508008F9DDE /* EditAudioInfo.swift */; };
+		2943F3842B84F508008F9DDE /* EditAudioInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F3832B84F508008F9DDE /* EditAudioInfoViewController.swift */; };
 		2979BA042B807DCE0038C104 /* PopViewAnimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA032B807DCE0038C104 /* PopViewAnimate.swift */; };
 		2979BA062B80A88E0038C104 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA052B80A88E0038C104 /* HomeDataSource.swift */; };
 		2979BA082B80B5CF0038C104 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA072B80B5CF0038C104 /* Button.swift */; };
@@ -66,7 +66,7 @@
 		2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMenuView.swift; sourceTree = "<group>"; };
 		2943F37E2B84B94E008F9DDE /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		2943F3812B84B98C008F9DDE /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
-		2943F3832B84F508008F9DDE /* EditAudioInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAudioInfo.swift; sourceTree = "<group>"; };
+		2943F3832B84F508008F9DDE /* EditAudioInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAudioInfoViewController.swift; sourceTree = "<group>"; };
 		2979BA032B807DCE0038C104 /* PopViewAnimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopViewAnimate.swift; sourceTree = "<group>"; };
 		2979BA052B80A88E0038C104 /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
 		2979BA072B80B5CF0038C104 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -264,7 +264,7 @@
 			children = (
 				29DB12432B7DF75D0069C827 /* HomeViewController.swift */,
 				2979BA052B80A88E0038C104 /* HomeDataSource.swift */,
-				2943F3832B84F508008F9DDE /* EditAudioInfo.swift */,
+				2943F3832B84F508008F9DDE /* EditAudioInfoViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -469,7 +469,7 @@
 				29DB12232B7DBAC10069C827 /* Notification.Name.swift in Sources */,
 				29DB129B2B7F123F0069C827 /* PlayerManager.swift in Sources */,
 				29DB129A2B7F123F0069C827 /* PlayerList.swift in Sources */,
-				2943F3842B84F508008F9DDE /* EditAudioInfo.swift in Sources */,
+				2943F3842B84F508008F9DDE /* EditAudioInfoViewController.swift in Sources */,
 				29DB12442B7DF75D0069C827 /* HomeViewController.swift in Sources */,
 				29DB12292B7DBAC10069C827 /* UIColor.swift in Sources */,
 				29DB12192B7DB8240069C827 /* Porperty.swift in Sources */,

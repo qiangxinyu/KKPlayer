@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         
         kMainWindow.rootViewController = HomeViewController.shared
-        kMainWindow.backgroundColor = .B01
+        kMainWindow.backgroundColor = .black
         kMainWindow.makeKeyAndVisible()
         
         restorePlayerStatus()

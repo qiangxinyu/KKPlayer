@@ -57,7 +57,9 @@ class AudioMenuView: MenuView {
         
         editButton.touchUpInside {
             self.hidden()
-            
+            let editVC = EditAudioInfoViewController()
+            editVC.list = self.selectList
+            HomeViewController.shared.present(editVC, animated: true)
         }
         
         shareButton.touchUpInside {

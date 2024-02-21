@@ -24,6 +24,8 @@ class PlayerControl: View, HomePopViewAnimate {
     private let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
     
+    private let lineView = UIView.presentLine
+    
     private let audioItemView = TouchAudioItemView(hasLine: false)
     
     
@@ -64,6 +66,7 @@ class PlayerControl: View, HomePopViewAnimate {
         alpha = 0
 
 
+        
         initContentView()
         initBackground()
         initHeader()
@@ -222,13 +225,22 @@ extension PlayerControl {
 
 extension PlayerControl {
     private func initHeader() {
+        contentView.addSubview(lineView)
+        lineView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(Theme.marginOffset)
+            make.width.equalTo(lineView.width)
+            make.height.equalTo(lineView.height)
+        }
+        
+        
         audioItemView.backgroundColor = .clear
         contentView.addSubview(audioItemView)
         audioItemView.touchUpInside {
             self.exchangeListAndLyric()
         }
         audioItemView.snp.makeConstraints { make in
-            make.top.equalTo(Theme.marginOffset)
+            make.top.equalTo(lineView.snp.bottom)
             make.left.right.equalToSuperview()
             make.height.equalTo(70)
         }
@@ -410,8 +422,13 @@ extension PlayerControl: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellKey) as? Cell ?? Cell()
-        cell.model = list[indexPath.row]
+        
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellKey, for: indexPath) as! Cell
+       
+        if indexPath.row < list.count {
+            cell.model = list[indexPath.row]
+        }
 
         return cell
     }
@@ -444,7 +461,7 @@ fileprivate class Cell: UITableViewCell {
     
   
     required init?(coder: NSCoder) {
-        super.init(style: .default, reuseIdentifier: CellKey)
+        super.init(coder: coder)
     }
 }
 

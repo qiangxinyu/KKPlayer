@@ -139,7 +139,8 @@ class AudioItemView: UIView {
             make.width.height.equalTo(44)
             make.centerY.equalToSuperview()
         }
-        more.touchUpInside {
+        more.touchUpInside {[weak self] in
+            guard let self = self else {return}
             AudioMenuView.show(ges: $0, list: [self.model])
         }
         

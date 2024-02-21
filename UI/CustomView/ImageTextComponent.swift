@@ -45,7 +45,11 @@ open class ImageTextComponent: UIView {
         style = .image
         initSelf()
     }
-    
+    init(style: Style) {
+        self.style = style
+        super.init(frame: .zero)
+        initSelf()
+    }
 
     
     init(style: Style, title: String? = nil, imageName: String? = nil) {
