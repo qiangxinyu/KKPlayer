@@ -52,16 +52,13 @@ class HomeViewController: ViewController {
         view.backgroundColor = .white
         
         refreshScreenInfo()
-        HomeDataSource.refreshItems()
   
-       
         observer()
+        HomeDataSource.refreshItems()
+
         
         initList()
-
-
         initNavigationBar()
-
         initMiniControl()
     }
 }
@@ -78,9 +75,25 @@ extension HomeViewController {
     
     private func statusChange() {
         navigationBar.status = status
-        tableView.reloadData()
-        selectList = []
+        notSelectAllItems()
         title = ""
+    }
+    
+    func selectAllItems() {
+        selectList = HomeDataSource.items
+        selectListChange()
+    }
+    
+    func notSelectAllItems() {
+        selectList = []
+        selectListChange()
+    }
+    
+    private func selectListChange() {
+        tableView.reloadData()
+        title = "已选中 \(selectList.count) 首"
+        navigationBar.allSelectButton.isSelected = selectList.count == HomeDataSource.items.count
+        navigationBar.moreButton.isEnable = !selectList.isEmpty
     }
 }
 
@@ -124,7 +137,7 @@ fileprivate class NaviBar: View, UISearchBarDelegate, UIDocumentPickerDelegate {
     }
     
     private lazy var sortMenuView = {SortMenuView()}()
-    private lazy var moreButton = {
+    private(set) lazy var moreButton = {
         let btn = MainThemeButton(imageName: "icon_more")
         self.addSubview(btn)
         btn.imageEdgeInserts = .init(edges: 10)
@@ -155,7 +168,7 @@ fileprivate class NaviBar: View, UISearchBarDelegate, UIDocumentPickerDelegate {
         return btn
     }()
     
-    lazy var allSelectButton = {
+    private(set) lazy var allSelectButton = {
         let btn = MainThemeSelectButton(title: "全选", selectTitle: "取消全选")
         self.addSubview(btn)
         btn.backgroundColor = .clear
@@ -327,28 +340,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
        
         
         
-        HomeDataSource.itemChange {
-            self.headerView.count = HomeDataSource.items.count
-            self.tableView.reloadData()
-        }
+        
     }
     
-    func selectAllItems() {
-        selectList = HomeDataSource.items
-        tableView.reloadData()
-        settingSelectTitle()
-    }
     
-    func notSelectAllItems() {
-        selectList = []
-        tableView.reloadData()
-        settingSelectTitle()
-        navigationBar.allSelectButton.isSelected = false
-    }
-    
-    func settingSelectTitle() {
-        title = "已选中 \(selectList.count) 首"
-    }
+ 
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > -tableViewContentInsertTop, navigationBar.lineView.isHidden {
@@ -399,9 +395,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 selectList.append(model)
             }
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-            settingSelectTitle()
-            navigationBar.allSelectButton.isSelected = selectList.count == HomeDataSource.items.count
+            selectListChange()
         }
     }
     
@@ -530,6 +524,11 @@ extension HomeViewController {
     private func observer() {
         PlayerManager.currentModelChange {
             self.tableView.scrollTo(item: PlayerManager.currentModel, list: HomeDataSource.items)
+        }
+        
+        HomeDataSource.itemsChange {
+            self.headerView.count = HomeDataSource.items.count
+            self.tableView.reloadData()
         }
     }
 }

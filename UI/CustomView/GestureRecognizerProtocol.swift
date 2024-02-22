@@ -8,16 +8,23 @@
 import UIKit
 
 
-public protocol TapProtocol: UIView {}
-extension TapProtocol {
+@MainActor public protocol TapProtocol: UIView , UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool
+    
+}
+extension TapProtocol  {
     public func touchUpInside(touch: @escaping () -> Void) {
-        addGestureRecognizer(UITapGestureRecognizer {_ in
+        let tap = UITapGestureRecognizer {_ in
             touch()
-        })
+        }
+        tap.delegate = self
+        addGestureRecognizer(tap)
     }
     
     func touchUpInside(touch: @escaping UIGestureRecognizer.Touch) {
-        addGestureRecognizer(UITapGestureRecognizer(touch))
+        let tap = UITapGestureRecognizer(touch)
+        tap.delegate = self
+        addGestureRecognizer(tap)
     }
 }
 

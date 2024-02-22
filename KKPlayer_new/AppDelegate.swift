@@ -50,32 +50,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         restorePlayerStatus()
         
         
-        if !UserDefaults.standard.bool(forKey: "11") {
-            
-            HomeDataSource.items.forEach {
-                CoreDataContext.delete($0)
-            }
-            
-            try? CoreDataContext.save()
-            
-            DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
-                
-               let l = KKFileManager.main.allURL(path: .audio())
-
-               var list = [URL]()
-               l.forEach { url in
-                   let toPath = KKFileManager.Path.tmp(component: url.relativePath)
-                   KKFileManager.moveFile(path: url, toPath: toPath)
-                   list.append(toPath.url)
-               }
-                
-                list.forEach { url in
-                    AudioFileQueue.push(audio: url)
-                }
-
-            }
-            UserDefaults.standard.set(true, forKey: "11")
-        }
+//        if !UserDefaults.standard.bool(forKey: "11") {
+//            
+//            HomeDataSource.items.forEach {
+//                CoreDataContext.delete($0)
+//            }
+//            
+//            try? CoreDataContext.save()
+//            
+//            DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+//                
+//               let l = KKFileManager.main.allURL(path: .audio())
+//
+//               var list = [URL]()
+//               l.forEach { url in
+//                   let toPath = KKFileManager.Path.tmp(component: url.relativePath)
+//                   KKFileManager.moveFile(path: url, toPath: toPath)
+//                   list.append(toPath.url)
+//               }
+//                
+//                list.forEach { url in
+//                    AudioFileQueue.push(audio: url)
+//                }
+//
+//            }
+//            UserDefaults.standard.set(true, forKey: "11")
+//        }
 
         
         

@@ -641,4 +641,12 @@ extension PlayerControl {
 
 
 
-class TouchAudioItemView: AudioItemView, TapProtocol {}
+class TouchAudioItemView: AudioItemView, TapProtocol {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view != self {
+            return false
+        }
+        return true
+    }
+    
+}

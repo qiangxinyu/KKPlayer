@@ -20,7 +20,7 @@ class AudioFileQueue {
     private static var queues = [URL]()
     private static var nextQueues = [URL]()
     
-    private static let queue = DispatchQueue(label: "com.concurrentqueue", attributes: .concurrent)
+    private static let queue = DispatchQueue(label: "com.AudioFileQueue", attributes: .concurrent)
 
     private static let timeout: TimeInterval = 0.4
     private static var isStartQueue = false
@@ -59,7 +59,7 @@ class AudioFileQueue {
     
 
     
-    private static let semaphore = DispatchSemaphore(value: 1)
+    private static let semaphore = DispatchSemaphore(value: 0)
     
     private static func checkAudio(
         _ url: URL,
@@ -73,7 +73,6 @@ class AudioFileQueue {
         }
         
         var audioFileName = fileName ?? url.lastPathComponent
-        audioFileName = audioFileName.replacingOccurrences(of: "\\", with: "").replacingOccurrences(of: "\"", with: "'")
         
         let savePath = KKFileManager.Path.audio(component: audioFileName)
         var audioName = audioFileName.removeMP3().removeErrorText()
@@ -118,7 +117,7 @@ class AudioFileQueue {
             } sureBlock1: { _ in
                 // rename
                 let time = Int(Date().timeIntervalSince1970 * 1000)
-                checkAudio(url, fileName: "\(audioName)_\(time).mp3", success: success, fail: fail)
+                checkAudio(url, fileName: "\(audioName)|\(time).mp3", success: success, fail: fail)
             } cancelBlock: { _ in
                 KKFileManager.removeFile(path: url.relativePath)
                 fail()
@@ -179,8 +178,7 @@ class AudioFileQueue {
             if (model.artist ?? "").isEmpty, nameArtist.count == 2 {
                 model.setArtist(nameArtist.last)
             }
-            
-                        
+                                    
             next()
         } fail: {
             next()
@@ -189,21 +187,20 @@ class AudioFileQueue {
     
     private static func addAudio(urls: [URL]) {
         for url in urls {
-            semaphore.wait()
             createAudioModel(url: url) {
                 semaphore.signal()
             }
+            semaphore.wait()
         }
         
         
-        DispatchQueue.main.async {
-            do {
-                try CoreDataContext.save()
-                HomeDataSource.refreshItems()
-            } catch {
-                UIAlertController.show(title: "数据库写入失败 \(error.localizedDescription)")
-            }
+        do {
+            try CoreDataContext.save()
+            HomeDataSource.refreshItems()
+        } catch {
+            UIAlertController.show(title: "数据库写入失败 \(error.localizedDescription)")
         }
+        
     }
    
 }

@@ -13,17 +13,23 @@ class HomeDataSource {
     
     
     /// 列表变动通知  目前只有主页列表需要
-    private static var itemChanges = [Change]()
-    static func itemChange(_ change: @escaping Change) {
-        itemChanges.append(change)
+    private static var itemsChanges = [Change]()
+    static func itemsChange(_ change: @escaping Change) {
+        itemsChanges.append(change)
     }
     
     /// 数据库查询结果
     /// 排序筛选数据库耗时稳定，所以不去进行自己操作内存数组排序筛选
     private(set) static var items: [AudioModel] = [] {
         didSet {
-            itemChanges.forEach {$0()}
+            DispatchQueue.main.async {
+                itemsChangesPost()
+            }
         }
+    }
+    
+    static func itemsChangesPost() {
+        itemsChanges.forEach {$0()}
     }
     
     /// 筛选
@@ -53,7 +59,6 @@ class HomeDataSource {
     static func refreshItems() {
         let request = AudioModel.fetchRequest()
         request.predicate = predicate
-        
         
         request.sortDescriptors = [NSSortDescriptor.init(key: sort.key, ascending: sort.ascending)]
 

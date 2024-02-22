@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		291525272B8618E200983960 /* UIImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291525262B8618E200983960 /* UIImagePickerController.swift */; };
 		2943F37B2B8454BA008F9DDE /* AudioMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */; };
 		2943F37F2B84B94E008F9DDE /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F37E2B84B94E008F9DDE /* Share.swift */; };
 		2943F3822B84B98C008F9DDE /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F3812B84B98C008F9DDE /* TipView.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		291525262B8618E200983960 /* UIImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerController.swift; sourceTree = "<group>"; };
 		2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMenuView.swift; sourceTree = "<group>"; };
 		2943F37E2B84B94E008F9DDE /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		2943F3812B84B98C008F9DDE /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				29DB12A92B7F89F20069C827 /* SnapKit.swift */,
 				2979BA092B80B7700038C104 /* UIEdgeInsets.swift */,
 				29E4F1E72B8300EE00F0C539 /* UITableView.swift */,
+				291525262B8618E200983960 /* UIImagePickerController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				29DB12AA2B7F89F20069C827 /* SnapKit.swift in Sources */,
 				29DB12332B7DBBC00069C827 /* BaseNavigationController.swift in Sources */,
 				2979BA042B807DCE0038C104 /* PopViewAnimate.swift in Sources */,
+				291525272B8618E200983960 /* UIImagePickerController.swift in Sources */,
 				29DB124E2B7E08310069C827 /* CGRect.swift in Sources */,
 				29DB12892B7E2E7C0069C827 /* UserDefaults.swift in Sources */,
 				29DB12282B7DBAC10069C827 /* UIAlertController.swift in Sources */,

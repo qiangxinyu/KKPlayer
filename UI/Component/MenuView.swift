@@ -19,17 +19,23 @@ class MenuView: View, TapProtocol {
         alpha = 0
         frame = kScreenBounds
 
-        super.addSubview(contentView)
         
         touchUpInside {[weak self] in
             self?.hidden()
         }
-        
+
+        super.addSubview(contentView)
         contentView.backgroundColor = .B03
         contentView.layer.masksToBounds = true
         contentView.layer.cornerRadius = 6
     }
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view != self {
+            return false
+        }
+        return true
+    }
     
     
     /// 弹出菜单
@@ -65,4 +71,7 @@ class MenuView: View, TapProtocol {
             }
         }
     }
+    
+    
+
 }

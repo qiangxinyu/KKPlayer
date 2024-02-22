@@ -8,28 +8,34 @@
 import UIKit
 
 
-class EditAudioInfoViewController: ViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditAudioInfoViewController: ViewController {
     
     
     var list = [AudioModel]()
     
     
     private let lineView = UIView.presentLine
-    private let artowkImageView = Button(style: .image)
+    private let artworkImageView = Button(style: .image)
     
-    
+    private let nameInput = InputView()
     private let artistInput = InputView()
     private let albumInput = InputView()
+    
+    private let saveButton = Button(title: "保存")
     
     
     private let itemHeight: CGFloat = 72
 
     private lazy var artistMenu = {
-        EditAudioMenuView(list: allAudio.filter {$0.artist != nil}.map { $0.artist! })
+        var artistList = allAudio.filter {$0.artist?.isEmpty == false }.map { $0.artist! }
+        artistList = Array(Set(artistList))
+        return EditAudioMenuView(list: artistList)
     }()
     
     private lazy var albumMenu = {
-        EditAudioMenuView(list: allAudio.filter {$0.album != nil}.map { $0.album! })
+        var albumList = allAudio.filter {$0.album?.isEmpty == false }.map { $0.album! }
+        albumList = Array(Set(albumList))
+        return EditAudioMenuView(list: albumList)
     }()
     
     private lazy var allAudio = {
@@ -37,49 +43,179 @@ class EditAudioInfoViewController: ViewController, UIImagePickerControllerDelega
     }()
     
     
+    private var newArtwork: UIImage? = nil
+    private var newName: String? = nil
+    private var newArtist: String? = nil
+    private var newAlbum: String? = nil {
+        didSet {
+            albumInput.value = newAlbum
+        }
+    }
+
     override func viewDidLoad() {
         layoutSubviews()
         handleModels()
+        handleLogical()
     }
-    
     
     
     private func handleModels() {
         if list.count == 1 {
-            artowkImageView.image = list[0].originalArtworkImage
+            artworkImageView.image = list[0].originalArtworkImage
+            nameInput.value = list[0].name
+            artistInput.value = list[0].artist
+            albumInput.value = list[0].album
         } else {
-            let size = artowkImageView.frame.size
-            artowkImageView.image = UIGraphicsImageRenderer(size: size).image {[weak self] _ in
-                guard let list = self?.list else { return }
+            var loading: UIActivityIndicatorView? = nil
+            if list.count > 50 {
+                loading = UIActivityIndicatorView()
+                artworkImageView.addSubview(loading!)
+                loading?.snp.makeConstraints { make in
+                    make.center.equalToSuperview()
+                }
+                loading?.startAnimating()
+            }
+            
+            let size = artworkImageView.frame.size
+            DispatchQueue.global().async { [weak self]  in
+                let image = UIGraphicsImageRenderer(size: size).image {_ in
+                    guard let list = self?.list else { return }
+                    
+                    let models = list.filter { $0.originalArtworkImage != nil }
+                    
+                    let rows: CGFloat = ceil(sqrt(Double(models.count)))
+                    let cols: CGFloat = rows
+                    
+                    let images = models.map { rows >= 4 ? $0.artworkImage! : $0.originalArtworkImage! }
                 
-                let images = list.filter { $0.originalArtworkImage != nil }.map {$0.originalArtworkImage!}
-                
-                let rows: CGFloat = ceil(sqrt(Double(images.count)))
-                let cols: CGFloat = rows
-                
-                let itemWidth = size.width / cols
-                let itemHeight = size.height / rows
-                
-                var row: CGFloat = 0
-                var col: CGFloat = 0
-                
-                for image in images {
-                    if col == cols {
-                        col = 0
-                        row += 1
+                    let itemWidth = size.width / cols
+                    let itemHeight = size.height / rows
+                    
+                    var row: CGFloat = 0
+                    var col: CGFloat = 0
+                    
+                    for image in images {
+                        if col == cols {
+                            col = 0
+                            row += 1
+                        }
+                        if row > rows {
+                            return
+                        }
+                        image.draw(in: .init(x: col * itemWidth, y: row * itemHeight, width: itemWidth, height: itemHeight))
+                        col += 1
                     }
-                    if row > rows {
-                        return
-                    }
-                    image.draw(in: .init(x: col * itemWidth, y: row * itemHeight, width: itemWidth, height: itemHeight))
-                    col += 1
                 }
                 
-                
+                DispatchQueue.main.async {
+                    self?.artworkImageView.image = image
+                    loading?.removeFromSuperview()
+                }
             }
+        }
+        
+        
+        nameInput.placeholder = "内容会拼接到所有歌名之后!"
+    }
+    
+    
+    private func handleLogical() {
+       
+        artistInput.showMenu {[weak self] ges in
+            self?.artistMenu.show(ges: ges) { newArtist in
+                self?.newArtist = newArtist
+            } closeCall: {
+                self?.artistInput.closeMenuButtonAnimate()
+            }
+        } 
+    
+        albumInput.showMenu {[weak self] ges in
+            self?.albumMenu.show(ges: ges) { newAlbum in
+                self?.newAlbum = newAlbum
+            } closeCall: {
+                self?.albumInput.closeMenuButtonAnimate()
+            }
+        }
+        
+        nameInput.valueChange = {[weak self] newValue in
+            if newValue?.isEmpty == true {
+                UIAlertController.show(title: "歌名不能为空")
+                return
+            }
+            self?.newName = newValue
+        }
+        
+        artistInput.valueChange = {[weak self] newValue in
+            self?.newArtist = newValue
+        }
+        
+        albumInput.valueChange = {[weak self] newValue in
+            self?.newAlbum = newValue
+        }
+        
+        saveButton.touchUpInside {[weak self] in
+            self?.save()
         }
     }
     
+    private func save() {
+        if newName == nil, newArtist == nil,
+            newArtwork == nil, newAlbum == nil {
+            dismiss(animated: true)
+            return
+        }
+        
+        if list.count == 1 {
+            list[0].update(
+                name: newName,
+                artist: newArtist,
+                artwork: newArtwork,
+                album: newAlbum
+            )
+            HomeDataSource.itemsChangesPost()
+            PlayerManager.playListChangesPost()
+            
+            dismiss(animated: true)
+        } else {
+            view.isUserInteractionEnabled = false
+            
+            let loading = UIActivityIndicatorView()
+            loading.color = .white
+            saveButton.addSubview(loading)
+            saveButton.backgroundColor = .gray
+            saveButton.title = ""
+            loading.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+            }
+            loading.startAnimating()
+
+            
+            DispatchQueue.global().async {[weak self] in
+                guard let self = self else {return}
+                
+                self.list.forEach { model in
+                    autoreleasepool {
+                        model.update(
+                            name: model.name! + (self.newName ?? ""),
+                            artist: self.newArtist,
+                            artwork: self.newArtwork,
+                            album: self.newAlbum,
+                            autoSaveCoreData: false
+                        )
+                    }
+                }
+                
+                try? CoreDataContext.save()
+                
+                
+                DispatchQueue.main.async {
+                    HomeDataSource.itemsChangesPost()
+                    PlayerManager.playListChangesPost()
+                    self.dismiss(animated: true)
+                }
+            }
+        }
+    }
     
     private func layoutSubviews() {
         view.backgroundColor = .white
@@ -92,39 +228,50 @@ class EditAudioInfoViewController: ViewController, UIImagePickerControllerDelega
             make.height.equalTo(lineView.height)
         }
         
-        view.addSubview(artowkImageView)
-        
-        artowkImageView.layer.borderColor = UIColor.HEXA("AAAAAA").cgColor
-        artowkImageView.layer.borderWidth = 0.5
-        artowkImageView.layer.masksToBounds = true
-        artowkImageView.layer.cornerRadius = 12
-        artowkImageView.backgroundColor = .P01
-        artowkImageView.snp.makeConstraints { make in
-            make.aspectRatio(1, view: artowkImageView)
+        view.addSubview(artworkImageView)
+        artworkImageView.touchUpInside {[weak self] in
+            UIImagePickerController.openPhotos(viewConroller: self)
+        }
+        artworkImageView.contentMode = .scaleAspectFill
+        artworkImageView.layer.borderColor = UIColor.HEXA("AAAAAA").cgColor
+        artworkImageView.layer.borderWidth = 0.5
+        artworkImageView.layer.masksToBounds = true
+        artworkImageView.layer.cornerRadius = 12
+        artworkImageView.backgroundColor = .P01
+        artworkImageView.snp.makeConstraints { make in
+            make.aspectRatio(1, view: artworkImageView)
             make.left.equalToSuperview().offset(Theme.marginOffset)
             make.right.equalToSuperview().offset(-Theme.marginOffset)
             make.top.equalTo(lineView.snp.bottom).offset(Theme.marginOffset)
         }
         
         
-        artowkImageView.layoutIfNeeded()
+        artworkImageView.layoutIfNeeded()
         
-        
+        view.addSubview(nameInput)
         view.addSubview(artistInput)
         view.addSubview(albumInput)
         
         
-        artistInput.touchMenu = {[weak self] ges in
-            self?.artistMenu.show(ges: ges)
-        }
-        artistInput.title = "歌手"
-        artistInput.snp.makeConstraints { make in
-            make.top.equalTo(artowkImageView.snp.bottom).offset(20)
+        nameInput.placeholder = "请输入歌名"
+        nameInput.title = "歌名"
+        nameInput.snp.makeConstraints { make in
+            make.top.equalTo(artworkImageView.snp.bottom).offset(20)
             make.left.equalTo(Theme.marginOffset)
             make.right.equalTo(-Theme.marginOffset)
             make.height.equalTo(itemHeight)
         }
         
+        artistInput.placeholder = "请输入歌手"
+        artistInput.title = "歌手"
+        artistInput.snp.makeConstraints { make in
+            make.top.equalTo(nameInput.snp.bottom).offset(Theme.marginOffset)
+            make.left.equalTo(Theme.marginOffset)
+            make.right.equalTo(-Theme.marginOffset)
+            make.height.equalTo(itemHeight)
+        }
+        
+        albumInput.placeholder = "请输入专辑名"
         albumInput.title = "专辑"
         albumInput.snp.makeConstraints { make in
             make.top.equalTo(artistInput.snp.bottom).offset(Theme.marginOffset)
@@ -132,7 +279,22 @@ class EditAudioInfoViewController: ViewController, UIImagePickerControllerDelega
             make.right.equalTo(-Theme.marginOffset)
             make.height.equalTo(itemHeight)
         }
+        
+        
+        view.addSubview(saveButton)
+        saveButton.backgroundColor = .Main
+        saveButton.label?.textColor = .white
+        saveButton.layer.cornerRadius = 8
+        saveButton.layer.masksToBounds = true
+        saveButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-kMainWindow.safeAreaInsets.bottom)
+            make.height.equalTo(44)
+            make.left.equalToSuperview().offset(30)
+            make.right.equalToSuperview().offset(-30)
+        }
     }
+    
 }
 
 
@@ -142,39 +304,53 @@ class EditAudioInfoViewController: ViewController, UIImagePickerControllerDelega
 fileprivate class InputView: View, UITextFieldDelegate {
     private let titleLabel = UILabel()
     private let textInput = UITextField()
-    private let menuButton = Button(imageName: "icon_down_arrow")
+    private lazy var menuButton = {Button(imageName: "icon_down_arrow")}()
     
     var title: String? {
-        set {
-            titleLabel.text = newValue
-        }
-        get {
-            titleLabel.text
-        }
+        set { titleLabel.text = newValue }
+        get { titleLabel.text }
     }
     
     var placeholder: String? {
-        set {
-            textInput.placeholder = newValue
-        }
-        get {
-            textInput.placeholder
-        }
+        set { textInput.placeholder = newValue }
+        get { textInput.placeholder }
     }
     
-    var touchMenu: ((UIGestureRecognizer) -> Void)? = nil
+    var value: String? {
+        set { textInput.text = newValue }
+        get { textInput.text }
+    }
     
-    func closeMenu() {
+    private var touchMenu: ((UIGestureRecognizer) -> Void)? = nil
+    
+    func closeMenuButtonAnimate() {
         UIView.animate(withDuration: 0.4) {[weak self] in
             self?.menuButton.transform = CGAffineTransformMakeRotation(0)
         }
     }
     
+    func showMenu(callback: @escaping (UIGestureRecognizer) -> Void) {
+        touchMenu = callback
+        
+        addSubview(menuButton)
+        menuButton.touchUpInside { [weak self] ges in
+            UIView.animate(withDuration: 0.4) {
+                self?.menuButton.transform = CGAffineTransformMakeRotation(-.pi / 2)
+            }
+            self?.touchMenu?(ges)
+        }
+        menuButton.imageEdgeInserts = .init(edges: 10)
+        menuButton.backgroundColor = .clear
+        menuButton.snp.makeConstraints { make in
+            make.width.height.equalTo(44)
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+    }
     
     override func initSelf() {
         addSubview(titleLabel)
         addSubview(textInput)
-        addSubview(menuButton)
         
         titleLabel.font = .pingFang(name: .medium, size: 20)
         titleLabel.snp.makeConstraints { make in
@@ -197,24 +373,30 @@ fileprivate class InputView: View, UITextFieldDelegate {
             make.height.equalTo(44)
         }
         
-        menuButton.touchUpInside { [weak self] ges in
-            UIView.animate(withDuration: 0.4) {
-                self?.menuButton.transform = CGAffineTransformMakeRotation(.pi / 2)
-            }
-            self?.touchMenu?(ges)
-        }
-        menuButton.imageEdgeInserts = .init(edges: 10)
-        menuButton.backgroundColor = .clear
-        menuButton.snp.makeConstraints { make in
-            make.width.height.equalTo(44)
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
+        
     }
     
+    var valueChange: ((String?) -> Void)? = nil
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-//            change?(textField.text)
+        valueChange?(textField.text)
+    }
+}
+
+// MARK: Image Picker Controller
+extension EditAudioInfoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let image = info[.editedImage] as? UIImage {
+            artworkImageView.image = image
+            newArtwork = image
+            
+        }
+        
+        picker.dismiss(animated: true)
     }
 }
 
@@ -230,7 +412,17 @@ fileprivate class EditAudioMenuView: MenuView, UITableViewDelegate, UITableViewD
         initSelf()
     }
     
-    
+    private var closeBlock: (() -> Void)? = nil
+    private var selectBlock: ((String) -> Void)? = nil
+    func show(ges: UIGestureRecognizer, selectCall: @escaping (String) -> Void, closeCall: @escaping () -> Void) {
+        super.show(ges: ges)
+        closeBlock = closeCall
+        selectBlock = selectCall
+    }
+    override func hidden() {
+        super.hidden()
+        closeBlock?()
+    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -238,19 +430,20 @@ fileprivate class EditAudioMenuView: MenuView, UITableViewDelegate, UITableViewD
     
     override func initSelf() {
         super.initSelf()
-    
         contentView.addSubview(tableView)
         
         let itemWidth: CGFloat = 200
         
         contentView.frame = .init(x: 0, y: 0, width: itemWidth, height: 44 * 6)
-        
+        tableView.frame = contentView.bounds
         tableView.register(Cell.self, forCellReuseIdentifier: CellKey)
 
         tableView.delegate = self
         tableView.dataSource = self
     }
     
+    
+   
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
@@ -271,7 +464,8 @@ fileprivate class EditAudioMenuView: MenuView, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        selectBlock?(datas[indexPath.row])
+        hidden()
     }
 }
 
@@ -283,7 +477,9 @@ fileprivate class Cell: UITableViewCell {
         backgroundColor = .white
         contentView.addSubview(label)
         label.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.left.equalTo(Theme.marginOffset)
+            make.right.equalTo(-Theme.marginOffset)
         }
     }
     required init?(coder: NSCoder) {

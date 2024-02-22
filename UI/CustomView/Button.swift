@@ -8,6 +8,14 @@
 import UIKit
 
 open class Button: ImageTextComponent, TapProtocol {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view != self {
+            return false
+        }
+        return true
+    }
+    
+    
     var oldTitleColor: UIColor?
     
     var isEnable = true {

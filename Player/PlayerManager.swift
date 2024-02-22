@@ -66,10 +66,14 @@ class PlayerManager {
     
 
     
-    static var playListChanges = [Change]()
+    static private var playListChanges = [Change]()
     static func playListChange(_ change: @escaping Change) {
         playListChanges.append(change)
     }
+    static func playListChangesPost() {
+        playListChanges.forEach {$0()}
+    }
+    
     /// 循环方式
     static var loop: PlayerList.Loop = .plain {
         didSet {

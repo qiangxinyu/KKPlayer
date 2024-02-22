@@ -23,7 +23,7 @@ class PlayerList {
             }
             
             refreshIndex(PlayerManager.currentModel)
-            PlayerManager.playListChanges.forEach {$0()}
+            PlayerManager.playListChangesPost()
         }
     }
     
@@ -63,7 +63,7 @@ class PlayerList {
             items.insert(contentsOf: models, at: index + 1)
         }
         
-        PlayerManager.playListChanges.forEach {$0()}
+        PlayerManager.playListChangesPost()
 
         TipView.show("已加入下一首播放")
     }

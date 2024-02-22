@@ -65,8 +65,12 @@ extension AudioModel {
             
             let maxSize = CGSize(width: size, height: size)
             let newRect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: .zero, size: maxSize))
+            let fom = UIGraphicsImageRendererFormat()
             
-            artwork = UIGraphicsImageRenderer(size: newRect.size).image { _ in
+            fom.opaque = false
+            fom.scale = 1
+            
+            artwork = UIGraphicsImageRenderer(size: newRect.size, format: fom).image { _ in
                 image.draw(in: newRect)
             }
         } else {

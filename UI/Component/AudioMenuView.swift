@@ -13,11 +13,6 @@ class AudioMenuView: MenuView {
     static func show(ges: UIGestureRecognizer, list: [AudioModel]) {
         shared.show(ges: ges)
         shared.selectList = list
-        
-        shared.deleteButton.isEnable = !list.isEmpty
-        shared.editButton.isEnable = shared.deleteButton.isEnable
-        shared.nextPlayButton.isEnable = shared.deleteButton.isEnable
-        shared.shareButton.isEnable = shared.deleteButton.isEnable
     }
     
     private var selectList = [AudioModel]()
