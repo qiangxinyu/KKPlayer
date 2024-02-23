@@ -28,6 +28,10 @@ class Label: UILabel {
 class MainThemeLabel: Label {
     override func initSelf() {
         textColor = .Main
+        
+        MainColorChange {[weak self] in
+            self?.textColor = .Main
+        }
     }
 }
 

@@ -76,6 +76,16 @@ open class ImageTextComponent: UIView {
     
     lazy var label: UILabel? = { initLabel() }()
     lazy var imageView: UIImageView? = { initImageView() }()
+    {
+        didSet {
+            if imageView != nil {
+                imageView?.contentMode = .scaleAspectFit
+                imageView?.clipsToBounds = true
+                addSubview(imageView!)
+            }
+            
+        }
+    }
     
     var titleEdgeInserts: UIEdgeInsets = .zero {
         didSet { settingStyle() }
@@ -83,6 +93,24 @@ open class ImageTextComponent: UIView {
     var imageEdgeInserts: UIEdgeInsets = .zero {
         didSet { settingStyle() }
     }
+    
+    /// 跟随主题色  不可逆
+    lazy var isMainTheme: Bool = {
+       false
+    }() {
+        didSet {
+            if isMainTheme {
+                imageView?.tintColor = .Main
+                label?.textColor = .Main
+                
+                MainColorChange { [weak self] in
+                    self?.imageView?.tintColor = .Main
+                    self?.label?.textColor = .Main
+                }
+            }
+        }
+    }
+
 
     
     func initSelf() {
@@ -215,7 +243,7 @@ open class ImageTextComponent: UIView {
     }
     
     private func initImageView() -> UIImageView {
-        let imageView = MainThemeImageView()
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         addSubview(imageView)
@@ -224,3 +252,9 @@ open class ImageTextComponent: UIView {
 }
 
 
+class MainThemeImageTextComponent: ImageTextComponent {
+    override func initSelf() {
+        super.initSelf()
+        isMainTheme = true
+    }
+}

@@ -36,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        let tr = ImageTextComponent()
+      
         PlayerManager.regist()
 
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()

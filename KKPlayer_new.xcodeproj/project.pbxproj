@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		291525272B8618E200983960 /* UIImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291525262B8618E200983960 /* UIImagePickerController.swift */; };
+		293314192B873C6F00577FD8 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293314182B873C6F00577FD8 /* ColorView.swift */; };
 		2943F37B2B8454BA008F9DDE /* AudioMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */; };
 		2943F37F2B84B94E008F9DDE /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F37E2B84B94E008F9DDE /* Share.swift */; };
 		2943F3822B84B98C008F9DDE /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F3812B84B98C008F9DDE /* TipView.swift */; };
@@ -16,6 +17,7 @@
 		2979BA062B80A88E0038C104 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA052B80A88E0038C104 /* HomeDataSource.swift */; };
 		2979BA082B80B5CF0038C104 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA072B80B5CF0038C104 /* Button.swift */; };
 		2979BA0A2B80B7700038C104 /* UIEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA092B80B7700038C104 /* UIEdgeInsets.swift */; };
+		29A278732B873BA40074623D /* SettingThemeColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A278722B873BA40074623D /* SettingThemeColorViewController.swift */; };
 		29DB12002B7DA8470069C827 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB11FF2B7DA8470069C827 /* AppDelegate.swift */; };
 		29DB120A2B7DA8470069C827 /* KKPlayer_new.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12082B7DA8470069C827 /* KKPlayer_new.xcdatamodeld */; };
 		29DB120C2B7DA8490069C827 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29DB120B2B7DA8490069C827 /* Assets.xcassets */; };
@@ -36,7 +38,7 @@
 		29DB12422B7DF6F30069C827 /* ImageTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12412B7DF6F30069C827 /* ImageTextComponent.swift */; };
 		29DB12442B7DF75D0069C827 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12432B7DF75D0069C827 /* HomeViewController.swift */; };
 		29DB12462B7DF80E0069C827 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12452B7DF80E0069C827 /* Theme.swift */; };
-		29DB124A2B7E019B0069C827 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12492B7E019B0069C827 /* SettingView.swift */; };
+		29DB124A2B7E019B0069C827 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12492B7E019B0069C827 /* SettingViewController.swift */; };
 		29DB124C2B7E07350069C827 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB124B2B7E07350069C827 /* UIView.swift */; };
 		29DB124E2B7E08310069C827 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB124D2B7E08310069C827 /* CGRect.swift */; };
 		29DB12512B7E1A290069C827 /* PlayerMiniControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12502B7E1A290069C827 /* PlayerMiniControl.swift */; };
@@ -65,6 +67,7 @@
 
 /* Begin PBXFileReference section */
 		291525262B8618E200983960 /* UIImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerController.swift; sourceTree = "<group>"; };
+		293314182B873C6F00577FD8 /* ColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
 		2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMenuView.swift; sourceTree = "<group>"; };
 		2943F37E2B84B94E008F9DDE /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		2943F3812B84B98C008F9DDE /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		2979BA052B80A88E0038C104 /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
 		2979BA072B80B5CF0038C104 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		2979BA092B80B7700038C104 /* UIEdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEdgeInsets.swift; sourceTree = "<group>"; };
+		29A278722B873BA40074623D /* SettingThemeColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingThemeColorViewController.swift; sourceTree = "<group>"; };
 		29DB11FC2B7DA8470069C827 /* KKPlayer_new.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKPlayer_new.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29DB11FF2B7DA8470069C827 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29DB12092B7DA8470069C827 /* KKPlayer_new.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KKPlayer_new.xcdatamodel; sourceTree = "<group>"; };
@@ -96,7 +100,7 @@
 		29DB12412B7DF6F30069C827 /* ImageTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTextComponent.swift; sourceTree = "<group>"; };
 		29DB12432B7DF75D0069C827 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		29DB12452B7DF80E0069C827 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		29DB12492B7E019B0069C827 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		29DB12492B7E019B0069C827 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		29DB124B2B7E07350069C827 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		29DB124D2B7E08310069C827 /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		29DB12502B7E1A290069C827 /* PlayerMiniControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMiniControl.swift; sourceTree = "<group>"; };
@@ -143,6 +147,15 @@
 				2943F3812B84B98C008F9DDE /* TipView.swift */,
 			);
 			path = TipView;
+			sourceTree = "<group>";
+		};
+		29A278762B873C030074623D /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				29A278722B873BA40074623D /* SettingThemeColorViewController.swift */,
+				293314182B873C6F00577FD8 /* ColorView.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		29DB11F32B7DA8470069C827 = {
@@ -275,7 +288,8 @@
 		29DB123A2B7DF65C0069C827 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				29DB12492B7E019B0069C827 /* SettingView.swift */,
+				29DB12492B7E019B0069C827 /* SettingViewController.swift */,
+				29A278762B873C030074623D /* Theme */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -467,6 +481,7 @@
 				2979BA042B807DCE0038C104 /* PopViewAnimate.swift in Sources */,
 				291525272B8618E200983960 /* UIImagePickerController.swift in Sources */,
 				29DB124E2B7E08310069C827 /* CGRect.swift in Sources */,
+				29A278732B873BA40074623D /* SettingThemeColorViewController.swift in Sources */,
 				29DB12892B7E2E7C0069C827 /* UserDefaults.swift in Sources */,
 				29DB12282B7DBAC10069C827 /* UIAlertController.swift in Sources */,
 				29DB12532B7E1A300069C827 /* PlayerControl.swift in Sources */,
@@ -479,6 +494,7 @@
 				29DB12192B7DB8240069C827 /* Porperty.swift in Sources */,
 				29DB12A22B7F5FE80069C827 /* AudioItemView.swift in Sources */,
 				29DB12A82B7F670B0069C827 /* TapGestureRecognizer.swift in Sources */,
+				293314192B873C6F00577FD8 /* ColorView.swift in Sources */,
 				29DB12322B7DBBC00069C827 /* BaseViewController.swift in Sources */,
 				29DB12812B7E2CD10069C827 /* PlayerStatus+CoreDataClass.swift in Sources */,
 				29DB127E2B7E2CD10069C827 /* AudioModel+CoreDataProperties.swift in Sources */,
@@ -502,7 +518,7 @@
 				29DB12382B7DF6390069C827 /* NavigationBar.swift in Sources */,
 				29DB129E2B7F5C940069C827 /* View.swift in Sources */,
 				2979BA082B80B5CF0038C104 /* Button.swift in Sources */,
-				29DB124A2B7E019B0069C827 /* SettingView.swift in Sources */,
+				29DB124A2B7E019B0069C827 /* SettingViewController.swift in Sources */,
 				29DB12A62B7F65370069C827 /* GestureRecognizerProtocol.swift in Sources */,
 				2979BA062B80A88E0038C104 /* HomeDataSource.swift in Sources */,
 				29DB12002B7DA8470069C827 /* AppDelegate.swift in Sources */,

@@ -21,7 +21,7 @@ class EditAudioInfoViewController: ViewController {
     private let artistInput = InputView()
     private let albumInput = InputView()
     
-    private let saveButton = Button(title: "保存")
+    private let saveButton = SaveButton(title: "保存")
     
     
     private let itemHeight: CGFloat = 72
@@ -233,7 +233,7 @@ class EditAudioInfoViewController: ViewController {
             UIImagePickerController.openPhotos(viewConroller: self)
         }
         artworkImageView.contentMode = .scaleAspectFill
-        artworkImageView.layer.borderColor = UIColor.HEXA("AAAAAA").cgColor
+        artworkImageView.layer.borderColor = UIColor.HEX("AAAAAA").cgColor
         artworkImageView.layer.borderWidth = 0.5
         artworkImageView.layer.masksToBounds = true
         artworkImageView.layer.cornerRadius = 12
@@ -282,17 +282,7 @@ class EditAudioInfoViewController: ViewController {
         
         
         view.addSubview(saveButton)
-        saveButton.backgroundColor = .Main
-        saveButton.label?.textColor = .white
-        saveButton.layer.cornerRadius = 8
-        saveButton.layer.masksToBounds = true
-        saveButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-kMainWindow.safeAreaInsets.bottom)
-            make.height.equalTo(44)
-            make.left.equalToSuperview().offset(30)
-            make.right.equalToSuperview().offset(-30)
-        }
+        saveButton.snpMake()
     }
     
 }

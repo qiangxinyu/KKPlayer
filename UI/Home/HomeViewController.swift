@@ -60,6 +60,7 @@ class HomeViewController: ViewController {
         initList()
         initNavigationBar()
         initMiniControl()
+        
     }
 }
 
@@ -209,7 +210,7 @@ fileprivate class NaviBar: View, UISearchBarDelegate, UIDocumentPickerDelegate {
         }
         
         myButton.touchUpInside {
-            SettingView.show()
+            HomeViewController.shared.present(SettingViewController.shared, animated: true)
         }
         
         myButton.backgroundColor = .clear
@@ -262,7 +263,7 @@ fileprivate class NaviBar: View, UISearchBarDelegate, UIDocumentPickerDelegate {
         
         addSubview(lineView)
         lineView.isHidden = true
-        lineView.backgroundColor = .HEXA("AEAEAE")
+        lineView.backgroundColor = .HEX("AEAEAE")
         lineView.snp.makeConstraints { make in
             make.height.equalTo(0.5)
             make.left.right.equalToSuperview()
@@ -359,7 +360,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-    
 
     
     
@@ -375,7 +375,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.model = HomeDataSource.items[indexPath.row]
         
         if status == .select {
-            cell.isSelected = selectList.contains(cell.model)
+            cell.isSelect = selectList.contains(cell.model)
         }
         return cell
     }
@@ -467,9 +467,10 @@ fileprivate class Cell: UITableViewCell {
         }
     }
     
-    override var isSelected: Bool {
+    /// 不要用系统的 isSelected
+    var isSelect: Bool = false {
         didSet {
-            itemView.isSelected = isSelected
+            itemView.isSelected = isSelect
         }
     }
     
@@ -538,7 +539,7 @@ extension HomeViewController {
 
 fileprivate class SortMenuView: MenuView {
     
-    private var lastSelectView: MainThemeSelectButton? = nil
+    private var lastSelectView: SelectButton? = nil
     
     override func initSelf() {
         super.initSelf()
@@ -583,8 +584,9 @@ fileprivate class SortMenuView: MenuView {
         contentView.height = y - 1
     }
     
-    private func createButton(title: String) -> MainThemeSelectButton {
-        let button = MainThemeSelectButton()
+    private func createButton(title: String) -> SelectButton {
+        let button = SelectButton()
+        button.imageView = MainThemeImageView()
         button.backgroundColor = .white
         button.style = .imageLeft
         button.selectedImage = UIImage(named: "icon_yes")
@@ -592,6 +594,8 @@ fileprivate class SortMenuView: MenuView {
         button.imageEdgeInserts = .init(edges: 10)
         button.title = title
         button.selectedTitle = title
+        
+        
         return button
     }
 }

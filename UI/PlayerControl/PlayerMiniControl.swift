@@ -11,8 +11,8 @@ class PlayerMiniControl: Button {
     
     private let artwork = MainThemeImageView()
     private let name = UILabel()
-    private let playPauseButton = SelectButton(imageName: "icon_play", selectImageName: "icon_pause")
-    private let nextButton = Button(imageName: "icon_next")
+    private let playPauseButton = MainThemeSelectButton(imageName: "icon_play", selectImageName: "icon_pause")
+    private let nextButton = MainThemeButton(imageName: "icon_next")
 
     override init() {
         super.init()

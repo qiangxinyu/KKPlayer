@@ -21,6 +21,6 @@ class UserDefaultsUtils {
     private static let themeKey = "themeKey"
     static var themeColor: [String] {
         set { userDefault.set(newValue, forKey: themeKey)}
-        get { return (userDefault.array(forKey: "themeKey") as? [String]) ?? ["E91E63"] }
+        get { return (userDefault.array(forKey: "themeKey") as? [String]) ?? ["E91E63FF"] }
     }
 }

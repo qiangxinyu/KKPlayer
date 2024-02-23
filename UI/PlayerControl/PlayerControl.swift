@@ -31,7 +31,7 @@ class PlayerControl: View, HomePopViewAnimate {
     
     private let titleLabel = UILabel()
     private let fromLabel = UILabel()
-    private let loopButton = Button(imageName: PlayerManager.loop.image)
+    private let loopButton = MainThemeButton(imageName: PlayerManager.loop.image)
 
     
     private var list: [AudioModel] {
@@ -40,7 +40,7 @@ class PlayerControl: View, HomePopViewAnimate {
     private var tableView = UITableView()
     
     private let notLyricsLabel = UILabel()
-    private let lyricsEditButton = Button(imageName: "icon_edit")
+    private let lyricsEditButton = MainThemeButton(imageName: "icon_edit")
     private let lyricsTV = TV()
     
     
@@ -481,6 +481,9 @@ extension PlayerControl {
 
         slider.tintColor = .Main
 
+        MainColorChange {[weak self] in
+            self?.slider.tintColor = .Main
+        }
 
         slider.maximumValue = Float(PlayerManager.duration)
         slider.addTarget(self, action: #selector(sliderChange), for: .valueChanged)
