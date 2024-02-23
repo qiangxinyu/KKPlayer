@@ -56,8 +56,7 @@ class KKFileManager {
         }
     }
     
-    
-    init() {
+    static func regist() {
         craeteFolder(path: .audio())
         craeteFolder(path: .image())
         craeteFolder(path: .lyrics())
@@ -93,6 +92,7 @@ class KKFileManager {
         return manager.createFile(atPath: path.rawValue, contents: data)
     }
     
+    @discardableResult
     static func craeteFolder(path: Path) -> Bool {
         return main.craeteFolder(path: path.rawValue)
     }

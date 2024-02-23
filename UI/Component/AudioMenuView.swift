@@ -105,26 +105,12 @@ class AudioMenuView: MenuView {
                 DispatchQueue.main.async {
                     tipView?.removeFromSuperview()
                     
-                    HomeDataSource.refreshItems()
-                    
-                    if HomeDataSource.items.count > 0 {
-                        
-                        PlayerManager.settingPlayList(list: HomeDataSource.items)
-                        
-                        if isPlaying {
-                            PlayerManager.currentModel = nil
-                            PlayerManager.playerList.playWidthIndex()
-                        }
-                        
-                        if !PlayerManager.isPlaying {
-                            PlayerManager.pause()
-                        }
-                    } else {
-                        PlayerManager.stop()
+                    if HomeViewController.shared.status == .select {
+                        HomeViewController.shared.notSelectAllItems()
                     }
-                    
-                    HomeViewController.shared.notSelectAllItems()
                 }
+                
+                PlayerManager.deleteItemRefresh(isPlaying: isPlaying)
             }
             
         }, cancelText: "取消")

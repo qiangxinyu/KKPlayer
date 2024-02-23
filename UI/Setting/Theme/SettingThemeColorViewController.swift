@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingThemeColorViewController: ViewController, UIGestureRecognizerDelegate {
+class SettingThemeColorViewController: PresentViewController {
     private let colors = ["FF0000", "FFFF00", "00FF00", "00FFFF", "0000FF", "FF00FF", "FF0000"]
         
     var currentHSB = HSBA(1, 1, 1, 1)
@@ -29,7 +29,8 @@ class SettingThemeColorViewController: ViewController, UIGestureRecognizerDelega
     private let maxCount = 10
     
     override func viewDidLoad() {
-        view.backgroundColor = .white
+        super.viewDidLoad()
+        
         
         currentHSB = .init(UIColor.Main.HSBA)
         
@@ -101,7 +102,7 @@ extension SettingThemeColorViewController {
             make.left.equalTo(Theme.marginOffset)
             make.right.equalTo(-Theme.marginOffset)
             make.height.equalTo(150)
-            make.top.equalToSuperview().offset(Theme.marginOffset)
+            make.top.equalTo(lineView.snp.bottom).offset(Theme.marginOffset)
         }
         
         
@@ -251,6 +252,7 @@ extension SettingThemeColorViewController {
             textInput.font = .pingFang(size: 14)
             textInput.textAlignment = .center
             textInput.delegate = self
+            textInput.keyboardType = .numberPad
             
             titleLabel.snp.makeConstraints { make in
                 make.left.equalTo(Theme.marginOffset)

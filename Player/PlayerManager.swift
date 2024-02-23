@@ -28,7 +28,11 @@ class PlayerManager {
     }
     /// 全局唯一的现在播放的音乐
     static var currentModel: AudioModel? {
-        didSet { currentModelChanges.forEach { $0() } }
+        didSet {
+            DispatchQueue.main.async {
+                currentModelChanges.forEach { $0() }
+            }
+        }
     }
     
     
@@ -60,7 +64,11 @@ class PlayerManager {
     }
     /// 当前是否在播放
     static var isPlaying = false {
-        didSet { isPlayingChanges.forEach { $0() } }
+        didSet {
+            DispatchQueue.main.async {
+                isPlayingChanges.forEach { $0() }
+            }
+        }
     }
     
     
@@ -71,7 +79,9 @@ class PlayerManager {
         playListChanges.append(change)
     }
     static func playListChangesPost() {
-        playListChanges.forEach {$0()}
+        DispatchQueue.main.async {
+            playListChanges.forEach {$0()}
+        }
     }
     
     /// 循环方式
@@ -156,6 +166,27 @@ class PlayerManager {
                 play()
             }
         }
+    }
+    
+    
+    static func deleteItemRefresh(isPlaying: Bool) {
+        HomeDataSource.refreshItems()
+        
+        if HomeDataSource.items.count > 0 {
+            
+            PlayerManager.settingPlayList(list: HomeDataSource.items)
+            
+            if isPlaying {
+                PlayerManager.currentModel = nil
+                PlayerManager.playerList.playWidthIndex()
+            }
+            
+            if !PlayerManager.isPlaying {
+                PlayerManager.pause()
+            }
+        } else {
+            PlayerManager.stop()
+        }   
     }
 }
 

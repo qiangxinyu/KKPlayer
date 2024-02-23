@@ -72,7 +72,7 @@ class AudioFileQueue {
             return
         }
         
-        var audioFileName = fileName ?? url.lastPathComponent
+        let audioFileName = fileName ?? url.lastPathComponent
         
         let savePath = KKFileManager.Path.audio(component: audioFileName)
         var audioName = audioFileName.removeMP3().removeErrorText()

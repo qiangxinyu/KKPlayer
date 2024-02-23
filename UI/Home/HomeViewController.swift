@@ -25,7 +25,7 @@ class HomeViewController: ViewController {
         self.init(nibName: nil, bundle: nil)
     }
     
-    fileprivate var status = Status.default {
+    var status = Status.default {
         didSet {
             statusChange()
         }
@@ -44,7 +44,10 @@ class HomeViewController: ViewController {
     private let headerView = HeaderView()
     private let tableView = UITableView()
 
-    private let miniControl = PlayerMiniControl()
+//    private let miniControl = PlayerMiniControl()
+    
+    override func viewDidAppear(_ animated: Bool) {
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +62,7 @@ class HomeViewController: ViewController {
         
         initList()
         initNavigationBar()
-        initMiniControl()
+//        initMiniControl()
         
     }
 }
@@ -93,7 +96,7 @@ extension HomeViewController {
     private func selectListChange() {
         tableView.reloadData()
         title = "已选中 \(selectList.count) 首"
-        navigationBar.allSelectButton.isSelected = selectList.count == HomeDataSource.items.count
+        navigationBar.allSelectButton.isSelected = HomeDataSource.items.count > 0 && selectList.count == HomeDataSource.items.count
         navigationBar.moreButton.isEnable = !selectList.isEmpty
     }
 }
@@ -372,7 +375,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellKey) as! Cell
 
         cell.status = status
-        cell.model = HomeDataSource.items[indexPath.row]
+        if indexPath.row < HomeDataSource.items.count {
+            cell.model = HomeDataSource.items[indexPath.row]
+        }
         
         if status == .select {
             cell.isSelect = selectList.contains(cell.model)
@@ -496,27 +501,27 @@ fileprivate class Cell: UITableViewCell {
 }
 
 
-
-// MARK: PlayerMiniControl
-
-extension HomeViewController {
-    private func initMiniControl() {
-        miniControl.touchUpInside {
-            if PlayerManager.currentModel == nil {
-                return
-            }
-            PlayerControl.show()
-        }
-        
-        view.addSubview(miniControl)
-        miniControl.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-kMainWindow.safeAreaInsets.bottom)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            make.height.equalTo(60)
-        }
-    }
-}
+//
+//// MARK: PlayerMiniControl
+//
+//extension HomeViewController {
+//    private func initMiniControl() {
+//        miniControl.touchUpInside {
+//            if PlayerManager.currentModel == nil {
+//                return
+//            }
+//            PlayerControl.show()
+//        }
+//
+//        kMainWindow.addSubview(miniControl)
+//        miniControl.snp.makeConstraints { make in
+//            make.bottom.equalToSuperview().offset(-kMainWindow.safeAreaInsets.bottom)
+//            make.left.equalToSuperview().offset(20)
+//            make.right.equalToSuperview().offset(-20)
+//            make.height.equalTo(60)
+//        }
+//    }
+//}
 
 
 // MARK: Observer

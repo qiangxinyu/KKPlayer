@@ -8,13 +8,12 @@
 import UIKit
 
 
-class EditAudioInfoViewController: ViewController {
+class EditAudioInfoViewController: PresentViewController {
     
     
     var list = [AudioModel]()
     
     
-    private let lineView = UIView.presentLine
     private let artworkImageView = Button(style: .image)
     
     private let nameInput = InputView()
@@ -53,6 +52,8 @@ class EditAudioInfoViewController: ViewController {
     }
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         layoutSubviews()
         handleModels()
         handleLogical()
@@ -218,15 +219,6 @@ class EditAudioInfoViewController: ViewController {
     }
     
     private func layoutSubviews() {
-        view.backgroundColor = .white
-        
-        view.addSubview(lineView)
-        lineView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(Theme.marginOffset)
-            make.width.equalTo(lineView.width)
-            make.height.equalTo(lineView.height)
-        }
         
         view.addSubview(artworkImageView)
         artworkImageView.touchUpInside {[weak self] in

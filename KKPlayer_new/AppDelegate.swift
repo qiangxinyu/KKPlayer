@@ -11,33 +11,14 @@ import IQKeyboardManagerSwift
 import SnapKit
 
 
-var CoreDataContext: NSManagedObjectContext = {
-    lazy var persistentContainer: NSPersistentContainer = {
-       
-        let container = NSPersistentContainer(name: "KKPlayer_new")
-        
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-    
-    
-    return persistentContainer.viewContext
-}()
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        let tr = ImageTextComponent()
-      
+              
+        KKFileManager.regist()
         PlayerManager.regist()
 
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
@@ -49,8 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         kMainWindow.backgroundColor = .black
         kMainWindow.makeKeyAndVisible()
         
-        restorePlayerStatus()
         
+        PlayerMiniControl.regist()
+
+        restorePlayerStatus()
         
 //        if !UserDefaults.standard.bool(forKey: "11") {
 //            
@@ -103,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+   
     func applicationWillTerminate(_ application: UIApplication) {
         PlayerStatus.save()
     }
@@ -136,3 +120,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
+
+
+var CoreDataContext: NSManagedObjectContext = {
+    lazy var persistentContainer: NSPersistentContainer = {
+       
+        let container = NSPersistentContainer(name: "KKPlayer_new")
+        
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    
+    return persistentContainer.viewContext
+}()

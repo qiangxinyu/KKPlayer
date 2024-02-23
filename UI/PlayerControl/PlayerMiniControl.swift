@@ -8,6 +8,17 @@
 import UIKit
 
 class PlayerMiniControl: Button {
+    static let shared = PlayerMiniControl()
+    
+    static func regist() {
+        kMainWindow.addSubview(shared)
+        shared.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-kMainWindow.safeAreaInsets.bottom)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(60)
+        }
+    }
     
     private let artwork = MainThemeImageView()
     private let name = UILabel()
@@ -16,7 +27,7 @@ class PlayerMiniControl: Button {
 
     override init() {
         super.init()
-        
+    
         PlayerManager.currentModelChange {
             self.artwork.image = PlayerManager.currentModel?.artworkImage ?? UIImage(named: "icon_default_artwork")
             self.name.text = PlayerManager.currentModel?.name
@@ -32,6 +43,13 @@ class PlayerMiniControl: Button {
         
         nextButton.touchUpInside {
             PlayerManager.next()
+        }
+        
+        touchUpInside {
+            if PlayerManager.currentModel == nil {
+                return
+            }
+            PlayerControl.show()
         }
         
         isShowTouchState = false

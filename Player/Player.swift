@@ -190,11 +190,12 @@ extension PlayerManager {
         
         
         func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-    //        if AutoStopVC.isStop {
-    //            AutoStopVC.isStop = false
-    //            pause()
-    //            return
-    //        }
+            if SettingTimerViewController.shared.isAutoStop {
+                SettingTimerViewController.shared.isAutoStop = false
+                next()
+                pause()
+                return
+            }
             next()
         }
 

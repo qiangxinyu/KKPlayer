@@ -30,7 +30,7 @@ extension PlayerStatus {
     
     static func save() {
         if let model = PlayerManager.currentModel {
-            model.objectID.uriRepresentation()
+            main.audioObjectID = model.objectID.uriRepresentation()
         }
         
         main.ascending = HomeDataSource.sort.ascending

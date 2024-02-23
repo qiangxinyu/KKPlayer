@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		291525272B8618E200983960 /* UIImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291525262B8618E200983960 /* UIImagePickerController.swift */; };
 		293314192B873C6F00577FD8 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293314182B873C6F00577FD8 /* ColorView.swift */; };
+		2933141E2B8856A700577FD8 /* SettingTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933141D2B8856A700577FD8 /* SettingTimerViewController.swift */; };
 		2943F37B2B8454BA008F9DDE /* AudioMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */; };
 		2943F37F2B84B94E008F9DDE /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F37E2B84B94E008F9DDE /* Share.swift */; };
 		2943F3822B84B98C008F9DDE /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943F3812B84B98C008F9DDE /* TipView.swift */; };
@@ -68,6 +69,7 @@
 /* Begin PBXFileReference section */
 		291525262B8618E200983960 /* UIImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerController.swift; sourceTree = "<group>"; };
 		293314182B873C6F00577FD8 /* ColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
+		2933141D2B8856A700577FD8 /* SettingTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimerViewController.swift; sourceTree = "<group>"; };
 		2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMenuView.swift; sourceTree = "<group>"; };
 		2943F37E2B84B94E008F9DDE /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		2943F3812B84B98C008F9DDE /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
@@ -141,6 +143,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2933141C2B88568F00577FD8 /* AudoTimer */ = {
+			isa = PBXGroup;
+			children = (
+				2933141D2B8856A700577FD8 /* SettingTimerViewController.swift */,
+			);
+			path = AudoTimer;
+			sourceTree = "<group>";
+		};
 		2943F3802B84B985008F9DDE /* TipView */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +300,7 @@
 			children = (
 				29DB12492B7E019B0069C827 /* SettingViewController.swift */,
 				29A278762B873C030074623D /* Theme */,
+				2933141C2B88568F00577FD8 /* AudoTimer */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -500,6 +511,7 @@
 				29DB127E2B7E2CD10069C827 /* AudioModel+CoreDataProperties.swift in Sources */,
 				29DB12262B7DBAC10069C827 /* UIFont.swift in Sources */,
 				29DB12242B7DBAC10069C827 /* UIString.swift in Sources */,
+				2933141E2B8856A700577FD8 /* SettingTimerViewController.swift in Sources */,
 				29DB12402B7DF6E30069C827 /* ImageView.swift in Sources */,
 				29E4F1EA2B83896300F0C539 /* MenuView.swift in Sources */,
 				29DB124C2B7E07350069C827 /* UIView.swift in Sources */,
@@ -677,6 +689,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -713,6 +726,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LD_RUNPATH_SEARCH_PATHS = (
