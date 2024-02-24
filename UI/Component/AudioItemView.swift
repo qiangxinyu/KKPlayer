@@ -8,10 +8,39 @@
 import UIKit
 
 
-class AudioItemView: View {
+class AudioItemView: UIView {
+    var status = HomeViewController.Status.default {
+        didSet {
+            switch status {
+            case .default:
+                more.isHidden = false
+                selected.removeFromSuperview()
+            case .select:
+                more.isHidden = true
+                selected.isHidden = true
+                addSubview(selected)
+                selected.snp.makeConstraints { make in
+                    selected.backgroundColor = .clear
+                    selected.imageEdgeInserts = .init(edges: 10)
+                    selected.snp.makeConstraints { make in
+                        make.right.equalToSuperview()
+                        make.width.height.equalTo(44)
+                        make.centerY.equalToSuperview()
+                    }
+                }
+            }
+        }
+    }
+    
+    var isSelected = false {
+        didSet {
+            selected.isHidden = !isSelected
+        }
+    }
+    
     var model = AudioModel() {
         didSet {
-            artwork.image = model.artworkImage ?? UIImage(named: "default_audio_artwork")
+            artwork.image = model.artworkImage ?? UIImage(named: "icon_default_artwork")
             name.text = model.name
             artist.text = model.artist
             if model.playCount > 1000 {
@@ -26,13 +55,24 @@ class AudioItemView: View {
     private let artwork = MainThemeImageView()
     private let name = UILabel()
     private let artist = UILabel()
-    private let playCount = Button(style: .imageLeft, imageName: "play_count")
-    private let more = TouchButton(imageName: "icon_more")
+    private let playCount = MainThemeImageTextComponent(style: .imageLeft, imageName: "play_count")
+    private let more = MainThemeButton(imageName: "icon_more")
+    private lazy var selected = {MainThemeButton(imageName: "icon_yes")}()
     private let line = UIView()
 
+    private var hasLine = true
     
-    override func initSelf() {
-//        backgroundColor = .white
+    init(hasLine: Bool = true) {
+        super.init(frame: .zero)
+        self.hasLine = hasLine
+        initSelf()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    func initSelf() {
         
         addSubview(artwork)
         addSubview(playCount)
@@ -44,12 +84,9 @@ class AudioItemView: View {
         contentView.addSubview(artist)
 
         
-        
-        artwork.contentMode = .scaleAspectFit
-        artwork.backgroundColor = .P01
         artwork.layer.cornerRadius = 4
         artwork.layer.masksToBounds = true
-        
+        artwork.backgroundColor = .P01
         artwork.snp.makeConstraints { make in
             make.left.equalTo(Theme.marginOffset)
             make.top.equalTo(2)
@@ -83,8 +120,7 @@ class AudioItemView: View {
         
         playCount.label?.textAlignment = .left
         playCount.backgroundColor = .clear
-        playCount.titleEdgeInserts = .init(top: 0, left: 0, bottom: 0, right: 5)
-        playCount.imageEdgeInserts = .init(top: 10, left: 0, bottom: 10, right: 0)
+        playCount.imageEdgeInserts = .init(top: 10, left: 0, bottom: 10, right: 5)
         
         playCount.label?.textColor = .Main
         playCount.label?.font = .pingFang(size: 10)
@@ -97,21 +133,26 @@ class AudioItemView: View {
 
         
         more.backgroundColor = .clear
-        more.imageEdgeInserts = .init(top: 10, left: 10, bottom: 10, right: 12)
+        more.imageEdgeInserts = .init(edges: 10)
         more.snp.makeConstraints { make in
             make.right.equalToSuperview()
             make.width.height.equalTo(44)
             make.centerY.equalToSuperview()
         }
+        more.touchUpInside {[weak self] in
+            guard let self = self else {return}
+            AudioMenuView.show(ges: $0, list: [self.model])
+        }
         
-        
-        addSubview(line)
-        line.backgroundColor = .T02
-        line.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.right.equalToSuperview()
-            make.left.equalTo(artwork.snp.right).offset(4)
-            make.height.equalTo(0.5)
+        if hasLine {
+            addSubview(line)
+            line.backgroundColor = .T02
+            line.snp.makeConstraints { make in
+                make.bottom.equalToSuperview()
+                make.right.equalToSuperview()
+                make.left.equalTo(artwork.snp.right).offset(4)
+                make.height.equalTo(0.5)
+            }
         }
     }
     

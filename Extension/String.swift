@@ -37,7 +37,7 @@ extension String {
     }
     
     /// HEX 获取  RGB 0 - 255
-    func getRGB() -> (Int, Int, Int) {
+    func toRGB() -> (Int, Int, Int) {
         if let color = Int(self, radix: 16) {
             let mask = 0x000000FF
             let r = Int(color >> 16) & mask
@@ -46,6 +46,19 @@ extension String {
             return (r, g, b)
         }
         return (0, 0, 0)
+    }
+    
+    /// HEX 获取  RGBA 0 - 255
+    func toRGBA() -> (Int, Int, Int, Int) {
+        if let color = Int(self, radix: 16) {
+            let mask = 0x000000FF
+            let r = Int(color >> 24) & mask
+            let g = Int(color >> 16) & mask
+            let b = Int(color >> 8) & mask
+            let a = Int(color) & mask
+            return (r, g, b, a)
+        }
+        return (0, 0, 0, 0)
     }
     
     /// RGB -> HEX
@@ -82,7 +95,11 @@ extension String {
     
     
     var isTurn: Bool {
-        get { validate(regular: "[a-z]|[A-Z]|[0-9]|[\\u4e00-\\u9fa5]") }
+        validate(regular: "[a-z]|[A-Z]|[0-9]|[\\u4e00-\\u9fa5]")
+    }
+    
+    var isHEXA: Bool {
+        validate(regular: "^[0-F]{8}$")
     }
   
     
@@ -91,10 +108,10 @@ extension String {
             return self
         }
         
-        let first = self.subString(start: 0, end: 1)
-        if !first.isTurn {
-            return self
-        }
+//        let first = self.subString(start: 0, end: 1)
+//        if !first.isTurn {
+//            return self
+//        }
         
         let mString = NSMutableString(string: self)
         CFStringTransform(mString, nil, kCFStringTransformToLatin, false)

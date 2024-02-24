@@ -21,8 +21,4 @@ public class PlayerStatus: NSManagedObject {
     }()
     
     
-    
-    
-    var ttt: TimeInterval = 0
-
 }

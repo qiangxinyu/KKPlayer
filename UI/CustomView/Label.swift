@@ -8,10 +8,7 @@
 import UIKit
 
 
-
-
-
-class View: UIView {
+class Label: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initSelf()
@@ -28,6 +25,15 @@ class View: UIView {
 }
 
 
+class MainThemeLabel: Label {
+    override func initSelf() {
+        textColor = .Main
+        
+        MainColorChange {[weak self] in
+            self?.textColor = .Main
+        }
+    }
+}
 
 
 

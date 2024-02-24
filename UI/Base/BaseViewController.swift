@@ -6,13 +6,24 @@
 //
 
 import UIKit
-import FDFullscreenPopGesture
 
-class ViewController: UIViewController {
-    
+class ViewController: UIViewController {}
+
+
+class PresentViewController: ViewController {
+    let lineView = UIView.presentLine
+
     override func viewDidLoad() {
         super.viewDidLoad()
-//        fd_prefersNavigationBarHidden = true
+        view.backgroundColor = .white
+        
+        view.addSubview(lineView)
+        lineView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(Theme.marginOffset)
+            make.width.equalTo(lineView.width)
+            make.height.equalTo(lineView.height)
+        }
     }
 }
 

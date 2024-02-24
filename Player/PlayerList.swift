@@ -7,126 +7,102 @@
 
 import SwiftUI
 
-extension PlayerManager {
+
+class PlayerList {
     
-    static func play(model: AudioModel, list: [AudioModel]) {
-        main.playerList.play(model: model, list: list)
+    var items: [AudioModel] = []
+    
+    var originItems: [AudioModel] = []
+    private var index = 0
+    
+    var loop: Loop = .plain {
+        didSet {
+            switch loop {
+            case .plain: items = originItems
+            case .single: items = []
+            case .random: items = originItems.shuffled()
+            }
+            
+            refreshIndex(PlayerManager.currentModel)
+            PlayerManager.playListChangesPost()
+        }
     }
     
-    static func play(model: AudioModel) {
-        main.playerList.play(model: model)
+    func settingPlayList(list: [AudioModel]) {
+        originItems = list
+        loop = PlayerManager.loop
     }
     
-    static func insertNext(model: AudioModel) {
-        main.playerList.insertNext(model: model)
+    func play(model: AudioModel, list: [AudioModel]) {
+        settingPlayList(list: list)
+        PlayerManager.currentModel = model
+        
+        play(model: model)
     }
     
-    static func play() {
-        main.player.play()
+    func play(model: AudioModel) {
+        refreshIndex(model)
+        PlayerManager.player.play(model: model)
     }
     
-    static func replay() {
-        main.player.replay()
+    func refreshIndex(_ model: AudioModel?) {
+        if model == nil || items.isEmpty {
+            return
+        }
+        guard let index = items.firstIndex(of: model!) else {
+            return
+        }
+        
+        self.index = index
     }
     
-    static func seek(to: TimeInterval) {
-        main.player.seek(to: to)
+    func insertNext(models: [AudioModel]) {
+        if items.count <= index {
+            items.append(contentsOf: models)
+        } else {
+            items.insert(contentsOf: models, at: index + 1)
+        }
+        
+        PlayerManager.playListChangesPost()
+
+        TipView.show("已加入下一首播放")
     }
     
-    static func pause() {
-        main.player.pause()
-    }
     
-    static func next() {
-        main.playerList.next()
+    func playWidthIndex() {
+        if items.count == 0 {
+            PlayerManager.clickPlayPauseButton()
+            return
+        }
+        switch loop {
+        case .single:
+            PlayerManager.replay()
+        case .plain, .random:
+            play(model: items[index])
+        }
     }
+   
     
-    static func previous() {
-//        if PlayerInfo.main.currentPlayerTime > 5 {
-//            replay()
-//        } else {
-//            main.playerList.previous()
-//        }
+    
+    func next() {
+        index += 1
+        if index >= items.count {
+            index = 0
+        }
+        playWidthIndex()
+    }
+   
+    
+    func previous() {
+        index -= 1
+        if index < 0 {
+            index = items.count - 1
+        }
+        playWidthIndex()
     }
 }
 
-
-extension PlayerManager {
-    class PlayerList: ObservableObject {
-        
-        @Published var items: [AudioModel] = []
-        @Published var originItems: [AudioModel] = []
-        @Published var index = 0
-        
-        @Published var loop: Loop = .plain {
-            didSet {
-                switch loop {
-                case .plain: items = originItems
-                case .single: items = []
-                case .random: items = originItems.shuffled()
-                }
-            }
-        }
-        
-        
-        func play(model: AudioModel, list: [AudioModel]) {
-            originItems = list
-            loop = main.loop
-            play(model: model)
-        }
-        
-        func play(model: AudioModel) {
-            
-            guard let index = items.firstIndex(of: model) else {
-                UIAlertController.show(title: "播放\(String(describing: model.name))出错，播放列表中没找到")
-                return
-            }
-            
-            self.index = index
-
-            PlayerManager.main.player.play(model: model)
-        }
-        
-        func insertNext(model: AudioModel) {
-            items.insert(model, at: index + 1)
-//            NoticeManager.main.text = "已加入下一首播放"
-        }
-        
-        
-        func play() {
-            switch main.loop {
-            case .single:
-                PlayerManager.replay()
-            case .plain, .random:
-                PlayerManager.play(model: items[index])
-            }
-        }
-       
-        
-        
-        func next() {
-            index += 1
-            if index >= items.count {
-                index = 0
-            }
-            play()
-        }
-       
-        
-        func previous() {
-            index -= 1
-            if index < 0 {
-                index = items.count - 1
-            }
-            play()
-        }
-    }
-
-}
-
-
-
-extension PlayerManager.PlayerList {
+extension PlayerList {
     enum Loop: Int16 {
         case single = 2
         case plain = 0
@@ -142,11 +118,11 @@ extension PlayerManager.PlayerList {
             }
         }
         
-        func next() -> Self {
+        mutating func next() {
             switch self {
-            case .plain: return .random
-            case .random: return .single
-            case .single: return .plain
+            case .plain: return self = .random
+            case .random: return self = .single
+            case .single: return self = .plain
             }
         }
     }

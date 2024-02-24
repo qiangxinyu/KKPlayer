@@ -15,37 +15,35 @@ extension AudioModel {
     }
     var lyrics: String? {
         set {
-            KKFileManager.removeFile(path: lyricsPath)
-            guard let text = newValue, text.count > 0 else {
+            if newValue?.isEmpty == true {
                 return
             }
-            KKFileManager.createFile(path: lyricsPath, data: text.data(using: .utf8))
+            
+            KKFileManager.createFile(path: lyricsPath, data: newValue!.data(using: .utf8))
         }
         get {
-            do {
-                return try String(contentsOf: lyricsPath.url)
-            } catch {
-                return nil
-            }
+            try? String(contentsOf: lyricsPath.url)
         }
     }
     
     
    
-    var artworkImage: UIImage? {
-        if let artwork = artwork {
-            return UIImage(data: artwork)
-        } else {
-            return nil
-        }
+    var artworkPath: KKFileManager.Path {
+        KKFileManager.Path.image(component: "\(createTime)_s")
     }
-   
     
     var originArtworkPath: KKFileManager.Path {
         KKFileManager.Path.image(component: String(createTime))
     }
     
-  
+    
+    var artworkImage: UIImage? {
+        if KKFileManager.fileExists(path: artworkPath) {
+            return UIImage(contentsOfFile: artworkPath.rawValue)
+        } else {
+            return nil
+        }
+    }
     
     var originalArtworkImage: UIImage? {
         if KKFileManager.fileExists(path: originArtworkPath) {
@@ -66,16 +64,20 @@ extension AudioModel {
         if image.size.width > size || image.size.height > size {
             
             let maxSize = CGSize(width: size, height: size)
-            let newSize = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: .zero, size: maxSize)).size
-            artwork = UIGraphicsImageRenderer(size: newSize).image { _ in
-                image.draw(in: CGRect(origin: .zero, size: newSize))
-            }
+            let newRect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: .zero, size: maxSize))
+            let fom = UIGraphicsImageRendererFormat()
             
+            fom.opaque = false
+            fom.scale = 1
+            
+            artwork = UIGraphicsImageRenderer(size: newRect.size, format: fom).image { _ in
+                image.draw(in: newRect)
+            }
         } else {
             artwork = image
         }
         
-        self.artwork = artwork.jpegData(compressionQuality: 1)
+        KKFileManager.createFile(path: artworkPath, data: artwork.jpegData(compressionQuality: 1))
     }
     
     
@@ -83,12 +85,17 @@ extension AudioModel {
         KKFileManager.Path.audio(component: relativePath ?? "")
     }
     
-    
-    
+
     
     func clearDisk() {
         KKFileManager.removeFile(path: path)
+        KKFileManager.removeFile(path: artworkPath)
         KKFileManager.removeFile(path: originArtworkPath)
         KKFileManager.removeFile(path: lyricsPath)
     }
 }
+
+
+
+
+

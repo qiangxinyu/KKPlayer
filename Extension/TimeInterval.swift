@@ -10,7 +10,7 @@ import UIKit
 
 extension TimeInterval {
     
-    func getMinSecond() -> String {
+    var minutesSecond: String {
         let time = Int(self)
         let min = time / 60
         let second = time % 60

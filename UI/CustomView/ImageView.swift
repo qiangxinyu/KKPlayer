@@ -27,5 +27,9 @@ class ImageView: UIImageView {
 class MainThemeImageView: ImageView {
     override func initSelf() {
         tintColor = .Main
+        
+        MainColorChange {[weak self] in
+            self?.tintColor = .Main
+        }
     }
 }

@@ -12,13 +12,15 @@ import ID3TagEditor
 import CoreData
 
 
+/// 导入歌曲 文件管理
+/// 文件命名格式：   歌名_歌手
 
 class AudioFileQueue {
     private init() {}
     private static var queues = [URL]()
     private static var nextQueues = [URL]()
     
-    private static let queue = DispatchQueue(label: "com.concurrentqueue", attributes: .concurrent)
+    private static let queue = DispatchQueue(label: "com.AudioFileQueue", attributes: .concurrent)
 
     private static let timeout: TimeInterval = 0.4
     private static var isStartQueue = false
@@ -52,12 +54,9 @@ class AudioFileQueue {
             }
         }
     }
-    
-  
-    
 
     
-    private static let semaphore = DispatchSemaphore(value: 1)
+    private static let semaphore = DispatchSemaphore(value: 0)
     
     private static func checkAudio(
         _ url: URL,
@@ -70,38 +69,30 @@ class AudioFileQueue {
             return
         }
         
-        var audioFileName = fileName ?? url.lastPathComponent
-        audioFileName = audioFileName.replacingOccurrences(of: "\\", with: "").replacingOccurrences(of: "\"", with: "'")
+        let audioFileName = fileName ?? url.lastPathComponent
         
         let savePath = KKFileManager.Path.audio(component: audioFileName)
         var audioName = audioFileName.removeMP3().removeErrorText()
         audioName = audioName.components(separatedBy: "_").first ?? audioName
         
+        let request = AudioModel.fetchRequest()
+
+        request.predicate = NSPredicate(format: "relativePath = %@", savePath.relativePath)
+
+        let list = try? CoreDataContext.fetch(request)
         
-        if KKFileManager.fileExists(path: savePath) {
+        
+        if KKFileManager.fileExists(path: savePath), list?.isEmpty == false {
+            
             
             UIAlertController.showDeleteAlert1(title: "《\(audioName)》已存在") {_ in
                 DispatchQueue.global().async {
                     //replace
-                    do {
-                        let request = AudioModel.fetchRequest()
-                        
-                        request.predicate = NSPredicate(format: "relativePath = %@", savePath.relativePath)
-                        
-                        let list = try CoreDataContext.fetch(request)
-                        
-                        if list.count == 1 {
-                            list[0].clearDisk()
-                            DispatchQueue.main.async {
-                                CoreDataContext.delete(list[0])
-                            }
-                        } else {
-                            UIAlertController.show(title: "数据库有误") { _ in
-                                fail()
-                            }
-                        }
-                    } catch {
-                        
+                    
+                    
+                    list![0].clearDisk()
+                    DispatchQueue.main.async {
+                        CoreDataContext.delete(list![0])
                     }
                     
                     guard KKFileManager.moveFile(path: url.path, toPath: savePath) else {
@@ -116,7 +107,7 @@ class AudioFileQueue {
             } sureBlock1: { _ in
                 // rename
                 let time = Int(Date().timeIntervalSince1970 * 1000)
-                checkAudio(url, fileName: "\(audioName)_\(time).mp3", success: success, fail: fail)
+                checkAudio(url, fileName: "\(audioName)|\(time).mp3", success: success, fail: fail)
             } cancelBlock: { _ in
                 KKFileManager.removeFile(path: url.relativePath)
                 fail()
@@ -174,14 +165,14 @@ class AudioFileQueue {
             } catch { }
             
             
-            if (model.artist ?? "").isEmpty, nameArtist.count == 2 {
-                model.setArtist(nameArtist.last)
+            if model.artist?.isEmpty == true {
+                if nameArtist.count == 2 {
+                    model.setArtist(nameArtist.last!)
+                } else {
+                    model.setArtist("")
+                }
             }
-            
-            
-            model.id = UserDefaultsUtils.id + 1
-            UserDefaultsUtils.id += 1
-            
+                                    
             next()
         } fail: {
             next()
@@ -190,21 +181,20 @@ class AudioFileQueue {
     
     private static func addAudio(urls: [URL]) {
         for url in urls {
-            semaphore.wait()
             createAudioModel(url: url) {
                 semaphore.signal()
             }
+            semaphore.wait()
         }
         
         
-        DispatchQueue.main.async {
-            do {
-                try CoreDataContext.save()
-                PlayerManager.main.getItems()
-            } catch {
-                UIAlertController.show(title: "数据库写入失败 \(error.localizedDescription)")
-            }
+        do {
+            try CoreDataContext.save()
+            HomeDataSource.refreshItems()
+        } catch {
+            UIAlertController.show(title: "数据库写入失败 \(error.localizedDescription)")
         }
+        
     }
    
 }

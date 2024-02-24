@@ -8,7 +8,7 @@
 import UIKit
 
 
-class Button: UIView {
+open class ImageTextComponent: UIView {
     enum Style {
         case text
         case image
@@ -24,10 +24,10 @@ class Button: UIView {
     private override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    private init() {
+    init() {
         super.init(frame: .zero)
     }
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
@@ -45,7 +45,11 @@ class Button: UIView {
         style = .image
         initSelf()
     }
-    
+    init(style: Style) {
+        self.style = style
+        super.init(frame: .zero)
+        initSelf()
+    }
 
     
     init(style: Style, title: String? = nil, imageName: String? = nil) {
@@ -72,6 +76,16 @@ class Button: UIView {
     
     lazy var label: UILabel? = { initLabel() }()
     lazy var imageView: UIImageView? = { initImageView() }()
+    {
+        didSet {
+            if imageView != nil {
+                imageView?.contentMode = .scaleAspectFit
+                imageView?.clipsToBounds = true
+                addSubview(imageView!)
+            }
+            
+        }
+    }
     
     var titleEdgeInserts: UIEdgeInsets = .zero {
         didSet { settingStyle() }
@@ -79,9 +93,27 @@ class Button: UIView {
     var imageEdgeInserts: UIEdgeInsets = .zero {
         didSet { settingStyle() }
     }
+    
+    /// 跟随主题色  不可逆
+    lazy var isMainTheme: Bool = {
+       false
+    }() {
+        didSet {
+            if isMainTheme {
+                imageView?.tintColor = .Main
+                label?.textColor = .Main
+                
+                MainColorChange { [weak self] in
+                    self?.imageView?.tintColor = .Main
+                    self?.label?.textColor = .Main
+                }
+            }
+        }
+    }
+
 
     
-    fileprivate func initSelf() {
+    func initSelf() {
         backgroundColor = .white
         settingStyle()
     }
@@ -118,6 +150,8 @@ class Button: UIView {
                 make.top.equalToSuperview().offset(imageEdgeInserts.top)
                 make.left.equalToSuperview().offset(imageEdgeInserts.left)
                 make.right.equalToSuperview().offset(-imageEdgeInserts.right)
+                make.aspectRatio(1, view: imageView!)
+
             })
             label?.snp.makeConstraints({ make in
                 make.top.equalTo(imageView!.snp.bottom).offset(titleEdgeInserts.top + imageEdgeInserts.bottom)
@@ -139,7 +173,9 @@ class Button: UIView {
                 make.top.equalToSuperview().offset(imageEdgeInserts.top)
                 make.left.equalToSuperview().offset(imageEdgeInserts.left)
                 make.bottom.equalToSuperview().offset(-imageEdgeInserts.bottom)
+                make.aspectRatio(1, view: imageView!)
             })
+            
             
             
             label?.snp.makeConstraints({ make in
@@ -149,7 +185,6 @@ class Button: UIView {
                 make.bottom.equalToSuperview().offset(-titleEdgeInserts.bottom)
                 make.height.greaterThanOrEqualTo(1)
                 make.width.greaterThanOrEqualTo(1)
-
             })
         case .imageBottom:
             imageView?.image = image
@@ -161,6 +196,8 @@ class Button: UIView {
                 make.left.equalToSuperview().offset(imageEdgeInserts.left)
                 make.right.equalToSuperview().offset(-imageEdgeInserts.right)
                 make.bottom.equalToSuperview().offset(-imageEdgeInserts.bottom)
+                make.aspectRatio(1, view: imageView!)
+
             })
             
             
@@ -182,6 +219,7 @@ class Button: UIView {
                 make.top.equalToSuperview().offset(imageEdgeInserts.top)
                 make.right.equalToSuperview().offset(-imageEdgeInserts.right)
                 make.bottom.equalToSuperview().offset(-imageEdgeInserts.bottom)
+                make.aspectRatio(1, view: imageView!)
             })
             
             
@@ -205,7 +243,7 @@ class Button: UIView {
     }
     
     private func initImageView() -> UIImageView {
-        let imageView = MainThemeImageView()
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         addSubview(imageView)
@@ -214,18 +252,9 @@ class Button: UIView {
 }
 
 
-class TouchButton: Button, TapProtocol {
-    
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        alpha = Theme.touchAlpha
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        alpha = 1
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        alpha = 1
+class MainThemeImageTextComponent: ImageTextComponent {
+    override func initSelf() {
+        super.initSelf()
+        isMainTheme = true
     }
 }

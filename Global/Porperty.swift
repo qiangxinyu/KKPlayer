@@ -33,11 +33,9 @@ func refreshScreenInfo() {
     kScreenWidth = kScreenSize.width
     kScreenHeight = kScreenSize.height
     
-    statusBarHeight = UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+    statusBarHeight = kMainWindow.safeAreaInsets.top
 
     kNavigationHeight = statusBarHeight + kNavigationBarHeight
-    
-    kTabBarHeight = UITabBar.appearance().height
 }
 
 fileprivate(set) var kScreenBounds = UIScreen.main.bounds
@@ -54,7 +52,7 @@ let kNavigationBarHeight: CGFloat = 44
 /// 是否是刘海
 let isBangs = { statusBarHeight > 30 }
 
-var kTabBarHeight: CGFloat = 0
+var kTabBarHeight: CGFloat = 44
 
 /// 状态栏高度
 fileprivate(set) var statusBarHeight: CGFloat = 0

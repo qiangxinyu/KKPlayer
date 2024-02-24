@@ -6,7 +6,6 @@
         <attribute name="artist" optional="YES" attributeType="String"/>
         <attribute name="artistLetters" optional="YES" attributeType="String"/>
         <attribute name="artistSort" optional="YES" attributeType="String"/>
-        <attribute name="artwork" optional="YES" attributeType="Binary"/>
         <attribute name="createTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="length" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -18,7 +17,7 @@
     </entity>
     <entity name="PlayerStatus" representedClassName="PlayerStatus" syncable="YES">
         <attribute name="ascending" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="audioID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="audioObjectID" optional="YES" attributeType="URI"/>
         <attribute name="loop" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="playTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="sort" optional="YES" attributeType="String"/>

@@ -7,155 +7,199 @@
 
 import SwiftUI
 
+
+typealias Change = () -> Void
+
+
 class PlayerManager {
-    private init() { getItems() }
-    
-    static func restorePlayerStatus() {
-        main.restorePlayerStatus()
-    }
-    func restorePlayerStatus() {
-        
-        if let string = PlayerStatus.main.sort, let sort = Sort(rawValue: string) {
-            self.sort = .sort(sort: sort, ascending: PlayerStatus.main.ascending)
-        }
-        
-        let item = items.filter { $0.id == PlayerStatus.main.audioID }
-        
-        
-        if item.count == 1 {
-            PlayerManager.play(model: item[0], list: items)
-            PlayerManager.pause()
-            PlayerManager.seek(to: PlayerStatus.main.playTime)
-        } else if item.count > 0 {
-            UIAlertController.show(title: "数据库id有重复")
-        }
-        
-        if let loop =  PlayerManager.PlayerList.Loop.init(rawValue: PlayerStatus.main.loop) {
-            self.loop = loop
-        }
-    }
-    
-    static let main = PlayerManager()
-    
-    
-    var playerList = PlayerList()
-    var player = Player()
-    
-    
 
+    private init() {}
     
-    func getItems() {
-        
-        let request = AudioModel.fetchRequest()
-        request.predicate = predicate
-        
-        switch sort {
-        case .select: break
-        case .sort(let sort, let ascending):
-            request.sortDescriptors = [NSSortDescriptor.init(key: sort.rawValue, ascending: ascending)]
-        }
-
-        do {
-            items = try CoreDataContext.fetch(request)
-        } catch {}
-        
-    }
+    /// 播放列表
+    static let playerList = PlayerList()
+    /// 播放器
+    static let player = Player()
     
-    var predicate: NSPredicate? = nil {
-        didSet {
-            if predicate != nil {
-                getItems()
-            }
+    
+    /// 监听者都是不会销毁的视图，所以就不考虑释放的问题
+    private static var currentModelChanges = [Change]()
+    static func currentModelChange(_ change: @escaping Change) {
+        DispatchQueue.main.async {
+            currentModelChanges.append(change)
         }
     }
     
-    
-    @Published var items: [AudioModel] = []
-    
-    @Published var currentModel: AudioModel?
-    
+    /// 全局唯一的现在播放的音乐
     static var currentModel: AudioModel? {
-        set {
-            main.currentModel = newValue
-        }
-        get {
-            main.currentModel
-        }
-    }
-    
-    
-    var sort: SortStyle = .sort(sort: .time, ascending: false) {
         didSet {
-            items.sorted {
-                
-                switch sort {
-                case .select: return false
-                case .sort(let sort, let ascending):
-                    return $0.id > $1.id
-                }
+            DispatchQueue.main.async {
+                currentModelChanges.forEach { $0() }
             }
         }
     }
-   
     
-    @Published var loop: PlayerList.Loop = .plain {
+    
+    private static var currentPlayerTimeChanges = [Change]()
+    static func currentPlayerTimeChange(_ change: @escaping Change) {
+        currentPlayerTimeChanges.append(change)
+    }
+    /// 当前播放到这首歌的时间
+    static var currentPlayerTime: TimeInterval = 0 {
         didSet {
-            playerList.loop = loop
-        }
-    }
-}
-
-
-
-
-extension PlayerManager {
-    enum Sort: String {
-        case name = "nameSort"
-        case time = "createTime"
-        case artist = "artistSort"
-        case length = "length"
-        case count = "playCount"
-        
-        var name: String {
-            get {
-                switch self {
-                case .name: return "歌名"
-                case .time: return "添加时间"
-                case .artist: return "艺人"
-                case .length: return "名称长度"
-                case .count: return "收听次数"
-                }
+            DispatchQueue.main.async {
+                currentPlayerTimeChanges.forEach { $0() }
             }
         }
     }
     
-    enum SortStyle: Equatable {
-        case select
-        case sort(sort: PlayerManager.Sort, ascending: Bool)
-        
-        var text: String {
-            switch self {
-            case .select: return "选择"
-            case let .sort(sort, ascending):
-                return sort.name + " " + (ascending ? "↑" : "↓")
+    
+    /// 当前歌曲总时长变动 在 current model 改变之前进行改变
+    /// 这个回调只有在现实总时长的地方用到，所以在 current model 之前就去改变不会影响逻辑
+    private static var durationChanges = [Change]()
+    static func durationChange(_ change: @escaping Change) {
+        durationChanges.append(change)
+    }
+    /// 当前歌总时间
+    static var duration: TimeInterval = 0 {
+        didSet {
+            DispatchQueue.main.async {
+                durationChanges.forEach { $0() }
             }
         }
+    }
+    
+    
+    private static var isPlayingChanges = [Change]()
+    static func isPlayingChange(_ change: @escaping Change) {
+        isPlayingChanges.append(change)
+    }
+    /// 当前是否在播放
+    static var isPlaying = false {
+        didSet {
+            DispatchQueue.main.async {
+                isPlayingChanges.forEach { $0() }
+            }
+        }
+    }
+    
+    
+
+    
+    static private var playListChanges = [Change]()
+    static func playListChange(_ change: @escaping Change) {
+        playListChanges.append(change)
+    }
+    static func playListChangesPost() {
+        DispatchQueue.main.async {
+            playListChanges.forEach {$0()}
+        }
+    }
+    
+    /// 循环方式
+    static var loop: PlayerList.Loop {
+        set { playerList.loop = newValue }
+        get { playerList.loop }
+    }
+    
+    /// 播放某首歌并同步主页列表到播放列表
+    static func play(model: AudioModel, list: [AudioModel]) {
+        playerList.play(model: model, list: list)
+    }
+    
+    static func settingPlayList(list: [AudioModel]) {
+        playerList.settingPlayList(list: list)
+
+    }
+    
+    /// 单纯播放某首歌
+    static func play(model: AudioModel) {
+        playerList.play(model: model)
+    }
+    
+    /// 插入下一首播放
+    static func insertNext(models: [AudioModel]) {
+        playerList.insertNext(models: models)
+    }
+    
+    static func play() {
+        player.play()
+    }
+    
+    static func replay() {
+        player.replay()
+    }
+    
+    static func pause() {
+        player.pause()
+    }
+    
+    static func stop() {
+        player.stop()
+    }
+    
+    static func seek(to: TimeInterval) {
+        player.seek(to: to)
+    }
+    
+    static func backward(second: TimeInterval) {
+        let targetSecond = currentPlayerTime - second
+        player.seek(to: targetSecond < 0 ? 0 : targetSecond)
+    }
+    static func forward(second: TimeInterval) {
+        let targetSecond = currentPlayerTime + second
+        if targetSecond > duration {
+            next()
+        } else {
+            player.seek(to: targetSecond)
+        }
+    }
+    static func next() {
+        playerList.next()
+    }
+    
+    static func previous() {
+        if currentPlayerTime > 5 {
+            replay()
+        } else {
+            playerList.previous()
+        }
+    }
+    
+    
+    static func clickPlayPauseButton() {
+        if isPlaying {
+            pause()
+        } else {
+            if currentModel == nil, HomeDataSource.items.count > 0 {
+                play(model: HomeDataSource.items[0], list: HomeDataSource.items)
+            } else {
+                play()
+            }
+        }
+    }
+    
+    
+    static func deleteItemRefresh(isPlaying: Bool) {
+        HomeDataSource.refreshItems()
         
-        
-        static let list: [SortStyle] = [
+        if HomeDataSource.items.count > 0 {
             
-            .select,
-            .sort(sort: .name, ascending: true),
-            .sort(sort: .name, ascending: false),
-            .sort(sort: .time, ascending: true),
-            .sort(sort: .time, ascending: false),
-            .sort(sort: .artist, ascending: true),
-            .sort(sort: .artist, ascending: false),
-            .sort(sort: .length, ascending: true),
-            .sort(sort: .length, ascending: false),
-            .sort(sort: .count, ascending: true),
-            .sort(sort: .count, ascending: false),
-        ]
-        
+            PlayerManager.settingPlayList(list: HomeDataSource.items)
+            
+            if isPlaying {
+                PlayerManager.currentModel = nil
+                PlayerManager.playerList.playWidthIndex()
+            }
+            
+            if !PlayerManager.isPlaying {
+                PlayerManager.pause()
+            }
+        } else {
+            PlayerManager.stop()
+        }
     }
 }
+
+
+
+

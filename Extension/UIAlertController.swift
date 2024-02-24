@@ -67,6 +67,13 @@ extension UIAlertController {
     
     
     private static func showAlert(vc: UIAlertController) {
-        UIApplication.shared.keyWindow?.rootViewController?.present(vc, animated: true, completion: nil)
+        currentVC(vc: kMainWindow.rootViewController)?.present(vc, animated: true, completion: nil)
+    }
+    
+    private static func currentVC(vc: UIViewController?) -> UIViewController? {
+        if let next = vc?.presentedViewController {
+            return next
+        }
+        return vc
     }
 }
