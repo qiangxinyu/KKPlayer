@@ -21,11 +21,12 @@ class PlayerManager {
     static let player = Player()
     
     
-    /// 监听的都是不会销毁的视图，所以就不考虑释放的问题
+    /// 监听者都是不会销毁的视图，所以就不考虑释放的问题
     private static var currentModelChanges = [Change]()
     static func currentModelChange(_ change: @escaping Change) {
         currentModelChanges.append(change)
     }
+    
     /// 全局唯一的现在播放的音乐
     static var currentModel: AudioModel? {
         didSet {
@@ -85,10 +86,9 @@ class PlayerManager {
     }
     
     /// 循环方式
-    static var loop: PlayerList.Loop = .plain {
-        didSet {
-            playerList.loop = loop
-        }
+    static var loop: PlayerList.Loop {
+        set { playerList.loop = newValue }
+        get { playerList.loop }
     }
     
     /// 播放某首歌并同步主页列表到播放列表
@@ -186,7 +186,7 @@ class PlayerManager {
             }
         } else {
             PlayerManager.stop()
-        }   
+        }
     }
 }
 

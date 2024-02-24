@@ -11,21 +11,18 @@ import IQKeyboardManagerSwift
 import SnapKit
 
 
-
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-              
+        
+        Player.regist()
         KKFileManager.regist()
-        PlayerManager.regist()
 
-        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default.addObserver(self, selector: #selector(didRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
+        registRotate()
  
         IQKeyboardManager.shared.enable = true
-        
+
         kMainWindow.rootViewController = HomeViewController.shared
         kMainWindow.backgroundColor = .black
         kMainWindow.makeKeyAndVisible()
@@ -34,6 +31,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PlayerMiniControl.regist()
 
         restorePlayerStatus()
+        
+        
+        var count = 0
+        
+        for model in HomeDataSource.items {
+            if !KKFileManager.fileExists(path: model.path) {
+                count += 1
+                TipView.show("找不到的歌\(count)")
+            }
+        }
         
 //        if !UserDefaults.standard.bool(forKey: "11") {
 //            
@@ -69,13 +76,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    
     // MARK: UIDevice orientation
+    
     @objc func didRotate() {
         refreshScreenInfo()
     }
     
+    private func registRotate() {
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        NotificationCenter.default.addObserver(self, selector: #selector(didRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
     
+    
+    // MARK: Open url
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
@@ -87,6 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
    
+    // MARK: App Out
     func applicationWillTerminate(_ application: UIApplication) {
         PlayerStatus.save()
     }
@@ -96,6 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
+    // MARK: restore
     func restorePlayerStatus() {
         if let key = PlayerStatus.main.sort {
             HomeDataSource.sort = .init(key: key, ascending: PlayerStatus.main.ascending)
@@ -121,6 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
+// MARK: Core Data
 
 var CoreDataContext: NSManagedObjectContext = {
     lazy var persistentContainer: NSPersistentContainer = {

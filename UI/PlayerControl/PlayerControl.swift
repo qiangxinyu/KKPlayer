@@ -14,6 +14,8 @@ class PlayerControl: View, HomePopViewAnimate {
     
     static let shared = PlayerControl()
     
+    private let lineView = UIView.presentLine
+
     private let contentView = ContentView()
     private let contentY: CGFloat = 70
     private let contentHeight = kScreenHeight - 70
@@ -23,11 +25,7 @@ class PlayerControl: View, HomePopViewAnimate {
     private let backgroundImageView = UIImageView()
     private let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
-    
-    private let lineView = UIView.presentLine
-    
     private let audioItemView = TouchAudioItemView(hasLine: false)
-    
     
     private let titleLabel = UILabel()
     private let fromLabel = UILabel()
@@ -52,9 +50,9 @@ class PlayerControl: View, HomePopViewAnimate {
     private let durationLabel = UILabel()
     
     
-    let nextBtn = MainThemeButton(imageName: "icon_next")
-    let playPauseBtn = MainThemeSelectButton(imageName: "icon_play", selectImageName: "icon_pause")
-    let previousBtn = MainThemeButton(imageName: "icon_previous")
+    private let nextBtn = MainThemeButton(imageName: "icon_next")
+    private let playPauseBtn = MainThemeSelectButton(imageName: "icon_play", selectImageName: "icon_pause")
+    private let previousBtn = MainThemeButton(imageName: "icon_previous")
     
     
     override func initSelf() {
@@ -79,10 +77,7 @@ class PlayerControl: View, HomePopViewAnimate {
         refreshAudioModel()
     }
     
-    
-    
-    
-    
+
     static func show() {
         shared.moveAnimate(isShow: true) { _ in
             shared.contentView.y = kScreenHeight - shared.contentHeight
@@ -423,7 +418,6 @@ extension PlayerControl: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: CellKey, for: indexPath) as! Cell
        
         if indexPath.row < list.count {
@@ -600,9 +594,6 @@ extension PlayerControl {
         }
     }
 }
-
-
-
 
 
 // MARK: Uitls

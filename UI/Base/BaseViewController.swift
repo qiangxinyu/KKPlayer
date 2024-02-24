@@ -6,15 +6,8 @@
 //
 
 import UIKit
-import FDFullscreenPopGesture
 
-class ViewController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        fd_prefersNavigationBarHidden = true
-    }
-}
+class ViewController: UIViewController {}
 
 
 class PresentViewController: ViewController {

@@ -28,6 +28,11 @@ class SettingThemeColorViewController: PresentViewController {
 
     private let maxCount = 10
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        initHSBChange()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +43,6 @@ class SettingThemeColorViewController: PresentViewController {
         initHSBViews()
         initRGBAViews()
         
-        initHSBChange()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {[weak self] in
             self?.initOldColors()

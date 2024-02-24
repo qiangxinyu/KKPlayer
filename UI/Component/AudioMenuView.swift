@@ -85,11 +85,12 @@ class AudioMenuView: MenuView {
         
         UIAlertController.showDeleteAlert(title: title, sureText: "删除", sureBlock: {_ in
             
+            var tipView: UIView?
+            if self.selectList.count > 30 {
+                tipView = TipView.show("删除中...", autoClose: false)
+            }
+            
             DispatchQueue.global().async {
-                var tipView: UIView?
-                if self.selectList.count > 30 {
-                    tipView = TipView.show("删除中...", autoClose: false)
-                }
                 
                 var isPlaying = false
                 self.selectList.forEach { model in

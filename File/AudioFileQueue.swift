@@ -54,9 +54,6 @@ class AudioFileQueue {
             }
         }
     }
-    
-  
-    
 
     
     private static let semaphore = DispatchSemaphore(value: 0)
@@ -78,31 +75,24 @@ class AudioFileQueue {
         var audioName = audioFileName.removeMP3().removeErrorText()
         audioName = audioName.components(separatedBy: "_").first ?? audioName
         
+        let request = AudioModel.fetchRequest()
+
+        request.predicate = NSPredicate(format: "relativePath = %@", savePath.relativePath)
+
+        let list = try? CoreDataContext.fetch(request)
         
-        if KKFileManager.fileExists(path: savePath) {
+        
+        if KKFileManager.fileExists(path: savePath), list?.isEmpty == false {
+            
             
             UIAlertController.showDeleteAlert1(title: "《\(audioName)》已存在") {_ in
                 DispatchQueue.global().async {
                     //replace
-                    do {
-                        let request = AudioModel.fetchRequest()
-                        
-                        request.predicate = NSPredicate(format: "relativePath = %@", savePath.relativePath)
-                        
-                        let list = try CoreDataContext.fetch(request)
-                        
-                        if list.count == 1 {
-                            list[0].clearDisk()
-                            DispatchQueue.main.async {
-                                CoreDataContext.delete(list[0])
-                            }
-                        } else {
-                            UIAlertController.show(title: "数据库有误") { _ in
-                                fail()
-                            }
-                        }
-                    } catch {
-                        
+                    
+                    
+                    list![0].clearDisk()
+                    DispatchQueue.main.async {
+                        CoreDataContext.delete(list![0])
                     }
                     
                     guard KKFileManager.moveFile(path: url.path, toPath: savePath) else {

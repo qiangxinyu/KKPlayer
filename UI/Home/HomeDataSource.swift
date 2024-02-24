@@ -29,7 +29,9 @@ class HomeDataSource {
     }
     
     static func itemsChangesPost() {
-        itemsChanges.forEach {$0()}
+        DispatchQueue.main.async {
+            itemsChanges.forEach {$0()}
+        }
     }
     
     /// 筛选

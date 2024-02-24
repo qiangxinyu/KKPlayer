@@ -25,6 +25,8 @@ class SettingTimerViewController: PresentViewController {
     
     private var presetsButtons = [SaveButton]()
     
+    private var timeViews: [[UIView]] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,44 @@ class SettingTimerViewController: PresentViewController {
         initRemainingTime()
        
         changeViews()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        layoutViews()
+    }
+    
+    private func layoutViews() {
+        textField.frame = .init(x: Theme.marginOffset, y: titleLabel.frame.maxY + 12, width: view.width - 2 * Theme.marginOffset, height: 44)
+        saveButton.frame = textField.frame
+        saveButton.y = textField.frame.maxY + 12
+        
+        
+        let itemSpace: CGFloat = 10
+        let itemWidth = (view.width - itemSpace * 2 - Theme.marginOffset * 2) / 3
+        
+        let x = Theme.marginOffset
+        let y = saveButton.frame.maxY + 12
+        
+        for (row, rowList) in timeViews.enumerated() {
+                        
+            for (col, button) in rowList.enumerated() {
+                
+                let newX = x + (itemWidth + itemSpace) * CGFloat(col)
+                let newY = y + CGFloat(row) * (44 + 12)
+                
+                button.frame = .init(
+                    x: newX,
+                    y: newY,
+                    width: itemWidth,
+                    height: 44)
+            }
+        }
+        
+        
+        remainingTimeLabel.frame = textField.frame
+
     }
     
     private func initSettingTimer() {
@@ -55,10 +95,8 @@ class SettingTimerViewController: PresentViewController {
         textField.leftView = .init(frame: .init(x: 0, y: 0, width: 8, height: 0))
         textField.rightViewMode = .always
         textField.rightView = .init(frame: .init(x: 0, y: 0, width: 8, height: 0))
-        textField.frame = .init(x: Theme.marginOffset, y: titleLabel.frame.maxY + 12, width: view.width - 2 * Theme.marginOffset, height: 44)
        
-        saveButton.frame = textField.frame
-        saveButton.y = textField.frame.maxY + 12
+        
         saveButton.touchUpInside {
             if self.saveButton.title == "启动" {
                 self.textField.endEditing(true)
@@ -80,30 +118,24 @@ class SettingTimerViewController: PresentViewController {
             
         }
         
-        let itemSpace: CGFloat = 10
-        let itemWidth = (view.width - itemSpace * 2 - Theme.marginOffset * 2) / 3
         
-        let x = Theme.marginOffset
-        let y = saveButton.frame.maxY + 12
         
-        for (row, rowList) in [[10, 14, 18], [22, 26, 30]].enumerated() {
-            for (col, time) in rowList.enumerated() {
-                let newX = x + (itemWidth + itemSpace) * CGFloat(col)
-                let newY = y + CGFloat(row) * (44 + 12)
+        for rowList in [[10, 14, 18], [22, 26, 30]] {
+            
+            var rowView = [UIView]()
+            
+            for time in rowList {
                 
                 let button = SaveButton(title: "\(time)")
-                button.frame = .init(
-                    x: newX,
-                    y: newY,
-                    width: itemWidth,
-                    height: 44)
-                view.addSubview(button)
                 
+                view.addSubview(button)
+                rowView.append(button)
                 button.touchUpInside {
                     self.autoStopTime = time * 60
                     self.startTimer()
                 }
             }
+            timeViews.append(rowView)
         }
     }
     
@@ -111,7 +143,6 @@ class SettingTimerViewController: PresentViewController {
         view.addSubview(remainingTimeLabel)
         
         remainingTimeLabel.textAlignment = .center
-        remainingTimeLabel.frame = textField.frame
     }
     
     private func startTimer() {

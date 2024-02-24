@@ -44,10 +44,6 @@ class HomeViewController: ViewController {
     private let headerView = HeaderView()
     private let tableView = UITableView()
 
-//    private let miniControl = PlayerMiniControl()
-    
-    override func viewDidAppear(_ animated: Bool) {
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,12 +54,9 @@ class HomeViewController: ViewController {
   
         observer()
         HomeDataSource.refreshItems()
-
         
         initList()
         initNavigationBar()
-//        initMiniControl()
-        
     }
 }
 
@@ -107,7 +100,6 @@ extension HomeViewController {
 
 extension HomeViewController {
     
-    
     private func initNavigationBar() {
         view.addSubview(navigationBar)
         navigationBar.snp.makeConstraints { make in
@@ -135,9 +127,7 @@ fileprivate class NaviBar: View, UISearchBarDelegate, UIDocumentPickerDelegate {
     
     
     var title: String? {
-        didSet {
-            label.text = title
-        }
+        didSet {  label.text = title }
     }
     
     private lazy var sortMenuView = {SortMenuView()}()
@@ -340,14 +330,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.separatorStyle = .none
         tableView.sectionIndexColor = .Main
         tableView.tableHeaderView = headerView
-        
-       
-        
-        
-        
     }
-    
-    
  
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -364,7 +347,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return 50
     }
 
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return HomeDataSource.items.count
@@ -438,9 +420,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 fileprivate class HeaderView: Label {
     
     var count: Int = 0 {
-        didSet {
-            text = "歌曲数：\(count)"
-        }
+        didSet {  text = "歌曲数：\(count)" }
     }
    
     
@@ -448,7 +428,6 @@ fileprivate class HeaderView: Label {
         height = 30
         textColor = .T02
         font = .pingFang(size: 12)
-        
     }
 
     open override func drawText(in rect: CGRect) {
@@ -499,29 +478,6 @@ fileprivate class Cell: UITableViewCell {
         fatalError("")
     }
 }
-
-
-//
-//// MARK: PlayerMiniControl
-//
-//extension HomeViewController {
-//    private func initMiniControl() {
-//        miniControl.touchUpInside {
-//            if PlayerManager.currentModel == nil {
-//                return
-//            }
-//            PlayerControl.show()
-//        }
-//
-//        kMainWindow.addSubview(miniControl)
-//        miniControl.snp.makeConstraints { make in
-//            make.bottom.equalToSuperview().offset(-kMainWindow.safeAreaInsets.bottom)
-//            make.left.equalToSuperview().offset(20)
-//            make.right.equalToSuperview().offset(-20)
-//            make.height.equalTo(60)
-//        }
-//    }
-//}
 
 
 // MARK: Observer

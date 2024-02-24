@@ -24,7 +24,6 @@ class HSBColorPicker : View, TapProtocol, PanProtocol {
             make.edges.equalToSuperview()
         }
         
-
         
         addSubview(bView)
         bView.snp.makeConstraints { make in

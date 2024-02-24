@@ -10,9 +10,7 @@ import UIKit
 
 class EditAudioInfoViewController: PresentViewController {
     
-    
     var list = [AudioModel]()
-    
     
     private let artworkImageView = Button(style: .image)
     
@@ -437,7 +435,7 @@ fileprivate class EditAudioMenuView: MenuView, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellKey) as? Cell ?? Cell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellKey) as! Cell
 
         cell.label.text = datas[indexPath.row]
         return cell

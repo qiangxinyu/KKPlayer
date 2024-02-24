@@ -18,7 +18,7 @@ class SettingViewController: PresentViewController {
     private let iCloud = SwitchItemView()
     private let webTransfer = SwitchItemView()
     
-    private let webUploader = GCDWebUploader.init(uploadDirectory: KKFileManager.Path.audio(component: "").rawValue)
+    private let webUploader = GCDWebUploader.init(uploadDirectory: KKFileManager.Path.audio().rawValue)
     var url: String? = nil
 
     
@@ -29,12 +29,8 @@ class SettingViewController: PresentViewController {
         webUploader.delegate = self
 
         initSubviews()
-
     }
-
 }
-
-
 
 
 // MARK: layout subviews
@@ -62,10 +58,17 @@ extension SettingViewController {
         }
         
         iCloud.title = "iCloud备份"
+        iCloud.touchUpInside {
+            UIAlertController.show(title: "目前不可用")
+        }
         webTransfer.title = "网页传输"
         
         webTransfer.valueChange = {[weak self] isOn in
             if isOn {
+                // get newwork authority
+                URLSession.shared.dataTask(with: URL(string: "https://github.com")!).resume()
+
+                
                 self?.webUploader.start()
                 let url = self?.webUploader.serverURL?.relativeString ?? ""
                 self?.webTransfer.title = "网页传输：\(url)"
@@ -77,8 +80,16 @@ extension SettingViewController {
         }
         
         webTransfer.touchUpInside {[weak self] in
-            self?.paste()
+            if self?.webUploader.isRunning == true {
+                self?.paste()
+            }
         }
+        
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         var y: CGFloat = kMainWindow.safeAreaInsets.top
         let itemHeight: CGFloat = 44
@@ -89,8 +100,8 @@ extension SettingViewController {
             abloutMe,
             iCloud,
             webTransfer
-        ].forEach { view in
-            view.frame = .init(x: 0, y: y, width: kScreenWidth, height: itemHeight)
+        ].forEach { v in
+            v.frame = .init(x: 0, y: y, width: view.width, height: itemHeight)
             y += itemHeight
         }
     }

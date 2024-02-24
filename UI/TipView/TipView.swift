@@ -11,8 +11,8 @@ import UIKit
 class TipView {
     private init() {}
     
-    static var timer: Timer?
-    static let margin = 20
+    private static var timer: Timer?
+    private static let margin = 20
     
     @discardableResult
     static func show(_ title: String, autoClose: Bool = true) -> UIView {

@@ -24,17 +24,13 @@
 		29DB120C2B7DA8490069C827 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29DB120B2B7DA8490069C827 /* Assets.xcassets */; };
 		29DB120F2B7DA8490069C827 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DB120D2B7DA8490069C827 /* LaunchScreen.storyboard */; };
 		29DB12192B7DB8240069C827 /* Porperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12182B7DB8240069C827 /* Porperty.swift */; };
-		29DB12232B7DBAC10069C827 /* Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB121B2B7DBAC10069C827 /* Notification.Name.swift */; };
-		29DB12242B7DBAC10069C827 /* UIString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB121C2B7DBAC10069C827 /* UIString.swift */; };
+		29DB12242B7DBAC10069C827 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB121C2B7DBAC10069C827 /* String.swift */; };
 		29DB12252B7DBAC10069C827 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB121D2B7DBAC10069C827 /* CGPoint.swift */; };
 		29DB12262B7DBAC10069C827 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB121E2B7DBAC10069C827 /* UIFont.swift */; };
 		29DB12282B7DBAC10069C827 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12202B7DBAC10069C827 /* UIAlertController.swift */; };
 		29DB12292B7DBAC10069C827 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12212B7DBAC10069C827 /* UIColor.swift */; };
 		29DB122A2B7DBAC10069C827 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12222B7DBAC10069C827 /* TimeInterval.swift */; };
 		29DB12322B7DBBC00069C827 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB122E2B7DBBC00069C827 /* BaseViewController.swift */; };
-		29DB12332B7DBBC00069C827 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB122F2B7DBBC00069C827 /* BaseNavigationController.swift */; };
-		29DB12382B7DF6390069C827 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12372B7DF6390069C827 /* NavigationBar.swift */; };
-		29DB123E2B7DF6D20069C827 /* SelectLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB123D2B7DF6D20069C827 /* SelectLabel.swift */; };
 		29DB12402B7DF6E30069C827 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB123F2B7DF6E30069C827 /* ImageView.swift */; };
 		29DB12422B7DF6F30069C827 /* ImageTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12412B7DF6F30069C827 /* ImageTextComponent.swift */; };
 		29DB12442B7DF75D0069C827 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12432B7DF75D0069C827 /* HomeViewController.swift */; };
@@ -87,17 +83,13 @@
 		29DB12102B7DA8490069C827 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29DB12162B7DB77F0069C827 /* KKPlayer_new.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KKPlayer_new.entitlements; sourceTree = "<group>"; };
 		29DB12182B7DB8240069C827 /* Porperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Porperty.swift; sourceTree = "<group>"; };
-		29DB121B2B7DBAC10069C827 /* Notification.Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.Name.swift; sourceTree = "<group>"; };
-		29DB121C2B7DBAC10069C827 /* UIString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIString.swift; sourceTree = "<group>"; };
+		29DB121C2B7DBAC10069C827 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		29DB121D2B7DBAC10069C827 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		29DB121E2B7DBAC10069C827 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		29DB12202B7DBAC10069C827 /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		29DB12212B7DBAC10069C827 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		29DB12222B7DBAC10069C827 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		29DB122E2B7DBBC00069C827 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		29DB122F2B7DBBC00069C827 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
-		29DB12372B7DF6390069C827 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
-		29DB123D2B7DF6D20069C827 /* SelectLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLabel.swift; sourceTree = "<group>"; };
 		29DB123F2B7DF6E30069C827 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		29DB12412B7DF6F30069C827 /* ImageTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTextComponent.swift; sourceTree = "<group>"; };
 		29DB12432B7DF75D0069C827 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -218,8 +210,7 @@
 		29DB121A2B7DBAC10069C827 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				29DB121B2B7DBAC10069C827 /* Notification.Name.swift */,
-				29DB121C2B7DBAC10069C827 /* UIString.swift */,
+				29DB121C2B7DBAC10069C827 /* String.swift */,
 				29DB121D2B7DBAC10069C827 /* CGPoint.swift */,
 				29DB121E2B7DBAC10069C827 /* UIFont.swift */,
 				29DB12202B7DBAC10069C827 /* UIAlertController.swift */,
@@ -254,7 +245,6 @@
 			isa = PBXGroup;
 			children = (
 				29DB122E2B7DBBC00069C827 /* BaseViewController.swift */,
-				29DB122F2B7DBBC00069C827 /* BaseNavigationController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -264,7 +254,6 @@
 			children = (
 				29DB129D2B7F5C940069C827 /* View.swift */,
 				29DB129F2B7F5CD20069C827 /* Label.swift */,
-				29DB123D2B7DF6D20069C827 /* SelectLabel.swift */,
 				29DB123F2B7DF6E30069C827 /* ImageView.swift */,
 				29DB12412B7DF6F30069C827 /* ImageTextComponent.swift */,
 				2979BA072B80B5CF0038C104 /* Button.swift */,
@@ -277,7 +266,6 @@
 			isa = PBXGroup;
 			children = (
 				2979BA032B807DCE0038C104 /* PopViewAnimate.swift */,
-				29DB12372B7DF6390069C827 /* NavigationBar.swift */,
 				29DB12A12B7F5FE80069C827 /* AudioItemView.swift */,
 				29E4F1E92B83896300F0C539 /* MenuView.swift */,
 				2943F37A2B8454BA008F9DDE /* AudioMenuView.swift */,
@@ -488,7 +476,6 @@
 				29DB12802B7E2CD10069C827 /* PlayerStatus+CoreDataProperties.swift in Sources */,
 				29DB12512B7E1A290069C827 /* PlayerMiniControl.swift in Sources */,
 				29DB12AA2B7F89F20069C827 /* SnapKit.swift in Sources */,
-				29DB12332B7DBBC00069C827 /* BaseNavigationController.swift in Sources */,
 				2979BA042B807DCE0038C104 /* PopViewAnimate.swift in Sources */,
 				291525272B8618E200983960 /* UIImagePickerController.swift in Sources */,
 				29DB124E2B7E08310069C827 /* CGRect.swift in Sources */,
@@ -496,7 +483,6 @@
 				29DB12892B7E2E7C0069C827 /* UserDefaults.swift in Sources */,
 				29DB12282B7DBAC10069C827 /* UIAlertController.swift in Sources */,
 				29DB12532B7E1A300069C827 /* PlayerControl.swift in Sources */,
-				29DB12232B7DBAC10069C827 /* Notification.Name.swift in Sources */,
 				29DB129B2B7F123F0069C827 /* PlayerManager.swift in Sources */,
 				29DB129A2B7F123F0069C827 /* PlayerList.swift in Sources */,
 				2943F3842B84F508008F9DDE /* EditAudioInfoViewController.swift in Sources */,
@@ -510,13 +496,12 @@
 				29DB12812B7E2CD10069C827 /* PlayerStatus+CoreDataClass.swift in Sources */,
 				29DB127E2B7E2CD10069C827 /* AudioModel+CoreDataProperties.swift in Sources */,
 				29DB12262B7DBAC10069C827 /* UIFont.swift in Sources */,
-				29DB12242B7DBAC10069C827 /* UIString.swift in Sources */,
+				29DB12242B7DBAC10069C827 /* String.swift in Sources */,
 				2933141E2B8856A700577FD8 /* SettingTimerViewController.swift in Sources */,
 				29DB12402B7DF6E30069C827 /* ImageView.swift in Sources */,
 				29E4F1EA2B83896300F0C539 /* MenuView.swift in Sources */,
 				29DB124C2B7E07350069C827 /* UIView.swift in Sources */,
 				2943F37F2B84B94E008F9DDE /* Share.swift in Sources */,
-				29DB123E2B7DF6D20069C827 /* SelectLabel.swift in Sources */,
 				29DB12852B7E2D560069C827 /* AudioFileQueue.swift in Sources */,
 				29DB120A2B7DA8470069C827 /* KKPlayer_new.xcdatamodeld in Sources */,
 				29DB12862B7E2D560069C827 /* KKFileManager.swift in Sources */,
@@ -527,7 +512,6 @@
 				29E4F1E82B8300EE00F0C539 /* UITableView.swift in Sources */,
 				2943F3822B84B98C008F9DDE /* TipView.swift in Sources */,
 				29DB12462B7DF80E0069C827 /* Theme.swift in Sources */,
-				29DB12382B7DF6390069C827 /* NavigationBar.swift in Sources */,
 				29DB129E2B7F5C940069C827 /* View.swift in Sources */,
 				2979BA082B80B5CF0038C104 /* Button.swift in Sources */,
 				29DB124A2B7E019B0069C827 /* SettingViewController.swift in Sources */,

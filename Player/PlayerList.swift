@@ -11,8 +11,9 @@ import SwiftUI
 class PlayerList {
     
     var items: [AudioModel] = []
+    
     var originItems: [AudioModel] = []
-    var index = 0
+    private var index = 0
     
     var loop: Loop = .plain {
         didSet {
@@ -33,15 +34,14 @@ class PlayerList {
     }
     
     func play(model: AudioModel, list: [AudioModel]) {
-        originItems = list
-        loop = PlayerManager.loop
+        settingPlayList(list: list)
+        PlayerManager.currentModel = model
         
-        refreshIndex(model)
-
         play(model: model)
     }
     
     func play(model: AudioModel) {
+        refreshIndex(model)
         PlayerManager.player.play(model: model)
     }
     
@@ -69,7 +69,6 @@ class PlayerList {
     }
     
     
-    /// 除了单曲循环外，  上一首 下一首必走方法
     func playWidthIndex() {
         if items.count == 0 {
             PlayerManager.clickPlayPauseButton()

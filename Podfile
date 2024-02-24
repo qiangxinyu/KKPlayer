@@ -16,7 +16,6 @@ target 'KKPlayer_new' do
   use_frameworks!
 
 
-  pod 'FDFullscreenPopGesture'
   pod 'SnapKit', '5.0.1'
   pod 'IQKeyboardManagerSwift', '6.5.6'
   pod 'ID3TagEditor', '~> 4.0'  
