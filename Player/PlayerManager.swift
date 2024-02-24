@@ -24,7 +24,9 @@ class PlayerManager {
     /// 监听者都是不会销毁的视图，所以就不考虑释放的问题
     private static var currentModelChanges = [Change]()
     static func currentModelChange(_ change: @escaping Change) {
-        currentModelChanges.append(change)
+        DispatchQueue.main.async {
+            currentModelChanges.append(change)
+        }
     }
     
     /// 全局唯一的现在播放的音乐
@@ -43,7 +45,11 @@ class PlayerManager {
     }
     /// 当前播放到这首歌的时间
     static var currentPlayerTime: TimeInterval = 0 {
-        didSet { currentPlayerTimeChanges.forEach { $0() } }
+        didSet {
+            DispatchQueue.main.async {
+                currentPlayerTimeChanges.forEach { $0() }
+            }
+        }
     }
     
     
@@ -55,7 +61,11 @@ class PlayerManager {
     }
     /// 当前歌总时间
     static var duration: TimeInterval = 0 {
-        didSet { durationChanges.forEach { $0() } }
+        didSet {
+            DispatchQueue.main.async {
+                durationChanges.forEach { $0() }
+            }
+        }
     }
     
     

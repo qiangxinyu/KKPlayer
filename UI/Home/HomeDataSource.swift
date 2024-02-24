@@ -51,12 +51,14 @@ class HomeDataSource {
     }
     
     
-    static var sort: Sort = Sort.list[0] {
+    static var sort: Sort = Sort.list[2] {
         didSet {
             refreshItems()
         }
     }
 
+    static var sortKeys = [String]()
+    static var sortIndexs = [Int]()
     
     static func refreshItems() {
         let request = AudioModel.fetchRequest()
@@ -65,7 +67,20 @@ class HomeDataSource {
         request.sortDescriptors = [NSSortDescriptor.init(key: sort.key, ascending: sort.ascending)]
 
         do {
-            items = try CoreDataContext.fetch(request)
+            let items = try CoreDataContext.fetch(request)
+            
+            sortKeys = []
+            sortIndexs = []
+            if sort.isSectionTitle {
+                for (index, model) in items.enumerated() {
+                    if let key = model.value(forKey: sort.key) as? String, !sortKeys.contains(key) {
+                        sortKeys.append(key)
+                        sortIndexs.append(index)
+                    }
+                }
+            }
+            
+            self.items = items
         } catch {}
     }
 }
@@ -79,7 +94,6 @@ extension HomeDataSource {
         var ascending: Bool
         
         var name: String {
-            
             switch key {
             case "nameSort": return "歌名"
             case "artistSort": return "歌手"
@@ -88,7 +102,10 @@ extension HomeDataSource {
             case "count": return "播放次数"
             default: return ""
             }
-            
+        }
+        
+        var isSectionTitle: Bool {
+            key == "nameSort" || key == "artistSort"
         }
         
         static let list: [Sort] = [

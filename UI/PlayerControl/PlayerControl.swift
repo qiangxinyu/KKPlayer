@@ -10,13 +10,15 @@ import UIKit
 fileprivate let CellKey = "CellKey"
 
 
-class PlayerControl: View, HomePopViewAnimate {
+class PlayerControl: ViewController {
+
+//class PlayerControl: View, HomePopViewAnimate {
     
     static let shared = PlayerControl()
     
     private let lineView = UIView.presentLine
 
-    private let contentView = ContentView()
+//    private let contentView = ContentView()
     private let contentY: CGFloat = 70
     private let contentHeight = kScreenHeight - 70
     private var begainY: CGFloat = 0
@@ -55,13 +57,16 @@ class PlayerControl: View, HomePopViewAnimate {
     private let previousBtn = MainThemeButton(imageName: "icon_previous")
     
     
-    override func initSelf() {
-        kMainWindow.addSubview(self)
+    override func viewDidLoad() {
+        initSelf()
+    }
+    func initSelf() {
+//        kMainWindow.addSubview(self)
         
         observer()
         
-        frame = .init(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight)
-        alpha = 0
+//        frame = .init(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight)
+//        alpha = 0
 
 
         
@@ -79,16 +84,17 @@ class PlayerControl: View, HomePopViewAnimate {
     
 
     static func show() {
-        shared.moveAnimate(isShow: true) { _ in
-            shared.contentView.y = kScreenHeight - shared.contentHeight
-        }
+        HomeViewController.shared.present(shared, animated: true)
+//        shared.moveAnimate(isShow: true) { _ in
+//            shared.contentView.y = kScreenHeight - shared.contentHeight
+//        }
     }
     
-    static func hidden() {
-        shared.moveAnimate(isShow: false) { _ in
-            shared.contentView.y = kScreenHeight
-        }
-    }
+//    static func hidden() {
+//        shared.moveAnimate(isShow: false) { _ in
+//            shared.contentView.y = kScreenHeight
+//        }
+//    }
     
     
     private func refreshAudioModel() {
@@ -101,6 +107,9 @@ class PlayerControl: View, HomePopViewAnimate {
             } else {
                 fromLabel.text = ""
             }
+            
+            loadLyrics(text: model.lyrics)
+
         }
     }
     
@@ -116,8 +125,6 @@ extension PlayerControl {
             self.refreshAudioModel()
             
             self.tableViewScrollToPlayItem()
-            
-            self.loadLyrics(text: PlayerManager.currentModel?.lyrics)
         }
         
         PlayerManager.currentPlayerTimeChange {
@@ -153,14 +160,14 @@ extension PlayerControl {
         backgroundImageView.backgroundColor = .white
         backgroundImageView.layer.cornerRadius = 16
         backgroundImageView.layer.masksToBounds = true
-        contentView.addSubview(backgroundImageView)
+        view.addSubview(backgroundImageView)
         backgroundImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
         backgroundView.layer.cornerRadius = 16
         backgroundView.layer.masksToBounds = true
-        contentView.addSubview(backgroundView)
+        view.addSubview(backgroundView)
         backgroundView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -174,40 +181,40 @@ extension PlayerControl {
 
 extension PlayerControl {
     private func initContentView() {
-        kMainWindow.addSubview(contentView)
+//        kMainWindow.addSubview(contentView)
 
-        contentView.pan { p in
-            if let pan = p as? UIPanGestureRecognizer {
-                self.handlePan(pan: pan)
-            }
-        }
-        contentView.frame = .init(x: 0, y: kScreenHeight, width: kScreenWidth, height: contentHeight)
+//        contentView.pan { p in
+//            if let pan = p as? UIPanGestureRecognizer {
+//                self.handlePan(pan: pan)
+//            }
+//        }
+//        contentView.frame = .init(x: 0, y: kScreenHeight, width: kScreenWidth, height: contentHeight)
 
     }
     
-    private func handlePan(pan: UIPanGestureRecognizer) {
-        
-        let point = pan.translation(in: kMainWindow)
-        let moveY = point.y - begainY
-
-        switch pan.state {
-        case .began:
-            begainY = point.y
-        case .changed:
-            
-            if moveY > 0 {
-                contentView.y = moveY + contentY
-                handMovePopView(scale: moveY / contentView.height)
-            }
-
-        default:
-            if moveY > contentView.height / 3 {
-                PlayerControl.hidden()
-            } else {
-                PlayerControl.show()
-            }
-        }
-    }
+//    private func handlePan(pan: UIPanGestureRecognizer) {
+//
+//        let point = pan.translation(in: kMainWindow)
+//        let moveY = point.y - begainY
+//
+//        switch pan.state {
+//        case .began:
+//            begainY = point.y
+//        case .changed:
+//
+//            if moveY > 0 {
+//                contentView.y = moveY + contentY
+//                handMovePopView(scale: moveY / contentView.height)
+//            }
+//
+//        default:
+//            if moveY > contentView.height / 3 {
+//                PlayerControl.hidden()
+//            } else {
+//                PlayerControl.show()
+//            }
+//        }
+//    }
     
     private class ContentView: UIView, PanProtocol {}
 }
@@ -220,7 +227,7 @@ extension PlayerControl {
 
 extension PlayerControl {
     private func initHeader() {
-        contentView.addSubview(lineView)
+        view.addSubview(lineView)
         lineView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(Theme.marginOffset)
@@ -230,7 +237,7 @@ extension PlayerControl {
         
         
         audioItemView.backgroundColor = .clear
-        contentView.addSubview(audioItemView)
+        view.addSubview(audioItemView)
         audioItemView.touchUpInside {
             self.exchangeListAndLyric()
         }
@@ -240,8 +247,8 @@ extension PlayerControl {
             make.height.equalTo(70)
         }
         
-        titleLabel.text = "播放列表"
-        contentView.addSubview(titleLabel)
+        titleLabel.text = "播放列表&歌词"
+        view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(
                 Theme.marginOffset)
@@ -250,7 +257,7 @@ extension PlayerControl {
         }
         
         formatShadowLabel(label: fromLabel)
-        contentView.addSubview(fromLabel)
+        view.addSubview(fromLabel)
         fromLabel.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
             make.left.greaterThanOrEqualTo(titleLabel.snp.right).offset(10)
@@ -266,7 +273,7 @@ extension PlayerControl {
         }
         loopButton.backgroundColor = .clear
         loopButton.imageEdgeInserts = .init(edges: 10)
-        contentView.addSubview(loopButton)
+        view.addSubview(loopButton)
         loopButton.snp.makeConstraints { make in
             make.width.height.equalTo(44)
             make.right.equalToSuperview()
@@ -284,9 +291,9 @@ extension PlayerControl {
 
 extension PlayerControl: UITextViewDelegate {
     private func initLyrcs() {
-        contentView.addSubview(lyricsTV)
-        contentView.addSubview(lyricsEditButton)
-        contentView.addSubview(notLyricsLabel)
+        view.addSubview(lyricsTV)
+        view.addSubview(lyricsEditButton)
+        view.addSubview(notLyricsLabel)
 
         
         lyricsTV.textAlignment = .center
@@ -384,7 +391,7 @@ extension PlayerControl: UITextViewDelegate {
 
 extension PlayerControl: UITableViewDelegate, UITableViewDataSource {
     func initTableView() {
-        contentView.addSubview(tableView)
+        view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.left.right.equalToSuperview()
@@ -467,11 +474,11 @@ fileprivate class Cell: UITableViewCell {
 
 extension PlayerControl {
     private func initTimeControl() {
-        contentView.addSubview(backward)
-        contentView.addSubview(forward)
-        contentView.addSubview(slider)
-        contentView.addSubview(currentTimeLabel)
-        contentView.addSubview(durationLabel)
+        view.addSubview(backward)
+        view.addSubview(forward)
+        view.addSubview(slider)
+        view.addSubview(currentTimeLabel)
+        view.addSubview(durationLabel)
 
         slider.tintColor = .Main
 
@@ -554,9 +561,9 @@ extension PlayerControl {
 // MARK: Player State Control
 extension PlayerControl {
     private func initPlayerStateControl() {
-        contentView.addSubview(previousBtn)
-        contentView.addSubview(playPauseBtn)
-        contentView.addSubview(nextBtn)
+        view.addSubview(previousBtn)
+        view.addSubview(playPauseBtn)
+        view.addSubview(nextBtn)
         
         
         previousBtn.touchUpInside {
@@ -637,9 +644,6 @@ extension PlayerControl {
 
 class TouchAudioItemView: AudioItemView, TapProtocol {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if touch.view != self {
-            return false
-        }
         return true
     }
     

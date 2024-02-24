@@ -55,7 +55,7 @@ class MenuView: View, TapProtocol {
     }
     
     func show(ges: UIGestureRecognizer) {
-        show(atPoint: ges.location(in: nil))
+        show(atPoint: ges.location(in: isPad ? HomeViewController.shared.view : nil))
     }
     
     func hidden() {

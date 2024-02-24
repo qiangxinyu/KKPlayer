@@ -14,27 +14,13 @@ fileprivate let CellKey = "CellKey"
 
 class HomeViewController: ViewController {
     static let shared = HomeViewController()
-   
-    private override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    internal required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    private convenience init() {
-        self.init(nibName: nil, bundle: nil)
-    }
     
     var status = Status.default {
-        didSet {
-            statusChange()
-        }
+        didSet { statusChange() }
     }
     
     override var title: String? {
-        didSet {
-            navigationBar.title = title
-        }
+        didSet { navigationBar.title = title }
     }
     
     private(set) var selectList = [AudioModel]()
@@ -43,7 +29,8 @@ class HomeViewController: ViewController {
     
     private let headerView = HeaderView()
     private let tableView = UITableView()
-
+    
+    private let feedbackGenerator = UISelectionFeedbackGenerator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -213,9 +200,8 @@ fileprivate class NaviBar: View, UISearchBarDelegate, UIDocumentPickerDelegate {
         }
         
         
-        sortButton.touchUpInside { ges in
-            let point = ges.location(in: nil)
-            self.sortMenuView.show(atPoint: point)
+        sortButton.touchUpInside {
+            self.sortMenuView.show(ges: $0)
         }
         sortButton.backgroundColor = .clear
         sortButton.imageEdgeInserts = .init(edges: 10)
@@ -386,35 +372,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-//    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-//        switch sort {
-//        case .name, .artist: return keys
-//        case .time, .length, .count: return nil
-//        }
-//    }
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return HomeDataSource.sortKeys
+    }
 
-//    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-//        feedbackGenerator.selectionChanged()
-//
-//        var row = 0
-//
-//        for (i, key) in keys.enumerated() {
-//            if i == index {
-//                var y = CGFloat(50 * (row + 1))
-//                let maxY = tableView.contentSize.height - tableView.height
-//
-//                if y > maxY {
-//                    y = maxY
-//                }
-//
-//                tableView.setContentOffset(.init(x: 0, y: y), animated: false)
-//                return index
-//            }
-//            row += (ids[key]?.count ?? 0)
-//        }
-//
-//        return index
-//    }
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        feedbackGenerator.selectionChanged()
+        tableView.scrollToRow(at: .init(row: HomeDataSource.sortIndexs[index], section: 0), at: .top, animated: true)
+        return index
+    }
 }
 
 fileprivate class HeaderView: Label {

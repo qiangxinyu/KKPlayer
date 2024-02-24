@@ -108,10 +108,10 @@ extension String {
             return self
         }
         
-        let first = self.subString(start: 0, end: 1)
-        if !first.isTurn {
-            return self
-        }
+//        let first = self.subString(start: 0, end: 1)
+//        if !first.isTurn {
+//            return self
+//        }
         
         let mString = NSMutableString(string: self)
         CFStringTransform(mString, nil, kCFStringTransformToLatin, false)

@@ -30,7 +30,6 @@ extension AudioModel {
     @NSManaged private(set) var letters: String?
     @NSManaged private(set) var name: String?
     @NSManaged private(set) var nameSort: String?
-
 }
 
 
@@ -49,14 +48,14 @@ extension AudioModel {
     }
 
 
-    func setAlbum(_ newValue: String?) {
+    func setAlbum(_ newValue: String) {
         album = newValue
-        albumLetters = newValue?.toPinyin().lowercased()
+        albumLetters = newValue.toPinyin().lowercased()
     }
 
-    func setArtist(_ newValue: String?) {
+    func setArtist(_ newValue: String) {
         artist = newValue
-        artistLetters = newValue?.toPinyin().lowercased()
+        artistLetters = newValue.toPinyin().lowercased()
         artistSort = artistLetters?.sortKey
     }
 

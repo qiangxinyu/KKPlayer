@@ -15,11 +15,11 @@ extension AudioModel {
     }
     var lyrics: String? {
         set {
-            KKFileManager.removeFile(path: lyricsPath)
-            guard let text = newValue, text.count > 0 else {
+            if newValue?.isEmpty == true {
                 return
             }
-            KKFileManager.createFile(path: lyricsPath, data: text.data(using: .utf8))
+            
+            KKFileManager.createFile(path: lyricsPath, data: newValue!.data(using: .utf8))
         }
         get {
             try? String(contentsOf: lyricsPath.url)

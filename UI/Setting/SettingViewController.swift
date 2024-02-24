@@ -93,7 +93,7 @@ extension SettingViewController {
         
         var y: CGFloat = kMainWindow.safeAreaInsets.top
         let itemHeight: CGFloat = 44
-        
+
         [
             themeSetting,
             timerSetting,
@@ -160,20 +160,20 @@ fileprivate class ItemView: View, TapProtocol {
         addSubview(label)
         addSubview(lineView)
         
+        lineView.backgroundColor = .B03
+        lineView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(Theme.marginOffset)
+            make.right.bottom.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        
         label.font = Theme.titleFont
         label.textColor = .T01
         
         label.snp.makeConstraints { make in
-            make.left.equalTo(Theme.marginOffset)
+            make.left.equalToSuperview().offset(Theme.marginOffset)
             make.top.bottom.equalToSuperview()
-        }
-        
-        lineView.backgroundColor = .B03
-        lineView.snp.makeConstraints { make in
-            make.left.equalTo(Theme.marginOffset)
-            make.right.bottom.equalToSuperview()
-            make.height.equalTo(1)
-        }
+        }        
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
@@ -202,7 +202,7 @@ fileprivate class ArrowItemView: ItemView {
         addSubview(arrow)
         arrow.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.right.equalTo(-Theme.marginOffset)
+            make.right.equalToSuperview().offset(-Theme.marginOffset)
         }
     }
 }

@@ -165,8 +165,12 @@ class AudioFileQueue {
             } catch { }
             
             
-            if (model.artist ?? "").isEmpty, nameArtist.count == 2 {
-                model.setArtist(nameArtist.last)
+            if model.artist?.isEmpty == true {
+                if nameArtist.count == 2 {
+                    model.setArtist(nameArtist.last!)
+                } else {
+                    model.setArtist("")
+                }
             }
                                     
             next()
