@@ -19,6 +19,7 @@
 		2979BA082B80B5CF0038C104 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA072B80B5CF0038C104 /* Button.swift */; };
 		2979BA0A2B80B7700038C104 /* UIEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979BA092B80B7700038C104 /* UIEdgeInsets.swift */; };
 		29A278732B873BA40074623D /* SettingThemeColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A278722B873BA40074623D /* SettingThemeColorViewController.swift */; };
+		29D7D9032B8A290800A82A79 /* KKPlayer_newTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D7D9022B8A290800A82A79 /* KKPlayer_newTests.swift */; };
 		29DB12002B7DA8470069C827 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB11FF2B7DA8470069C827 /* AppDelegate.swift */; };
 		29DB120A2B7DA8470069C827 /* KKPlayer_new.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12082B7DA8470069C827 /* KKPlayer_new.xcdatamodeld */; };
 		29DB120C2B7DA8490069C827 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29DB120B2B7DA8490069C827 /* Assets.xcassets */; };
@@ -59,8 +60,20 @@
 		29DB12AA2B7F89F20069C827 /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB12A92B7F89F20069C827 /* SnapKit.swift */; };
 		29E4F1E82B8300EE00F0C539 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4F1E72B8300EE00F0C539 /* UITableView.swift */; };
 		29E4F1EA2B83896300F0C539 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4F1E92B83896300F0C539 /* MenuView.swift */; };
+		29F5D0D02B8AE3BC00CCFBD0 /* AloutMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F5D0CF2B8AE3BC00CCFBD0 /* AloutMe.swift */; };
+		29F5D0D22B8AEDCA00CCFBD0 /* ChangeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F5D0D12B8AEDCA00CCFBD0 /* ChangeIcon.swift */; };
 		6AE006D751054BC5E454B77A /* Pods_KKPlayer_new.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73399B736E76759BBBF02142 /* Pods_KKPlayer_new.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		29D7D9042B8A290800A82A79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29DB11F42B7DA8470069C827 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29DB11FB2B7DA8470069C827;
+			remoteInfo = KKPlayer_new;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		291525262B8618E200983960 /* UIImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerController.swift; sourceTree = "<group>"; };
@@ -75,6 +88,9 @@
 		2979BA072B80B5CF0038C104 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		2979BA092B80B7700038C104 /* UIEdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEdgeInsets.swift; sourceTree = "<group>"; };
 		29A278722B873BA40074623D /* SettingThemeColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingThemeColorViewController.swift; sourceTree = "<group>"; };
+		29D7D9002B8A290800A82A79 /* KKPlayer_newTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KKPlayer_newTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		29D7D9022B8A290800A82A79 /* KKPlayer_newTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KKPlayer_newTests.swift; sourceTree = "<group>"; };
+		29D7D90A2B8A2F5A00A82A79 /* Main.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Main.xctestplan; sourceTree = "<group>"; };
 		29DB11FC2B7DA8470069C827 /* KKPlayer_new.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKPlayer_new.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29DB11FF2B7DA8470069C827 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29DB12092B7DA8470069C827 /* KKPlayer_new.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KKPlayer_new.xcdatamodel; sourceTree = "<group>"; };
@@ -118,12 +134,21 @@
 		29DB12A92B7F89F20069C827 /* SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
 		29E4F1E72B8300EE00F0C539 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		29E4F1E92B83896300F0C539 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		29F5D0CF2B8AE3BC00CCFBD0 /* AloutMe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AloutMe.swift; sourceTree = "<group>"; };
+		29F5D0D12B8AEDCA00CCFBD0 /* ChangeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeIcon.swift; sourceTree = "<group>"; };
 		447FE7FA4569C623575EEB5D /* Pods-KKPlayer_new.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KKPlayer_new.release.xcconfig"; path = "Target Support Files/Pods-KKPlayer_new/Pods-KKPlayer_new.release.xcconfig"; sourceTree = "<group>"; };
 		73399B736E76759BBBF02142 /* Pods_KKPlayer_new.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KKPlayer_new.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4DE2287B6936861B0A9C965 /* Pods-KKPlayer_new.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KKPlayer_new.debug.xcconfig"; path = "Target Support Files/Pods-KKPlayer_new/Pods-KKPlayer_new.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		29D7D8FD2B8A290800A82A79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		29DB11F92B7DA8470069C827 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -160,6 +185,15 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		29D7D9012B8A290800A82A79 /* KKPlayer_newTests */ = {
+			isa = PBXGroup;
+			children = (
+				29D7D9022B8A290800A82A79 /* KKPlayer_newTests.swift */,
+				29D7D90A2B8A2F5A00A82A79 /* Main.xctestplan */,
+			);
+			path = KKPlayer_newTests;
+			sourceTree = "<group>";
+		};
 		29DB11F32B7DA8470069C827 = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +205,7 @@
 				29DB121A2B7DBAC10069C827 /* Extension */,
 				29DB12172B7DB8140069C827 /* Global */,
 				29DB11FE2B7DA8470069C827 /* KKPlayer_new */,
+				29D7D9012B8A290800A82A79 /* KKPlayer_newTests */,
 				29DB11FD2B7DA8470069C827 /* Products */,
 				C68852B0A083F115534AB12D /* Pods */,
 				DE720435FC01E4B5906617EC /* Frameworks */,
@@ -181,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				29DB11FC2B7DA8470069C827 /* KKPlayer_new.app */,
+				29D7D9002B8A290800A82A79 /* KKPlayer_newTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -287,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				29DB12492B7E019B0069C827 /* SettingViewController.swift */,
+				29F5D0CE2B8AE3AA00CCFBD0 /* About */,
 				29A278762B873C030074623D /* Theme */,
 				2933141C2B88568F00577FD8 /* AudoTimer */,
 			);
@@ -342,6 +379,15 @@
 			path = Player;
 			sourceTree = "<group>";
 		};
+		29F5D0CE2B8AE3AA00CCFBD0 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				29F5D0CF2B8AE3BC00CCFBD0 /* AloutMe.swift */,
+				29F5D0D12B8AEDCA00CCFBD0 /* ChangeIcon.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
 		C68852B0A083F115534AB12D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +408,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		29D7D8FF2B8A290800A82A79 /* KKPlayer_newTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29D7D9062B8A290800A82A79 /* Build configuration list for PBXNativeTarget "KKPlayer_newTests" */;
+			buildPhases = (
+				29D7D8FC2B8A290800A82A79 /* Sources */,
+				29D7D8FD2B8A290800A82A79 /* Frameworks */,
+				29D7D8FE2B8A290800A82A79 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				29D7D9052B8A290800A82A79 /* PBXTargetDependency */,
+			);
+			name = KKPlayer_newTests;
+			productName = KKPlayer_newTests;
+			productReference = 29D7D9002B8A290800A82A79 /* KKPlayer_newTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		29DB11FB2B7DA8470069C827 /* KKPlayer_new */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 29DB12132B7DA8490069C827 /* Build configuration list for PBXNativeTarget "KKPlayer_new" */;
@@ -391,6 +455,10 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					29D7D8FF2B8A290800A82A79 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 29DB11FB2B7DA8470069C827;
+					};
 					29DB11FB2B7DA8470069C827 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -410,11 +478,19 @@
 			projectRoot = "";
 			targets = (
 				29DB11FB2B7DA8470069C827 /* KKPlayer_new */,
+				29D7D8FF2B8A290800A82A79 /* KKPlayer_newTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		29D7D8FE2B8A290800A82A79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		29DB11FA2B7DA8470069C827 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -469,6 +545,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		29D7D8FC2B8A290800A82A79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29D7D9032B8A290800A82A79 /* KKPlayer_newTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		29DB11F82B7DA8470069C827 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -491,6 +575,7 @@
 				29DB12192B7DB8240069C827 /* Porperty.swift in Sources */,
 				29DB12A22B7F5FE80069C827 /* AudioItemView.swift in Sources */,
 				29DB12A82B7F670B0069C827 /* TapGestureRecognizer.swift in Sources */,
+				29F5D0D22B8AEDCA00CCFBD0 /* ChangeIcon.swift in Sources */,
 				293314192B873C6F00577FD8 /* ColorView.swift in Sources */,
 				29DB12322B7DBBC00069C827 /* BaseViewController.swift in Sources */,
 				29DB12812B7E2CD10069C827 /* PlayerStatus+CoreDataClass.swift in Sources */,
@@ -505,6 +590,7 @@
 				29DB12852B7E2D560069C827 /* AudioFileQueue.swift in Sources */,
 				29DB120A2B7DA8470069C827 /* KKPlayer_new.xcdatamodeld in Sources */,
 				29DB12862B7E2D560069C827 /* KKFileManager.swift in Sources */,
+				29F5D0D02B8AE3BC00CCFBD0 /* AloutMe.swift in Sources */,
 				29DB12252B7DBAC10069C827 /* CGPoint.swift in Sources */,
 				29DB129C2B7F123F0069C827 /* Player.swift in Sources */,
 				29DB12A02B7F5CD20069C827 /* Label.swift in Sources */,
@@ -528,6 +614,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		29D7D9052B8A290800A82A79 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29DB11FB2B7DA8470069C827 /* KKPlayer_new */;
+			targetProxy = 29D7D9042B8A290800A82A79 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		29DB120D2B7DA8490069C827 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -540,6 +634,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		29D7D9072B8A290800A82A79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NMKQ2HP7N2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.qxy.KKPlayer-newTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KKPlayer_new.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KKPlayer_new";
+			};
+			name = Debug;
+		};
+		29D7D9082B8A290800A82A79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NMKQ2HP7N2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.qxy.KKPlayer-newTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KKPlayer_new.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KKPlayer_new";
+			};
+			name = Release;
+		};
 		29DB12112B7DA8490069C827 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -660,6 +798,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = KKPlayer_new/KKPlayer_new.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -668,6 +807,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = F5QR5WX8K3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KKPlayer_new/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "空空のPlayer";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = " ヾ(*´∇`)ﾉ 卖个萌，请求下相册权限";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -697,6 +837,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = KKPlayer_new/KKPlayer_new.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -705,6 +846,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = F5QR5WX8K3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KKPlayer_new/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "空空のPlayer";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = " ヾ(*´∇`)ﾉ 卖个萌，请求下相册权限";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -731,6 +873,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		29D7D9062B8A290800A82A79 /* Build configuration list for PBXNativeTarget "KKPlayer_newTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29D7D9072B8A290800A82A79 /* Debug */,
+				29D7D9082B8A290800A82A79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		29DB11F72B7DA8470069C827 /* Build configuration list for PBXProject "KKPlayer_new" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

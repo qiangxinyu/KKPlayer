@@ -500,6 +500,11 @@ fileprivate class SortMenuView: MenuView {
             }
             
             item.touchUpInside {
+                if HomeDataSource.sort == sort {
+                    self.hidden()
+                    return
+                }
+                
                 HomeDataSource.sort = sort
                 self.lastSelectView?.isSelected = false
                 item.isSelected = true

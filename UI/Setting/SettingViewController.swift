@@ -53,8 +53,8 @@ extension SettingViewController {
         }
         
         abloutMe.title = "关于我们"
-        abloutMe.touchUpInside {
-            
+        abloutMe.touchUpInside {[weak self] in
+            self?.present(AloutMeViewController(), animated: true)
         }
         
         iCloud.title = "iCloud备份"

@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "B3230F09-966C-4A08-ACF0-EB81782BB3FF",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:KKPlayer_new.xcodeproj",
+        "identifier" : "29D7D8FF2B8A290800A82A79",
+        "name" : "KKPlayer_newTests"
+      }
+    }
+  ],
+  "version" : 1
+}
