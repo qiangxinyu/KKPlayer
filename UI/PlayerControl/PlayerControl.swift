@@ -10,15 +10,10 @@ import UIKit
 fileprivate let CellKey = "CellKey"
 
 
-class PlayerControl: ViewController {
-
-//class PlayerControl: View, HomePopViewAnimate {
+class PlayerControl: PresentViewController {
     
     static let shared = PlayerControl()
-    
-    private let lineView = UIView.presentLine
 
-//    private let contentView = ContentView()
     private let contentY: CGFloat = 70
     private let contentHeight = kScreenHeight - 70
     private var begainY: CGFloat = 0
@@ -58,19 +53,14 @@ class PlayerControl: ViewController {
     
     
     override func viewDidLoad() {
-        initSelf()
-    }
-    func initSelf() {
-//        kMainWindow.addSubview(self)
-        
         observer()
-        
-//        frame = .init(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight)
-//        alpha = 0
 
-
+        super.viewDidLoad()
         
-        initContentView()
+        if isPad {
+            lineView.isHidden = true
+        }
+
         initBackground()
         initHeader()
         initLyrcs()
@@ -81,20 +71,11 @@ class PlayerControl: ViewController {
         
         refreshAudioModel()
     }
-    
+
 
     static func show() {
         HomeViewController.shared.present(shared, animated: true)
-//        shared.moveAnimate(isShow: true) { _ in
-//            shared.contentView.y = kScreenHeight - shared.contentHeight
-//        }
     }
-    
-//    static func hidden() {
-//        shared.moveAnimate(isShow: false) { _ in
-//            shared.contentView.y = kScreenHeight
-//        }
-//    }
     
     
     private func refreshAudioModel() {
@@ -109,11 +90,8 @@ class PlayerControl: ViewController {
             }
             
             loadLyrics(text: model.lyrics)
-
         }
     }
-    
-    
 }
 
 
@@ -158,15 +136,22 @@ extension PlayerControl {
 extension PlayerControl {
     private func initBackground() {
         backgroundImageView.backgroundColor = .white
-        backgroundImageView.layer.cornerRadius = 16
-        backgroundImageView.layer.masksToBounds = true
+        
+        if isPhone {
+            backgroundImageView.layer.cornerRadius = 16
+            backgroundImageView.layer.masksToBounds = true
+            
+            backgroundView.layer.cornerRadius = 16
+            backgroundView.layer.masksToBounds = true
+        }
+        backgroundImageView.contentMode = .scaleAspectFill
+        
         view.addSubview(backgroundImageView)
         backgroundImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        backgroundView.layer.cornerRadius = 16
-        backgroundView.layer.masksToBounds = true
+        
         view.addSubview(backgroundView)
         backgroundView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -176,65 +161,11 @@ extension PlayerControl {
 
 
 
-
-// MARK: Content View
-
-extension PlayerControl {
-    private func initContentView() {
-//        kMainWindow.addSubview(contentView)
-
-//        contentView.pan { p in
-//            if let pan = p as? UIPanGestureRecognizer {
-//                self.handlePan(pan: pan)
-//            }
-//        }
-//        contentView.frame = .init(x: 0, y: kScreenHeight, width: kScreenWidth, height: contentHeight)
-
-    }
-    
-//    private func handlePan(pan: UIPanGestureRecognizer) {
-//
-//        let point = pan.translation(in: kMainWindow)
-//        let moveY = point.y - begainY
-//
-//        switch pan.state {
-//        case .began:
-//            begainY = point.y
-//        case .changed:
-//
-//            if moveY > 0 {
-//                contentView.y = moveY + contentY
-//                handMovePopView(scale: moveY / contentView.height)
-//            }
-//
-//        default:
-//            if moveY > contentView.height / 3 {
-//                PlayerControl.hidden()
-//            } else {
-//                PlayerControl.show()
-//            }
-//        }
-//    }
-    
-    private class ContentView: UIView, PanProtocol {}
-}
-
-
-
-
 // MARK: Header
 
 
 extension PlayerControl {
     private func initHeader() {
-        view.addSubview(lineView)
-        lineView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(Theme.marginOffset)
-            make.width.equalTo(lineView.width)
-            make.height.equalTo(lineView.height)
-        }
-        
         
         audioItemView.backgroundColor = .clear
         view.addSubview(audioItemView)

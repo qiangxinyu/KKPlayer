@@ -304,7 +304,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.estimatedSectionHeaderHeight = 0
         
         tableView.contentInsetAdjustmentBehavior = .never
-        tableView.contentInset = .init(top: navigationBarHeight, left: 0, bottom: kMainWindow.safeAreaInsets.bottom + 60 + 10, right: 0)
+        tableView.contentInset = .init(
+            top: navigationBarHeight,
+            left: 0,
+            bottom: kMainWindow.safeAreaInsets.bottom + (isPhone ?  70 : 0),
+            right: 0)
 
         tableView.register(Cell.self, forCellReuseIdentifier: CellKey)
         
@@ -457,6 +461,9 @@ extension HomeViewController {
         HomeDataSource.itemsChange {
             self.headerView.count = HomeDataSource.items.count
             self.tableView.reloadData()
+            if HomeDataSource.keyword == nil {
+                self.tableView.scrollTo(item: PlayerManager.currentModel, list: HomeDataSource.items)
+            }
         }
     }
 }
@@ -489,6 +496,7 @@ fileprivate class SortMenuView: MenuView {
         }
         
         HomeDataSource.Sort.list.forEach { sort in
+            print("sort", sort.key, sort.ascending)
             y += (itemHeight + 1)
             let item = createButton(title: sort.name + (sort.ascending ? "↑" : "↓"))
             item.frame = .init(x: 0, y: y, width: itemWidth, height: itemHeight)
@@ -513,7 +521,7 @@ fileprivate class SortMenuView: MenuView {
             }
         }
         
-        contentView.height = y - 1
+        contentView.height = y + itemHeight
     }
     
     private func createButton(title: String) -> SelectButton {

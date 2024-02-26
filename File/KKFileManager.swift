@@ -19,7 +19,7 @@ class KKFileManager {
     
     
     
-    enum Path {
+    enum Path: Equatable {
         typealias RawValue = String
         
         case audio(component: String = "")

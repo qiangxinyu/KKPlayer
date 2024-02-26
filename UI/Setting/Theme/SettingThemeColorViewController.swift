@@ -264,6 +264,7 @@ extension SettingThemeColorViewController {
                 make.centerY.equalToSuperview()
             }
             
+            slider.tintColor = .HEX("007AFF")
             slider.maximumValue = 1
             slider.addTarget(self, action: #selector(valueChange), for: .valueChanged)
             slider.snp.makeConstraints { make in

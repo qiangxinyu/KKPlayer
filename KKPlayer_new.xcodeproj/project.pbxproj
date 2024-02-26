@@ -62,6 +62,7 @@
 		29E4F1EA2B83896300F0C539 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4F1E92B83896300F0C539 /* MenuView.swift */; };
 		29F5D0D02B8AE3BC00CCFBD0 /* AloutMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F5D0CF2B8AE3BC00CCFBD0 /* AloutMe.swift */; };
 		29F5D0D22B8AEDCA00CCFBD0 /* ChangeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F5D0D12B8AEDCA00CCFBD0 /* ChangeIcon.swift */; };
+		29F5D0D42B8B2F0E00CCFBD0 /* IPadHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F5D0D32B8B2F0E00CCFBD0 /* IPadHomeViewController.swift */; };
 		6AE006D751054BC5E454B77A /* Pods_KKPlayer_new.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73399B736E76759BBBF02142 /* Pods_KKPlayer_new.framework */; };
 /* End PBXBuildFile section */
 
@@ -136,6 +137,7 @@
 		29E4F1E92B83896300F0C539 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		29F5D0CF2B8AE3BC00CCFBD0 /* AloutMe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AloutMe.swift; sourceTree = "<group>"; };
 		29F5D0D12B8AEDCA00CCFBD0 /* ChangeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeIcon.swift; sourceTree = "<group>"; };
+		29F5D0D32B8B2F0E00CCFBD0 /* IPadHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPadHomeViewController.swift; sourceTree = "<group>"; };
 		447FE7FA4569C623575EEB5D /* Pods-KKPlayer_new.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KKPlayer_new.release.xcconfig"; path = "Target Support Files/Pods-KKPlayer_new/Pods-KKPlayer_new.release.xcconfig"; sourceTree = "<group>"; };
 		73399B736E76759BBBF02142 /* Pods_KKPlayer_new.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KKPlayer_new.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4DE2287B6936861B0A9C965 /* Pods-KKPlayer_new.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KKPlayer_new.debug.xcconfig"; path = "Target Support Files/Pods-KKPlayer_new/Pods-KKPlayer_new.debug.xcconfig"; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				29DB12432B7DF75D0069C827 /* HomeViewController.swift */,
 				2979BA052B80A88E0038C104 /* HomeDataSource.swift */,
 				2943F3832B84F508008F9DDE /* EditAudioInfoViewController.swift */,
+				29F5D0D32B8B2F0E00CCFBD0 /* IPadHomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				29DB124E2B7E08310069C827 /* CGRect.swift in Sources */,
 				29A278732B873BA40074623D /* SettingThemeColorViewController.swift in Sources */,
 				29DB12892B7E2E7C0069C827 /* UserDefaults.swift in Sources */,
+				29F5D0D42B8B2F0E00CCFBD0 /* IPadHomeViewController.swift in Sources */,
 				29DB12282B7DBAC10069C827 /* UIAlertController.swift in Sources */,
 				29DB12532B7E1A300069C827 /* PlayerControl.swift in Sources */,
 				29DB129B2B7F123F0069C827 /* PlayerManager.swift in Sources */,
@@ -797,7 +801,7 @@
 			baseConfigurationReference = D4DE2287B6936861B0A9C965 /* Pods-KKPlayer_new.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = KKPlayer_new/KKPlayer_new.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -836,7 +840,7 @@
 			baseConfigurationReference = 447FE7FA4569C623575EEB5D /* Pods-KKPlayer_new.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = KKPlayer_new/KKPlayer_new.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

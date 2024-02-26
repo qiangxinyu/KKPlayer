@@ -143,13 +143,13 @@ class AudioFileQueue {
                 let tag = try id3TagEditor.read(from: model.path.rawValue)
                 
                 if let album = (tag?.frames[.album] as? ID3FrameWithStringContent)?.content {
-                    model.setAlbum(album.replacingOccurrences(of: "\"", with: "'"))
+                    model.setAlbum(album)
                 }
                 if let artist = (tag?.frames[.artist] as? ID3FrameWithStringContent)?.content {
-                    model.setArtist(artist.replacingOccurrences(of: "\"", with: "'"))
+                    model.setArtist(artist)
                 }
                 if let artist = (tag?.frames[.artist] as? ID3FrameWithStringContent)?.content {
-                    model.setArtist(artist.replacingOccurrences(of: "\"", with: "'"))
+                    model.setArtist(artist)
                 }
                 if let lyricist = (tag?.frames[.lyricist] as? ID3FrameWithStringContent)?.content {
                     model.lyrics = lyricist

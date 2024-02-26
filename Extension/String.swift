@@ -131,7 +131,7 @@ extension String {
    
     func removeErrorText() -> String {
         return replacingOccurrences(of: "\"", with: "'")
-            .replacingOccurrences(of: "/", with: "")
+            .replacingOccurrences(of: "/", with: "&")
             .replacingOccurrences(of: "\0", with: "")
             .replacingOccurrences(of: "\\", with: "")
     }

@@ -99,7 +99,7 @@ extension HomeDataSource {
             case "artistSort": return "歌手"
             case "createTime": return "添加时间"
             case "length": return "名称长度"
-            case "count": return "播放次数"
+            case "playCount": return "播放次数"
             default: return ""
             }
         }
@@ -121,8 +121,8 @@ extension HomeDataSource {
             .init(key: "length", ascending: true),
             .init(key: "length", ascending: false),
         
-            .init(key: "count", ascending: true),
-            .init(key: "count", ascending: false)
+            .init(key: "playCount", ascending: true),
+            .init(key: "playCount", ascending: false)
         ]
     }
 }

@@ -49,12 +49,12 @@ extension AudioModel {
 
 
     func setAlbum(_ newValue: String) {
-        album = newValue
+        album = newValue.removeErrorText()
         albumLetters = newValue.toPinyin().lowercased()
     }
 
     func setArtist(_ newValue: String) {
-        artist = newValue
+        artist = newValue.removeErrorText()
         artistLetters = newValue.toPinyin().lowercased()
         artistSort = artistLetters?.sortKey
     }
@@ -62,12 +62,10 @@ extension AudioModel {
     /// 只有在初始导入的时候会用这个方法，所以不需要进行 save core data
     func setPlayCount(count: Int64) {
         playCount = count
-        renameFile()
     }
     
     func playCountAddOne() {
         playCount += 1
-        renameFile()
         try? CoreDataContext.save()
     }
     

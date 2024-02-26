@@ -69,10 +69,10 @@ public class AudioModel: NSManagedObject {
     }
     
     func renameFile() {
-        let newRelativePath = "\(name ?? "")_\(artist ?? "").mp3"
+        let newRelativePath = "\(name ?? "")_\(artist ?? "").mp3".removeErrorText()
 
-        let newPath = newRelativePath.replacingOccurrences(of: "/", with: "&")
-        KKFileManager.moveFile(path: path, toPath: .audio(component: newPath))
+        
+        KKFileManager.moveFile(path: path, toPath: .audio(component: newRelativePath))
         
         relativePath = newRelativePath
     }
