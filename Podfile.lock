@@ -1,5 +1,4 @@
 PODS:
-  - FDFullscreenPopGesture (1.1)
   - GCDWebServer/Core (3.5.4)
   - GCDWebServer/WebUploader (3.5.4):
     - GCDWebServer/Core
@@ -8,7 +7,6 @@ PODS:
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
-  - FDFullscreenPopGesture
   - GCDWebServer/WebUploader
   - ID3TagEditor (~> 4.0)
   - IQKeyboardManagerSwift (= 6.5.6)
@@ -16,19 +14,17 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - FDFullscreenPopGesture
     - GCDWebServer
     - ID3TagEditor
     - IQKeyboardManagerSwift
     - SnapKit
 
 SPEC CHECKSUMS:
-  FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   ID3TagEditor: e3284f4133ba8da82b7a9166e9e36bcf54c7d8f3
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: cb67da16f4490f6403219216076fb9bea6c74e94
+PODFILE CHECKSUM: 0151e2a64e06a56f6660767bb57198c44ce86284
 
 COCOAPODS: 1.12.1

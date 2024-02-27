@@ -36,83 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        var notModels = [AudioModel]()
-        
-        for model in HomeDataSource.items {
-            if !KKFileManager.fileExists(path: model.path) {
-                
-                notModels.append(model)
-            }
-        }
-        
-        if notModels.count > 0 {
-            TipView.show("找不到的歌 count:  \(notModels.count)")
-            
-            let btn = Button()
-            kMainWindow.addSubview(btn)
-            btn.frame = .init(x: 100, y: 100, width: 100, height: 100)
-            btn.backgroundColor = .orange
-            btn.touchUpInside {
-                var urls = KKFileManager.main.allURL(path: .audio())
-                
-                HomeDataSource.items.forEach { model in
-                    if let index = urls.firstIndex(of: model.path) {
-                        urls.remove(at: index)
-                    }
-                }
-                
-                var url = ""
-                urls.forEach { path in
-                    url += path.relativePath + "\n"
-                }
-                
-                notModels.forEach { model in
-                    url += "\(model.name ?? "") \(model.relativePath ?? "") \n"
-                }
-                
-                
-                try? CoreDataContext.save()
-                btn.removeFromSuperview()
-                TipView.show("\(url)")
-
-            }
-        }
-        
-        
-        
-        
-        
-        
-//        if !UserDefaults.standard.bool(forKey: "22") {
-//
-//            HomeDataSource.items.forEach { model in
-//                CoreDataContext.delete(model)
-//            }
-//            try? CoreDataContext.save()
-//
-//            DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-//
-//               let l = KKFileManager.main.allURL(path: .audio())
-//
-//               var list = [URL]()
-//               l.forEach { url in
-//                   let toPath = KKFileManager.Path.tmp(component: url.relativePath)
-//                   KKFileManager.moveFile(path: url, toPath: toPath)
-//                   list.append(toPath.url)
-//               }
-//
-//                list.forEach { url in
-//                    AudioFileQueue.push(audio: url)
-//                }
-//
-//            }
-//            UserDefaults.standard.set(true, forKey: "22")
-//        }
-
-        
-        
-
-        
         return true
     }
     
@@ -195,3 +118,5 @@ var CoreDataContext: NSManagedObjectContext = {
     
     return persistentContainer.viewContext
 }()
+
+

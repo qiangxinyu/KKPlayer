@@ -20,5 +20,9 @@ target 'KKPlayer_new' do
   pod 'IQKeyboardManagerSwift', '6.5.6'
   pod 'ID3TagEditor', '~> 4.0'  
   pod "GCDWebServer/WebUploader"
+  
+  
+  
+
 
 end
