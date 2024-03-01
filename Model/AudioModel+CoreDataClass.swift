@@ -35,13 +35,17 @@ public class AudioModel: NSManagedObject {
         }
         
         if let newArtist = newArtist {
+            CollectDataSource.deleteArtist(model: self)
             setArtist(newArtist)
             _ = id3Tag.artist(frame: ID3FrameWithStringContent(content: newArtist))
+            CollectDataSource.pushArtist(with: self)
         }
         
         if let newAlbum = newAlbum {
+            CollectDataSource.deleteAlbum(model: self)
             setAlbum(newAlbum)
             _ = id3Tag.album(frame: ID3FrameWithStringContent(content: newAlbum))
+            CollectDataSource.pushAlbum(with: self)
         }
         
         if let newArtwork = newArtwork {
@@ -66,6 +70,15 @@ public class AudioModel: NSManagedObject {
         if autoSaveCoreData {
             try? CoreDataContext.save()
         }
+    }
+    
+    func clearDisk() {
+        
+        
+        KKFileManager.removeFile(path: path)
+        KKFileManager.removeFile(path: artworkPath)
+        KKFileManager.removeFile(path: originArtworkPath)
+        KKFileManager.removeFile(path: lyricsPath)
     }
     
     func renameFile() {

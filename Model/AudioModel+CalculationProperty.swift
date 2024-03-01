@@ -38,19 +38,11 @@ extension AudioModel {
     
     
     var artworkImage: UIImage? {
-        if KKFileManager.fileExists(path: artworkPath) {
-            return UIImage(contentsOfFile: artworkPath.rawValue)
-        } else {
-            return nil
-        }
+        MemoryCache.getImage(path: artworkPath)
     }
     
     var originalArtworkImage: UIImage? {
-        if KKFileManager.fileExists(path: originArtworkPath) {
-            return UIImage(contentsOfFile: originArtworkPath.rawValue)
-        } else {
-            return nil
-        }
+        MemoryCache.getImage(path: originArtworkPath)
     }
     
    
@@ -87,12 +79,7 @@ extension AudioModel {
     
 
     
-    func clearDisk() {
-        KKFileManager.removeFile(path: path)
-        KKFileManager.removeFile(path: artworkPath)
-        KKFileManager.removeFile(path: originArtworkPath)
-        KKFileManager.removeFile(path: lyricsPath)
-    }
+    
 }
 
 

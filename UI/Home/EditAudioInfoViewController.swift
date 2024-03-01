@@ -173,7 +173,6 @@ class EditAudioInfoViewController: PresentViewController {
             )
             HomeDataSource.itemsChangesPost()
             PlayerManager.playListChangesPost()
-            
             dismiss(animated: true)
         } else {
             view.isUserInteractionEnabled = false
@@ -205,7 +204,6 @@ class EditAudioInfoViewController: PresentViewController {
                 }
                 
                 try? CoreDataContext.save()
-                
                 
                 DispatchQueue.main.async {
                     HomeDataSource.itemsChangesPost()

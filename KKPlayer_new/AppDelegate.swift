@@ -11,6 +11,7 @@ import IQKeyboardManagerSwift
 import SnapKit
 
 
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -34,6 +35,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         restorePlayerStatus()
         
+        
+        if !UserDefaults.standard.bool(forKey: "import123456") {
+            
+            let tip = TipView.show("生成集合中...")
+            
+            DispatchQueue.global().async {
+                HomeDataSource.items.forEach { audio in
+                    CollectDataSource.pushAudio(audio)
+                }
+                
+                try? CoreDataContext.save()
+                
+                DispatchQueue.main.async {
+                    tip.removeFromSuperview()
+                }
+            }
+
+            UserDefaults.standard.set(true, forKey: "import123456")
+        }
         
         
         return true

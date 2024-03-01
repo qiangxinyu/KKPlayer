@@ -21,8 +21,5 @@ target 'KKPlayer_new' do
   pod 'ID3TagEditor', '~> 4.0'  
   pod "GCDWebServer/WebUploader"
   
-  
-  
-
 
 end

@@ -56,7 +56,7 @@ class AudioItemView: UIView {
     private let name = UILabel()
     private let artist = UILabel()
     private let playCount = MainThemeImageTextComponent(style: .imageLeft, imageName: "play_count")
-    private let more = MainThemeButton(imageName: "icon_more")
+    let more = MainThemeButton(imageName: "icon_more")
     private lazy var selected = {MainThemeButton(imageName: "icon_yes")}()
     private let line = UIView()
 

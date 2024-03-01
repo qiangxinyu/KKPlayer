@@ -84,12 +84,11 @@ class AudioFileQueue {
         
         if KKFileManager.fileExists(path: savePath), list?.isEmpty == false {
             
-            
             UIAlertController.showDeleteAlert1(title: "《\(audioName)》已存在") {_ in
                 DispatchQueue.global().async {
                     //replace
                     
-                    
+                    CollectDataSource.deleteAudio(model: list![0])
                     list![0].clearDisk()
                     DispatchQueue.main.async {
                         CoreDataContext.delete(list![0])
@@ -113,6 +112,7 @@ class AudioFileQueue {
                 fail()
             }
         } else {
+            KKFileManager.removeFile(path: savePath)
             guard KKFileManager.moveFile(path: url.path, toPath: savePath) else {
                 UIAlertController.show(title: "文件添加失败") { _ in
                     fail()
@@ -162,6 +162,11 @@ class AudioFileQueue {
                 if let data = (tag?.frames[.attachedPicture(.other)] as? ID3FrameAttachedPicture)?.picture {
                     model.setOriginalArtwork(UIImage(data: data))
                 }
+                
+                if let data = (tag?.frames[.attachedPicture(.bandArtistLogotype)] as? ID3FrameAttachedPicture)?.picture {
+                    model.setOriginalArtwork(UIImage(data: data))
+                }
+                
             } catch { }
             
             
@@ -172,7 +177,7 @@ class AudioFileQueue {
                     model.setArtist("")
                 }
             }
-                                    
+            CollectDataSource.pushAudio(model)
             next()
         } fail: {
             next()

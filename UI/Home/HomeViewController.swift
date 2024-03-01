@@ -27,7 +27,7 @@ class HomeViewController: ViewController {
     
     private let navigationBar = NaviBar()
     
-    private let headerView = HeaderView()
+    private let headerView = CountHeaderView()
     private let tableView = UITableView()
     
     private let feedbackGenerator = UISelectionFeedbackGenerator()
@@ -112,6 +112,10 @@ fileprivate class NaviBar: View, UISearchBarDelegate, UIDocumentPickerDelegate {
     private let importButton = MainThemeButton(imageName: "icon_import")
     private let sortButton = MainThemeButton(imageName: "icon_sort")
     
+    private let albumButton = MainThemeButton(imageName: "icon_album")
+    private let artistButton = MainThemeButton(imageName: "icon_artist")
+    private let postionButton = MainThemeButton(imageName: "icon_postion")
+
     
     var title: String? {
         didSet {  label.text = title }
@@ -177,6 +181,9 @@ fileprivate class NaviBar: View, UISearchBarDelegate, UIDocumentPickerDelegate {
         addSubview(searchBar)
         addSubview(importButton)
         addSubview(sortButton)
+        addSubview(albumButton)
+        addSubview(artistButton)
+        addSubview(postionButton)
 
         
         label.font = .pingFang(size: 14)
@@ -211,6 +218,9 @@ fileprivate class NaviBar: View, UISearchBarDelegate, UIDocumentPickerDelegate {
             make.right.equalToSuperview()
         }
         
+        
+       
+        
         importButton.touchUpInside {
             let controller = UIDocumentPickerViewController(documentTypes: ["public.mp3"], in: .import)
             controller.delegate = self
@@ -226,6 +236,43 @@ fileprivate class NaviBar: View, UISearchBarDelegate, UIDocumentPickerDelegate {
         importButton.snp.makeConstraints { make in
             make.width.height.equalTo(44)
             make.right.equalTo(sortButton.snp.left)
+            make.centerY.equalTo(myButton)
+        }
+        
+        
+        albumButton.touchUpInside {
+            HomeViewController.shared.present(AudioCollectViewController(type: .Album), animated: true)
+        }
+        
+        albumButton.backgroundColor = .clear
+        albumButton.imageEdgeInserts = .init(edges: 10)
+        albumButton.snp.makeConstraints { make in
+            make.right.equalTo(importButton.snp.left)
+            make.width.height.equalTo(44)
+            make.centerY.equalTo(myButton)
+        }
+        
+        artistButton.touchUpInside {
+            HomeViewController.shared.present(AudioCollectViewController(type: .Artist), animated: true)
+        }
+        
+        artistButton.backgroundColor = .clear
+        artistButton.imageEdgeInserts = .init(edges: 10)
+        artistButton.snp.makeConstraints { make in
+            make.right.equalTo(albumButton.snp.left)
+            make.width.height.equalTo(44)
+            make.centerY.equalTo(myButton)
+        }
+        
+        postionButton.touchUpInside {
+            HomeViewController.shared.tableViewScrollToNowPlaying()
+        }
+        
+        postionButton.backgroundColor = .clear
+        postionButton.imageEdgeInserts = .init(edges: 10)
+        postionButton.snp.makeConstraints { make in
+            make.right.equalTo(artistButton.snp.left)
+            make.width.height.equalTo(44)
             make.centerY.equalTo(myButton)
         }
         
@@ -282,6 +329,7 @@ fileprivate class NaviBar: View, UISearchBarDelegate, UIDocumentPickerDelegate {
             myButton.isHidden = true
         }
         
+        albumButton.isHidden = myButton.isHidden
         importButton.isHidden = myButton.isHidden
         moreButton.isHidden = !myButton.isHidden
         exitButton.isHidden = !myButton.isHidden
@@ -387,31 +435,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-fileprivate class HeaderView: Label {
-    
-    var count: Int = 0 {
-        didSet {  text = "歌曲数：\(count)" }
-    }
-   
-    
-    override func initSelf() {
-        height = 30
-        textColor = .T02
-        font = .pingFang(size: 12)
-    }
 
-    open override func drawText(in rect: CGRect) {
-        super.drawText(
-            in: rect.inset(
-                by: .init(
-                    top: 0,
-                    left: Theme.marginOffset,
-                    bottom: 0,
-                    right: 0)
-            )
-        )
-    }
-}
 
 fileprivate class Cell: UITableViewCell {
     
@@ -455,16 +479,20 @@ fileprivate class Cell: UITableViewCell {
 extension HomeViewController {
     private func observer() {
         PlayerManager.currentModelChange {
-            self.tableView.scrollTo(item: PlayerManager.currentModel, list: HomeDataSource.items)
+            self.tableViewScrollToNowPlaying()
         }
         
         HomeDataSource.itemsChange {
             self.headerView.count = HomeDataSource.items.count
             self.tableView.reloadData()
             if HomeDataSource.keyword == nil {
-                self.tableView.scrollTo(item: PlayerManager.currentModel, list: HomeDataSource.items)
+                self.tableViewScrollToNowPlaying()
             }
         }
+    }
+    
+    func tableViewScrollToNowPlaying() {
+        tableView.scrollTo(item: PlayerManager.currentModel, list: HomeDataSource.items)
     }
 }
 
@@ -496,7 +524,6 @@ fileprivate class SortMenuView: MenuView {
         }
         
         HomeDataSource.Sort.list.forEach { sort in
-            print("sort", sort.key, sort.ascending)
             y += (itemHeight + 1)
             let item = createButton(title: sort.name + (sort.ascending ? "↑" : "↓"))
             item.frame = .init(x: 0, y: y, width: itemWidth, height: itemHeight)

@@ -70,14 +70,14 @@ class PlayerList {
     
     
     func playWidthIndex() {
-        if items.count == 0 {
-            PlayerManager.clickPlayPauseButton()
-            return
-        }
         switch loop {
         case .single:
             PlayerManager.replay()
         case .plain, .random:
+            if items.count == 0 {
+                PlayerManager.clickPlayPauseButton()
+                return
+            }
             play(model: items[index])
         }
     }

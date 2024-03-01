@@ -98,10 +98,12 @@ class AudioMenuView: MenuView {
                         isPlaying = true
                     }
                     model.clearDisk()
+                    CollectDataSource.deleteAudio(model: model)
                     CoreDataContext.delete(model)
                 }
                 
                 try? CoreDataContext.save()
+                
                 
                 DispatchQueue.main.async {
                     tipView?.removeFromSuperview()
